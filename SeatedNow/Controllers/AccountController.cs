@@ -4,12 +4,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SeatedNow.Models;
 
 namespace SeatedNow.Controllers
 {
     public class AccountController : Controller
     {
-        SqlConnection con = new SqlConnection();
 
         public IActionResult Index()
         {
@@ -23,8 +23,7 @@ namespace SeatedNow.Controllers
 
         protected void  CreateUser()
         {
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
+
 
         }
     }

@@ -9,6 +9,15 @@ namespace SeatedNow.Models
     public class UserAccount
     {
 
+        public UserAccount(string firstName, string lastName, string email, string phoneNumber, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Password = password;
+        }
+
         [Key]
         public int UserID { get; set; }
 
