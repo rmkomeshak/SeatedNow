@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\Login - Copy.cshtml" />
+    <Content Remove="Views\home\Login - Copy.cshtml" />
     <Content Remove="wwwroot\images\banner1.svg" />
     <Content Remove="wwwroot\images\banner2.svg" />
     <Content Remove="wwwroot\images\banner3.svg" />

@@ -41,14 +41,22 @@ footer {
 
 /*-- Header Image and Image Background --*/
 .sn-image {
-    background-image: url('/images/seatednow-header-large.jpg');
-    background-color: 000;
+    background-color: #000;
     background-repeat: no-repeat;
-    background-position: bottom center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.sn-image.one {
+    background-image: url('/images/stock/restaurant1.jpg');
+    background-position: bottom center;
+}
+
+.sn-image.two {
+    background-image: url('/images/stock/restaurant2.jpg');
+    background-position: center center;
 }
 
 .sn-image.fixed {
@@ -57,10 +65,8 @@ footer {
 }
 
 .sn-image.faded {
-    background-image: url('/images/restaurant-stock-1.jpg');
     display: block;
     position: relative;
-    background-position: center center;
 }
 
 .sn-image.faded:before {
@@ -81,7 +87,7 @@ footer {
 }
 
 .sn-green-pattern:before {
-    background-image: url('/images/food-pattern.svg');
+    background-image: url('/images/svg/food-pattern.svg');
     content: "";
     top: 0;
     left: 0;
