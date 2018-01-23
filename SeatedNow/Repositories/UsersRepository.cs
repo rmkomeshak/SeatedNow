@@ -11,26 +11,35 @@ namespace SeatedNow.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
+        SqlConnection connection;
 
         public UsersRepository()
         {
             DataRepository dataRepo = new DataRepository();
+            connection = dataRepo.getDBConnection();
         }
 
         public void CreateUser(UserAccount account)
         {
-            /*
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server = tcp:seatednow.database.windows.net,1433; Initial Catalog = seatednow; Persist Security Info = False; User ID = seatednow; Password = Sipawd123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
 
-            connection.Open();
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    string query = "INSERT INTO [dbo].[Users]  VALUES ('" + account.FirstName + "', '" + account.LastName + "', '" + account.Email + "', '" + account.Password + "', '" + account.PhoneNumber + "')";
 
-            string query = "INSERT INTO [dbo].[Users]  VALUES ('dane', 'mazzaro', 'damazzaro@oakland.edu', 'hello1234', '2484960964')";
-
-            SqlCommand cmd = new SqlCommand(query, connection);
-
-            connection.Close();
-            */
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }       
         }
 
         public void DeleteUser(UserAccount account)

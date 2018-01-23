@@ -16,13 +16,13 @@ namespace SeatedNow.Repositories
         public DataRepository()
         {
 
-            connection = new SqlConnection();
+            this.connection = new SqlConnection();
             connection.ConnectionString = "Server=tcp:seatednow.database.windows.net,1433;Initial Catalog=seatednow;Persist Security Info=False;User ID=seatednow;Password=Sipawd123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
         public SqlConnection getDBConnection()
         {
-            return connection;
+            return this.connection;
         }
 
     }
