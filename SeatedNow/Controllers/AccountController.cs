@@ -21,10 +21,10 @@ namespace SeatedNow.Controllers
             return View();
         }
 
-        protected void  CreateUser()
+        [HttpPost]
+        public IActionResult CreateUser()
         {
-
-
+            return View("Index");
         }
     }
 }

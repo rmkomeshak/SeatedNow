@@ -4,25 +4,28 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using SeatedNow.Models;
 
 namespace SeatedNow.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        SqlConnection con;
+
+        private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
+        //Create the readonly configuration items for the database connection string
+
+        public UsersRepository(IConfiguration config)
+        {
+            configuration = config;
+            connection = new SqlConnection(configuration.GetConnectionString("SeatedNowDB"));
+        }
+        //Initialize the connection string and create connection object
 
         public void CreateUser(UserAccount account)
         {
-            builder.DataSource = "seatednow.database.microsoft.net";
-            builder.UserID = "seatednow";
-            builder.Password = "Sipawd123";
-            builder.InitialCatalog = "SeatedNow";
-
-            con = new SqlConnection(builder.ConnectionString);
-
-            StringBuilder sb = new StringBuilder();
+            connection.Open();
         }
 
         public void DeleteUser(UserAccount account)
