@@ -42,6 +42,7 @@ footer {
 /*-- Header Image and Image Background --*/
 .sn-image {
     background-color: #000;
+    background-position: center center;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -56,7 +57,14 @@ footer {
 
 .sn-image.two {
     background-image: url('/images/stock/restaurant2.jpg');
-    background-position: center center;
+}
+
+.sn-image.three {
+    background-image: url('/images/stock/restaurant3.jpg');
+}
+
+.sn-image.four {
+    background-image: url('/images/stock/restaurant4.jpg');
 }
 
 .sn-image.fixed {
