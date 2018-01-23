@@ -12,20 +12,25 @@ namespace SeatedNow.Repositories
     public class UsersRepository : IUsersRepository
     {
 
-        private readonly IConfiguration configuration;
-        private readonly SqlConnection connection;
-        //Create the readonly configuration items for the database connection string
-
-        public UsersRepository(IConfiguration config)
+        public UsersRepository()
         {
-            configuration = config;
-            connection = new SqlConnection(configuration.GetConnectionString("SeatedNowDB"));
+            DataRepository dataRepo = new DataRepository();
         }
-        //Initialize the connection string and create connection object
 
         public void CreateUser(UserAccount account)
         {
+            /*
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = "Server = tcp:seatednow.database.windows.net,1433; Initial Catalog = seatednow; Persist Security Info = False; User ID = seatednow; Password = Sipawd123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+
             connection.Open();
+
+            string query = "INSERT INTO [dbo].[Users]  VALUES ('dane', 'mazzaro', 'damazzaro@oakland.edu', 'hello1234', '2484960964')";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            connection.Close();
+            */
         }
 
         public void DeleteUser(UserAccount account)
