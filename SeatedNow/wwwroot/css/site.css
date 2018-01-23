@@ -59,9 +59,21 @@
     border-color: #5D7337;
 }
 
-    .btn-outline-sn:hover {
-        color: #fff;
-        background-color: #5D7337;
-        border-color: #5D7337;
-    }
+.btn-outline-sn:hover {
+    color: #fff;
+    background-color: #5D7337;
+    border-color: #5D7337;
+}
 
+.btn-sn:focus, .btn-sn.focus, .btn-outline-sn:focus, .btn-outline-sn.focus {
+    box-shadow: 0 0 0 0.2rem rgba(93, 115, 55, 0.2);
+}
+
+a {
+    color: #5D7337;
+}
+
+a:hover {
+    color: #5D7337;
+    text-decoration: underline;
+}
