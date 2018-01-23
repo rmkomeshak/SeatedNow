@@ -23,20 +23,12 @@ namespace SeatedNow.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult CreateUser(String FirstName, String LastName, String Email, String PhoneNumber, String Password)
         {
+            UsersRepository userRepo = new UsersRepository();
+            UserAccount userAccount = new UserAccount(FirstName, LastName, Email, PhoneNumber, Password);
 
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "Server = tcp:seatednow.database.windows.net,1433; Initial Catalog = seatednow; Persist Security Info = False; User ID = seatednow; Password = Sipawd123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
-
-            connection.Open();
-
-            string query = "INSERT INTO [dbo].[Users]  VALUES ('dane', 'mazzaro', 'damazzaro@oakland.edu', 'hello1234', '2484960964')";
-
-            SqlCommand cmd = new SqlCommand(query, connection);
-
-            connection.Close();
+            userRepo.CreateUser(userAccount);
             return Content(FirstName + " | " + LastName + " | " + Email + " | " + Password );
         }
     }
