@@ -1,2 +1,40 @@
-﻿body {
-}
+﻿    body {
+    }
+
+    .sn-image {
+        background-image: url('/images/seatednow-header.jpg');
+        background-color: 000;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .sn-image.fixed {
+        width: 100%;
+        height: 500px;
+    }
+
+    .sn-image.faded {
+        display: block;
+        position: relative;
+    }
+
+    .sn-image.faded:before {
+        background: #000;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        opacity: 0.8;
+    }
