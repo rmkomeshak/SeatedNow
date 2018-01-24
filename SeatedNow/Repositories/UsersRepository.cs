@@ -27,9 +27,9 @@ namespace SeatedNow.Repositories
                 using (connection)
                 {
                     connection.Open();
-                    string query = "INSERT INTO [dbo].[Users]  VALUES ('" + account.FirstName + "', '" + account.LastName + "', '" + account.Email + "', '" + account.Password + "', '" + account.PhoneNumber + "')";
+                    string sendquery = "INSERT INTO [dbo].[Users] VALUES ('" + account.getFirstName() + "', '" + account.getLastName() + "', '" + account.Email + "', '" + account.Password + "', '" + account.PhoneNumber + "')";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(sendquery, connection))
                     {
                         command.ExecuteNonQuery();
                         connection.Close();

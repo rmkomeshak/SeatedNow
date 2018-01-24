@@ -23,13 +23,35 @@ namespace SeatedNow.Controllers
             return View();
         }
 
-        public IActionResult CreateUser(String FirstName, String LastName, String Email, String PhoneNumber, String Password)
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult RegisterNewUser(String Name, String Email, String PhoneNumber, String Password)
         {
             UsersRepository userRepo = new UsersRepository();
-            UserAccount userAccount = new UserAccount(FirstName, LastName, Email, PhoneNumber, Password);
+            UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, Password);
 
             userRepo.CreateUser(userAccount);
-            return Content(FirstName + " | " + LastName + " | " + Email + " | " + Password );
+
+            return View("../Home/Index");
         }
+
+        public IActionResult LoginUser(String Email, String Password)
+        {
+            Console.WriteLine("HELLO " + Email + " " + Password);
+            if (Email == "damazzaro@oakland.edu" && Password == "hello123")
+            {
+                return View("../Home/IndexL");
+            }
+            return View("../Account/Login");
+        }
+        
+        public IActionResult LogoutUser()
+        {
+            return View("../Home/Index");
+        }
+
     }
 }

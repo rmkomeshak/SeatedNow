@@ -8,11 +8,9 @@ namespace SeatedNow.Models
 {
     public class UserAccount
     {
-
-        public UserAccount(string firstName, string lastName, string email, string phoneNumber, string password)
+        public UserAccount(string name, string email, string phoneNumber, string password)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            Name = name;
             Email = email;
             PhoneNumber = phoneNumber;
             Password = password;
@@ -21,11 +19,8 @@ namespace SeatedNow.Models
         [Key]
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "Please enter your first name to continue!")]
-        public string FirstName { get; set; }
-
-        [Required(ErrorMessage = "Please enter your last name to continue!")]
-        public string LastName { get; set; }
+        [Required(ErrorMessage = "Please enter your name to continue!")]
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter your desired email to continue!")]
         [DataType(DataType.EmailAddress)]
@@ -42,6 +37,20 @@ namespace SeatedNow.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Your password must match!")]
         public string ConfirmPassword { get; set; }
+
+        public string getFirstName()
+        {
+            var names = Name.Split(' ');
+            string firstname = names[0];
+            return firstname;
+        }
+
+        public string getLastName()
+        {
+            var names = Name.Split(' ');
+            string lastname = names[1];
+            return lastname;
+        }
 
     }
 }
