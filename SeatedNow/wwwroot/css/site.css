@@ -50,21 +50,21 @@ footer {
     background-size: cover;
 }
 
-.sn-image.one {
-    background-image: url('/images/stock/restaurant1.jpg');
+.sn-image.sn1 {
+    background-image: url('/images/restaurant1.jpg');
     background-position: bottom center;
 }
 
-.sn-image.two {
-    background-image: url('/images/stock/restaurant2.jpg');
+.sn-image.sn2 {
+    background-image: url('/images/restaurant2.jpg');
 }
 
-.sn-image.three {
-    background-image: url('/images/stock/restaurant3.jpg');
+.sn-image.sn3 {
+    background-image: url('/images/restaurant3.jpg');
 }
 
-.sn-image.four {
-    background-image: url('/images/stock/restaurant4.jpg');
+.sn-image.sn4 {
+    background-image: url('/images/restaurant4.jpg');
 }
 
 .sn-image.fixed {
@@ -95,7 +95,7 @@ footer {
 }
 
 .sn-green-pattern:before {
-    background-image: url('/images/svg/food-pattern.svg');
+    background-image: url('/images/food-pattern.svg');
     content: "";
     top: 0;
     left: 0;
