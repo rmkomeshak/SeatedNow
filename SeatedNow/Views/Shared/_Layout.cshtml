@@ -22,12 +22,12 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img src="~/images/logo/seatednow-logo-small.png" height="22px" alt="Seated Now">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                <img src="~/images/seatednow-logo-small.png" height="22px" alt="Seated Now">
-            </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto"></ul>
@@ -49,7 +49,7 @@
     @RenderBody()
 
     <footer>
-        <div class="container-fluid text-light" style="background: #111; padding: 50px 0">
+        <div class="container-fluid text-light" style="background: #0a0a0a; padding: 50px 0">
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 order-md-last">
