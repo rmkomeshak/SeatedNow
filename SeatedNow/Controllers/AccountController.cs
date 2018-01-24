@@ -35,17 +35,17 @@ namespace SeatedNow.Controllers
 
             userRepo.CreateUser(userAccount);
 
-            return View("../Home/Index");
+            return Content("You have successfully registered! (This wont be the page registration goes to, we have yet to implement it");
         }
 
         public IActionResult LoginUser(String Email, String Password)
         {
-            Console.WriteLine("HELLO " + Email + " " + Password);
+            UserAccount account = new UserAccount("Dane Mazzaro", Email, "2484960964", Password);
             if (Email == "damazzaro@oakland.edu" && Password == "hello123")
             {
-                return View("../Home/IndexL");
+                return Content("Hello");
             }
-            return View("../Account/Login");
+            return Content(Email + " | " + Password);
         }
         
         public IActionResult LogoutUser()
