@@ -13,6 +13,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="images\food-pattern.svg" />
+    <Content Include="images\restaurant1.jpg" />
+    <Content Include="images\restaurant2.jpg" />
+    <Content Include="images\restaurant3.jpg" />
+    <Content Include="images\restaurant4.jpg" />
+    <Content Include="images\seatednow-logo-small.png" />
+    <Content Include="images\seatednow-logo-white-small.png" />
+    <Content Include="images\seatednow-logo-white.png" />
+    <Content Include="images\seatednow-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
@@ -25,18 +37,6 @@
   <ItemGroup>
     <Folder Include="Mappers\" />
     <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\images\food-pattern.svg" />
-    <None Include="wwwroot\images\restaurant1.jpg" />
-    <None Include="wwwroot\images\restaurant2.jpg" />
-    <None Include="wwwroot\images\restaurant3.jpg" />
-    <None Include="wwwroot\images\restaurant4.jpg" />
-    <None Include="wwwroot\images\seatednow-logo-small.png" />
-    <None Include="wwwroot\images\seatednow-logo-white-small.png" />
-    <None Include="wwwroot\images\seatednow-logo-white.png" />
-    <None Include="wwwroot\images\seatednow-logo.png" />
   </ItemGroup>
 
 </Project>
