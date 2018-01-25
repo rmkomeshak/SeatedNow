@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Models;
 using SeatedNow.Repositories;
@@ -49,6 +43,17 @@ namespace SeatedNow.Controllers
             }
         }
 
+        public JsonResult EmailIsRegistered(string Email)
+        {
+            UsersRepository userRepo = new UsersRepository();
+            if (!userRepo.IsEmailRegistered(Email))
+            {
+                return Json(true);
+            }
+
+            return Json(false);
+        }
+
         public IActionResult LoginUser(String Email, String Password)
         {
             UsersRepository userRepo = new UsersRepository();
@@ -56,6 +61,7 @@ namespace SeatedNow.Controllers
 
             if (PasswordsMatch(userRepo.GetHashedPassword(Email), HashedPassword))
             {
+                HttpContext.Session.SetString("Email", Email);
                 return Content("Success!");
             } else
             {

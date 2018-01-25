@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SeatedNow.Models
 {
@@ -24,6 +25,7 @@ namespace SeatedNow.Models
 
         [Required(ErrorMessage = "Please enter your desired email")]
         [DataType(DataType.EmailAddress)]
+        [Remote("EmailIsRegistered","Account", ErrorMessage ="That email already exists in our system")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your desired mobile phone number")]
