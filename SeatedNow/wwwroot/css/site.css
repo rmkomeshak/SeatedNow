@@ -21,6 +21,7 @@ h6 {
     font-size: 15px !important;
     line-height: 1.4em;
     padding: 0.45rem 0.75rem 0.35rem 0.75rem;
+    border: 0px transparent solid;
 }
 
 footer {
@@ -41,6 +42,8 @@ footer {
 
 /*-- Header Image and Image Background --*/
 .sn-image {
+    display: block;
+    position: relative;
     background-color: #000;
     background-position: center center;
     background-repeat: no-repeat;
@@ -69,24 +72,35 @@ footer {
 
 .sn-image.fixed {
     width: 100%;
-    height: 500px;
+    height: 300px;
 }
 
-.sn-image.faded {
-    display: block;
-    position: relative;
-}
-
-.sn-image.faded:before {
+.sn-image:before {
     background: #000;
-    content: "";
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    opacity: 0.8;
 }
+
+.sn-image.fade10:before { content: ""; opacity: 0.1; }
+
+.sn-image.fade20:before { content: ""; opacity: 0.2; }
+
+.sn-image.fade30:before { content: ""; opacity: 0.3; }
+
+.sn-image.fade40:before { content: ""; opacity: 0.4; }
+
+.sn-image.fade50:before { content: ""; opacity: 0.5; }
+
+.sn-image.fade60:before { content: ""; opacity: 0.6; }
+
+.sn-image.fade70:before { content: ""; opacity: 0.7; }
+
+.sn-image.fade80:before { content: ""; opacity: 0.8; }
+
+.sn-image.fade90:before { content: ""; opacity: 0.9; }
 
 .sn-green-pattern {
     display: block;
@@ -170,12 +184,32 @@ p a:hover {
 .form-control:focus {
     color: #555555;
     background-color: #fff;
-    border-color: #5D7337;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(93, 115, 55, 0.2);
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255, 0.3);
 }
 
-.sn-green-pattern .form-control:focus {
-    border-color: #ced4da;
-    box-shadow: 0 0 0 0.2rem rgba(255,255,255, 0.3);
+/* -- Error messages on forms -- */
+
+.field-validation-error span {
+    color: #fff !important;
+    margin-top: 7px;
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.field-validation-error span::before {
+    content: '\f06a';
+    font-family: 'Font Awesome 5 Solid';
+    display: none;
+    font-size: 16px;
+}
+
+.field-validation-error .svg-inline--fa {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.form-control.input-validation-error {
+    box-shadow: 0 0 0 0.2rem rgba(255,0,0, 1);
 }
