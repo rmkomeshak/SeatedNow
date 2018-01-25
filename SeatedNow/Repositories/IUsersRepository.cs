@@ -12,6 +12,7 @@ namespace SeatedNow.Repositories
         void DeleteUser(UserAccount account);
         UserAccount GetUserByID(int id);
         UserAccount GetUserByFirstLastName(string firstname, string lastname);
+        UserAccount GetUserByEmail(string email);
         Boolean IsEmailRegistered(string email);
     }
 }

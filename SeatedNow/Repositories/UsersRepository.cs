@@ -63,6 +63,17 @@ namespace SeatedNow.Repositories
             throw new NotImplementedException();
         }
 
+        public UserAccount GetUserByEmail(string email)
+        {
+            string checkquery = "SELECT name, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            throw new NotFiniteNumberException();
+
+        }
+
         public UserAccount GetUserByFirstLastName(string firstname, string lastname)
         {
             throw new NotImplementedException();
