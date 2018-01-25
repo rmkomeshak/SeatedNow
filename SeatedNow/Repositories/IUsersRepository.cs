@@ -8,12 +8,14 @@ namespace SeatedNow.Repositories
 {
     interface IUsersRepository
     {
-        void CreateUser(UserAccount account);
+        void RegisterNewUser(UserAccount account);
 
         void DeleteUser(UserAccount account);
 
         UserAccount GetUserByID(int id);
 
         UserAccount GetUserByFirstLastName(string firstname, string lastname);
+
+        Boolean IsEmailRegistered(string email);
     }
 }

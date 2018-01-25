@@ -19,7 +19,7 @@ namespace SeatedNow.Repositories
             connection = dataRepo.getDBConnection();
         }
 
-        public void CreateUser(UserAccount account)
+        public void RegisterNewUser(UserAccount account)
         {
 
             try
@@ -55,6 +55,29 @@ namespace SeatedNow.Repositories
         public UserAccount GetUserByID(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Boolean IsEmailRegistered(string email)
+        {
+            string checkquery = "SELECT count(*) FROM [dbo].[Users] WHERE email = '" + email + "'";
+            int rows;
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+        
+            rows = (int) command.ExecuteScalar();
+
+            connection.Close();
+
+            if (rows > 0)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+
+
         }
     }
 }
