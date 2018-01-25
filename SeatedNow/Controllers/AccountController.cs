@@ -5,7 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Models;
 using SeatedNow.Repositories;
@@ -33,7 +35,7 @@ namespace SeatedNow.Controllers
         public IActionResult RegisterNewUser(String Name, String Email, String PhoneNumber, String Password)
         {
             UsersRepository userRepo = new UsersRepository();
-            String HashedPassword = HashPassword(Password);
+            String HashedPassword = GenerateHash(Password);
             UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
 
             if (userRepo.IsEmailRegistered(userAccount.Email))
@@ -49,7 +51,16 @@ namespace SeatedNow.Controllers
 
         public IActionResult LoginUser(String Email, String Password)
         {
-            return Content(Email + " | " + Password);
+            UsersRepository userRepo = new UsersRepository();
+            string HashedPassword = GenerateHash(Password);
+
+            if (PasswordsMatch(userRepo.GetHashedPassword(Email), HashedPassword))
+            {
+                return Content("Success!");
+            } else
+            {
+                return Content("Failure!");
+            }
         }
         
         public IActionResult LogoutUser()
@@ -57,7 +68,7 @@ namespace SeatedNow.Controllers
             return View("../Home/Index");
         }
 
-        private string HashPassword(string password)
+        private string GenerateHash(string password)
         {
             SHA1 sha1 = SHA1.Create();
             StringBuilder hashPass = new StringBuilder();
@@ -74,16 +85,7 @@ namespace SeatedNow.Controllers
 
         private Boolean PasswordsMatch(string savedPass, string inputPass)
         {
-            string hashedInputPass = HashPassword(inputPass);
-
-            if (String.Equals(savedPass, hashedInputPass))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (savedPass.Equals(inputPass));
         }
 
     }

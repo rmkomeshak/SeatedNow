@@ -42,6 +42,22 @@ namespace SeatedNow.Repositories
             }       
         }
 
+        public string GetHashedPassword(string email)
+        {
+
+            string checkquery = "SELECT password FROM[dbo].[Users] WHERE email = '" + email + "'";
+            string hashedPass;
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            hashedPass = (String) command.ExecuteScalar();
+
+            connection.Close();
+
+            return hashedPass;
+        }
+
         public void DeleteUser(UserAccount account)
         {
             throw new NotImplementedException();
