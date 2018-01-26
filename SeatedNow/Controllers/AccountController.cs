@@ -45,6 +45,7 @@ namespace SeatedNow.Controllers
 
         public JsonResult EmailIsRegistered(string Email)
         {
+            HttpContext.Session.SetString("Email", Email);
             UsersRepository userRepo = new UsersRepository();
             if (!userRepo.IsEmailRegistered(Email))
             {
@@ -61,7 +62,6 @@ namespace SeatedNow.Controllers
 
             if (PasswordsMatch(userRepo.GetHashedPassword(Email), HashedPassword))
             {
-                HttpContext.Session.SetString("Email", Email);
                 return Content("Success!");
             } else
             {
