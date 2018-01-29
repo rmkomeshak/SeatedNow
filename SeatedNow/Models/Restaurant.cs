@@ -7,6 +7,8 @@ namespace SeatedNow.Models
 {
     public class Restaurant
     {
+        /*
+
         public RestaurantAccount(string name, string address, string city, string zip, string state , string phoneNumber)
         {
             Name = name;
@@ -31,7 +33,7 @@ namespace SeatedNow.Models
 
         public string PhoneNumber { get; set; }
 
-
+        */
 
     }
 }

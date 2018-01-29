@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\home\Login - Copy.cshtml" />
+    <Content Remove="Views\Home\Login - Copy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
