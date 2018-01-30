@@ -217,6 +217,7 @@ p a:hover {
 
 .sn-blurb {
     text-align: center;
+    cursor: default;
 }
 
 .sn-blurb i {
