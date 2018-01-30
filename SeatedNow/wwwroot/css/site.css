@@ -21,7 +21,7 @@ h6 {
     font-size: 15px !important;
     line-height: 1.4em;
     padding: 8px 12px 7px 12px;
-    border: 0px transparent solid;
+    border: none;
 }
 
 footer {
@@ -132,12 +132,12 @@ a:hover {
 
 p a {
     border-bottom: 1px transparent solid;
-    transition: border-color 0.15s ease-in-out;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
 }
 
 p a:hover {
     border-bottom: 1px #5D7337 solid;
-    transition: border-color 0.15s ease-in-out;
 }
 
 .sn-green-pattern a {
@@ -188,6 +188,10 @@ p a:hover {
     box-shadow: 0 0 0 0.2rem rgba(255,255,255, 0.3);
 }
 
+.form-control.white-bg {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
 /* -- Error messages on forms -- */
 
 .field-validation-error span {
@@ -200,16 +204,44 @@ p a:hover {
 
 .field-validation-error span::before {
     content: '\f06a';
-    font-family: 'Font Awesome 5 Solid';
-    display: none;
+    font-family: 'Font Awesome 5 Free';
     font-size: 16px;
-}
-
-.field-validation-error .svg-inline--fa {
     margin-right: 5px;
-    font-size: 14px;
 }
 
 .form-control.input-validation-error {
     box-shadow: 0 0 0 0.2rem rgba(255,0,0, 1);
+}
+
+/* Custom blurb module */
+
+.sn-blurb {
+    text-align: center;
+}
+
+.sn-blurb i {
+    display: inline-block;
+    font-size: 44px;
+    height: 100px;
+    width: 100px;
+    line-height: 90px;
+    color: #5d7337;
+    background: #fff;
+    border: 5px #eee solid;
+    border-radius: 100%;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.sn-blurb:hover i {
+    transform: rotate(360deg);
+    background: #5d7337;
+    border-color: #5d7337;
+    color: #fff;
+}
+
+.sn-blurb h4 {
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 19px;
 }

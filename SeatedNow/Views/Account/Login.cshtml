@@ -27,7 +27,7 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="col-sm-9 offset-3" style="margin-top: 10px; text-align: right; font-style: italic; font-weight: 700; font-size: 14px;">
-                        <a href="#" style="color: #888;">Forgot your password?</a>
+                        <a href="#" style="color: #888;" data-toggle="modal" data-target="#ForgotPassword">Forgot your password?</a>
                     </div>
                 </div>
                 <div class="form-group row" style="margin-top: 50px;">
@@ -36,6 +36,28 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ForgotPassword" tabindex="-1" role="dialog" aria-labelledby="ForgotPassword" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ForgotPasswordTitle">Forgot your password?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please enter your email address below and we'll send you a link to reset your password.</p>
+                <input class="form-control white-bg" placeholder="Email" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sn">Enter</button>
+            </div>
         </div>
     </div>
 </div>
