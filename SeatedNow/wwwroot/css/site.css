@@ -255,6 +255,29 @@ p a:hover {
     margin-bottom: 50px;
 }
 
+.sn-top-keywords {
+    display: block;
+    border-radius: 5px;
+    padding: 25px;
+    margin-bottom: 40px;
+    background: #111;
+    color: #fff;
+}
+
+.sn-top-keywords button {
+    margin: 5px;
+}
+
+.sn-top-keywords button:before {
+    content: '#';
+}
+
+.sn-top-keywords h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 5px 5px 10px 5px;
+}
+
 .sn-listing {
     display: block;
     min-height: 100px;
@@ -279,8 +302,8 @@ p a:hover {
 }
 
 .sn-listing h3.restaurant-title {
-    font-size: 32px;
-    line-height: 130%;
+    font-size: 28px;
+    line-height: 140%;
     margin: 0;
 }
 
@@ -316,6 +339,19 @@ p a:hover {
 
 .sn-listing .btn-light:hover {
     background-color: #ccc;
+}
+
+.sn-listing .ratings {
+    color: #ffc107;
+    margin-top: 10px;
+}
+
+.sn-listing .ratings a.ratings-link {
+    color: #555;
+    font-style: italic;
+    font-size: 14px;
+    display: inline-block;
+    margin: 5px;
 }
 
 .sn-listing button.btn-reserve {
