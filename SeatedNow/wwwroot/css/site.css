@@ -1,4 +1,6 @@
-﻿body {
+﻿/* -- Font Changes -- */
+
+body {
     font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     line-height: 1.4em;
@@ -34,13 +36,25 @@ footer {
     border-color: #111111;
 }
 
-    .btn-dark:hover {
-        color: #fff;
-        background-color: #000000;
-        border-color: #000000;
-    }
+.btn-dark:hover {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.form-control:focus {
+    color: #555555;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255, 0.3);
+}
+
+.form-control.white-bg {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
 
 /*-- Header Image and Image Background --*/
+
 .sn-image {
     display: block;
     position: relative;
@@ -197,18 +211,7 @@ p a:hover {
     box-shadow: 0 0 0 0.2rem rgba(93, 115, 55, 0.2);
 }
 
-.form-control:focus {
-    color: #555555;
-    background-color: #fff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(255,255,255, 0.3);
-}
-
-.form-control.white-bg {
-    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
-}
-
-/* -- Error messages on forms -- */
+/* -- Error Messages on Forms -- */
 
 .field-validation-error span {
     color: #fff !important;
@@ -229,11 +232,36 @@ p a:hover {
     box-shadow: 0 0 0 0.2rem rgba(255,0,0, 1);
 }
 
-/* Custom blurb module */
+/* -- Logged Out -- */
+
+h1.title {
+    max-width: 80%;
+    font-weight: 200;
+    font-size: 50px;
+}
+
+.btn-lg {
+    font-size: 20px;
+}
+
+.sn-favorites i {
+    font-size: 100px;
+    color: #ffc107;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+
+.container-fluid:hover .sn-favorites i {
+    transform: rotate(50deg);
+}
+
+/* -- Logged Out Blurb -- */
 
 .sn-blurb {
     text-align: center;
     cursor: default;
+    max-width: 270px;
+    margin: 0 auto 20px auto;
 }
 
 .sn-blurb i {
@@ -258,10 +286,32 @@ p a:hover {
 }
 
 .sn-blurb h4 {
-    font-weight: 700;
+    font-weight: 200;
     margin-top: 20px;
-    font-size: 19px;
+    font-size: 24px;
 }
+
+/* -- Logged Out Example Keywords -- */
+
+.example-keywords {
+    display: inline-block;
+    background: rgba(0,0,0,0.1);
+    border: 1px rgba(255,255,255,0.2) solid;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.example-keywords button {
+    margin: 5px;
+    cursor: default !important;
+}
+
+.example-keywords button:before {
+    content: '#';
+}
+
+/* -- Logged In Sidebar -- */
 
 .sn-sidebar {
     display: block;
@@ -270,6 +320,8 @@ p a:hover {
     padding: 20px;
     margin-bottom: 50px;
 }
+
+/* -- Logged In Keywords -- */
 
 .sn-top-keywords {
     display: block;
@@ -293,6 +345,8 @@ p a:hover {
     font-weight: 700;
     margin: 5px 5px 10px 5px;
 }
+
+/* -- Logged In Listings -- */
 
 .sn-listing {
     display: block;
