@@ -246,3 +246,81 @@ p a:hover {
     margin-top: 20px;
     font-size: 19px;
 }
+
+.sn-sidebar {
+    display: block;
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.sn-listing {
+    display: block;
+    min-height: 100px;
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    padding: 10px 30px;
+    margin-bottom: 30px;
+}
+
+.sn-listing .logo {
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    text-align: center;
+    line-height: 100px;
+}
+
+.sn-listing .logo img {
+    max-width: 100%;
+    max-height: 100px;
+}
+
+.sn-listing h3.restaurant-title {
+    font-size: 32px;
+    line-height: 130%;
+    margin: 0;
+}
+
+.sn-listing h3.restaurant-title a {
+    color: #333;
+}
+
+.sn-listing .restaurant-location {
+    font-size: 14px;
+}
+
+.sn-listing .keywords {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.sn-listing .keywords button:before {
+    content:'#';
+}
+
+.sn-listing .btn-sm {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.sn-listing .btn-light {
+    background-color: #ddd;
+    border: none;
+}
+
+.sn-listing .btn-light:hover {
+    background-color: #ccc;
+}
+
+.sn-listing button.btn-reserve {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
