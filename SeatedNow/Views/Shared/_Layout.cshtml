@@ -61,14 +61,6 @@
                     <div class="col-md-3 order-md-first">
                         <img src="~/images/seatednow-logo-white-small.png" height="22" alt="SeatedNow">
                         <h6 style="margin-top: 20px;">Links</h6>
-                        @using Microsoft.AspNetCore.Http
-                        @inject IHttpContextAccessor HttpContextAccessor
-                        <script>
-                            var isFiltered = '@HttpContextAccessor.HttpContext.Session.GetString("Email")';
-                            if (isFiltered) {
-                                alert('hello');
-                            }
-                        </script>
                         <p>
                             <a asp-area="" asp-controller="Home" asp-action="About">About</a><br/>
                             <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a><br/>
