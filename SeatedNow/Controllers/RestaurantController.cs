@@ -8,7 +8,7 @@ namespace SeatedNow.Controllers
 {
     public class RestaurantController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }

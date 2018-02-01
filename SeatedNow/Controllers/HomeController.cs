@@ -17,29 +17,21 @@ namespace SeatedNow.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "All about SeatedNow.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Contact the SeatedNow team.";
-
             return View();
         }
 
         public IActionResult Login()
         {
-            ViewData["Message"] = "Sign into your account.";
-
             return View();
         }
 
         public IActionResult Register()
         {
-            ViewData["Message"] = "Register for an account.";
-
             return View();
         }
 
