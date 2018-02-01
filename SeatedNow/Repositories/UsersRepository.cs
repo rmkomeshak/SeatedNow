@@ -65,10 +65,15 @@ namespace SeatedNow.Repositories
 
         public UserAccount GetUserByEmail(string email)
         {
-            string checkquery = "SELECT name, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
+            string checkquery = "SELECT name, email, phone, password FROM [dbo].[Users] WHERE email = '" + email + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
+            using (var reader = command.ExecuteReader())
+            {
+                return new UserAccount(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
+            }
+
 
             throw new NotFiniteNumberException();
 
