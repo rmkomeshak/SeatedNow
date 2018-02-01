@@ -26,10 +26,6 @@ h6 {
     border: none;
 }
 
-footer {
-    font-size: 14px;
-}
-
 .btn-dark {
     color: #fff;
     background-color: #111111;
@@ -51,6 +47,24 @@ footer {
 
 .form-control.white-bg {
     box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+footer .row img {
+    margin: 20px 5px;
+}
+
+footer .row a {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+footer .row span {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 14px;
+    color: #888;
 }
 
 /*-- Header Image and Image Background --*/
