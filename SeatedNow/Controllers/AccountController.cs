@@ -16,7 +16,7 @@ namespace SeatedNow.Controllers
     public class AccountController : Controller
     {
 
-        UserSessionManager _userSessionManager = new UserSessionManager();
+        UserSession _userSessionManager = new UserSession();
         IUserRepository _userRepository = new UserRepository();
 
         public IActionResult Index()

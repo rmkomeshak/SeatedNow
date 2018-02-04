@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Managers
 {
-    public class UserSessionManager
+    public class UserSession
     {
         IHttpContextAccessor accessor = new HttpContextAccessor();
 

@@ -38,7 +38,7 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-sm-0"></ul>
                 <ul class="navbar-nav mt-2 mt-sm-0">
                     @{ 
-                        UserSessionManager userSession = new UserSessionManager();
+                        UserSession userSession = new UserSession();
                         Console.WriteLine(userSession.IsValid());
                         if (userSession.IsValid())
                         {
