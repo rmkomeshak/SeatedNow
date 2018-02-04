@@ -24,7 +24,7 @@
                     <label asp-for="Password" class="control-label col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-9">
                         <input asp-for="Password" class="form-control" placeholder="Password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <span asp-validation-for="Password" class="text-danger">@Html.ValidationMessage("InvalidCredentials")</span>
                     </div>
                     <div class="col-sm-9 offset-3" style="margin-top: 10px; text-align: right; font-style: italic; font-weight: 700; font-size: 14px;">
                         <a href="#" style="color: #888;" data-toggle="modal" data-target="#ForgotPassword">Forgot your password?</a>

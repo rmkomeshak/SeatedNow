@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Repositories
 {
-    interface IUsersRepository
+    interface IUserRepository
     {
         void RegisterNewUser(UserAccount account);
         void DeleteUser(UserAccount account);
@@ -14,5 +14,6 @@ namespace SeatedNow.Repositories
         UserAccount GetUserByFirstLastName(string firstname, string lastname);
         UserAccount GetUserByEmail(string email);
         Boolean IsEmailRegistered(string email);
+        string GetHashedPassword(string email);
     }
 }

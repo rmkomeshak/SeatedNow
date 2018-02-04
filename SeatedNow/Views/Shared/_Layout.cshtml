@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model SeatedNow.Models.UserAccount
+
+@using SeatedNow.Managers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,16 +37,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mt-2 mt-sm-0"></ul>
                 <ul class="navbar-nav mt-2 mt-sm-0">
-                    <li class="nav-item">
-                        <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
-                    </li>
-                    <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
-                        <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                    </li>
+                    @{ 
+                        UserSessionManager userSession = new UserSessionManager();
+                        Console.WriteLine(userSession.IsValid());
+                        if (userSession.IsValid())
+                        {
+                            <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
+                                <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="Profile">Hello, @userSession.GetFirstName()</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="LogoutUser">Logout</a>
+                            </li>
+
+                        } else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
+                            </li>
+                            <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
+                                <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
-     </nav>
+    </nav>
 
     @RenderBody()
 

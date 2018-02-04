@@ -9,11 +9,11 @@ using SeatedNow.Models;
 
 namespace SeatedNow.Repositories
 {
-    public class UsersRepository : IUsersRepository
+    public class UserRepository : IUserRepository
     {
         SqlConnection connection;
 
-        public UsersRepository()
+        public UserRepository()
         {
             DataRepository dataRepo = new DataRepository();
             connection = dataRepo.getDBConnection();
@@ -65,13 +65,25 @@ namespace SeatedNow.Repositories
 
         public UserAccount GetUserByEmail(string email)
         {
-            string checkquery = "SELECT name, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
+            int dbuserid = -1;
+            string dbname = "", dbphone="", dbemail="", dbpass="";
+            string checkquery = "SELECT userid, firstname, lastname, phone, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
 
-            throw new NotFiniteNumberException();
+            SqlDataReader reader = command.ExecuteReader();
 
+            while (reader.Read())
+            {
+                dbuserid = (int) reader["userid"];
+                dbname = reader["firstname"] + " " + reader["lastname"];
+                dbphone = reader["phone"].ToString();
+                dbemail = reader["email"].ToString();
+                dbpass = reader["password"].ToString();
+            }
+
+            return new UserAccount(dbuserid, dbname, dbemail, dbphone, dbpass);
         }
 
         public UserAccount GetUserByFirstLastName(string firstname, string lastname)

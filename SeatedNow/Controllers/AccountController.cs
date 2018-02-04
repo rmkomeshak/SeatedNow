@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SeatedNow.Managers;
 using SeatedNow.Models;
 using SeatedNow.Repositories;
 
@@ -11,12 +16,10 @@ namespace SeatedNow.Controllers
     public class AccountController : Controller
     {
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        UserSessionManager _userSessionManager = new UserSessionManager();
+        IUserRepository _userRepository = new UserRepository();
 
-        public IActionResult Register()
+        public IActionResult Index()
         {
             return View();
         }
@@ -26,28 +29,64 @@ namespace SeatedNow.Controllers
             return View();
         }
 
-        public IActionResult RegisterNewUser(String Name, String Email, String PhoneNumber, String Password)
+        public IActionResult Register()
         {
-            UsersRepository userRepo = new UsersRepository();
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            return View(_userRepository.GetUserByEmail(HttpContext.Session.GetString("_email")));
+        }
+
+        public IActionResult RegisterUser(String Name, String Email, String PhoneNumber, String Password)
+        {
             String HashedPassword = GenerateHash(Password);
             UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
 
-            if (userRepo.IsEmailRegistered(userAccount.Email))
+            if (_userRepository.IsEmailRegistered(userAccount.Email))
             {
                 return Content("Error this email is already registered");
             }
             else
             {
-                userRepo.RegisterNewUser(userAccount);
+                _userRepository.RegisterNewUser(userAccount);
                 return Content("You have successfully registered!");
             }
+        }
+
+        public IActionResult LoginUser(String Email, String Password)
+        {
+            if (ModelState.IsValid && !String.IsNullOrEmpty(Password))
+            {
+                string HashedPassword = GenerateHash(Password);
+
+                if (PasswordsMatch(_userRepository.GetHashedPassword(Email), HashedPassword))
+                {
+                    UserAccount account = _userRepository.GetUserByEmail(Email);
+                    _userSessionManager.Create(account);
+                    return View("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("InvalidCredentials", "Invalid login attempt.");
+                }
+            }
+
+            return View("Login");
+
+        }
+
+        public IActionResult LogoutUser()
+        {
+            _userSessionManager.Destroy();
+            return Redirect("../Home/Index");
         }
 
         public JsonResult EmailIsRegistered(string Email)
         {
             HttpContext.Session.SetString("Email", Email);
-            UsersRepository userRepo = new UsersRepository();
-            if (!userRepo.IsEmailRegistered(Email))
+            if (!_userRepository.IsEmailRegistered(Email))
             {
                 return Json(true);
             }
@@ -55,23 +94,9 @@ namespace SeatedNow.Controllers
             return Json(false);
         }
 
-        public IActionResult LoginUser(String Email, String Password)
+        private Boolean PasswordsMatch(string savedPass, string inputPass)
         {
-            UsersRepository userRepo = new UsersRepository();
-            string HashedPassword = GenerateHash(Password);
-
-            if (PasswordsMatch(userRepo.GetHashedPassword(Email), HashedPassword))
-            {
-                return Content("Success!");
-            } else
-            {
-                return Content("Failure!");
-            }
-        }
-        
-        public IActionResult LogoutUser()
-        {
-            return View("../Home/Index");
+            return (savedPass.Equals(inputPass));
         }
 
         private string GenerateHash(string password)
@@ -88,11 +113,5 @@ namespace SeatedNow.Controllers
 
             return hashPass.ToString();
         }
-
-        private Boolean PasswordsMatch(string savedPass, string inputPass)
-        {
-            return (savedPass.Equals(inputPass));
-        }
-
     }
 }
