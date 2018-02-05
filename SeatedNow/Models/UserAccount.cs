@@ -60,7 +60,6 @@ namespace SeatedNow.Models
 
         public string getLastName()
         {
-            string test;
             var names = Name.Split(' ');
             string lastname = names[1];
             return lastname;
