@@ -65,7 +65,7 @@ namespace SeatedNow.Controllers
                 {
                     UserAccount account = _userRepository.GetUserByEmail(Email);
                     _userSessionManager.Create(account);
-                    return View("Index");
+                    return Redirect("Index");
                 }
                 else
                 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace SeatedNow.Models
 {
@@ -29,27 +30,18 @@ namespace SeatedNow.Models
         [Key]
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "Please enter your first and last name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter your desired email")]
         [DataType(DataType.EmailAddress)]
-        [Remote("EmailIsRegistered","Account", ErrorMessage ="That email already exists in our system")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter your desired mobile phone number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Must be a valid US phone numner (xxx xxx xxxx)")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Please enter your password")]
-        [StringLength(20, MinimumLength = 5, ErrorMessage = "Password must be between 5 and 20 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Your passwords must match")]
-        public string ConfirmPassword { get; set; }
+        public string Role { get; set; }
 
         public string getFirstName()
         {
@@ -61,7 +53,20 @@ namespace SeatedNow.Models
         public string getLastName()
         {
             var names = Name.Split(' ');
-            string lastname = names[1];
+            string lastname = "";
+
+            if (names.Length >= 3)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                for (int i = 1; i < names.Length; i++)
+                {
+                    sb.Append(names[i] + " ");
+                }
+
+                lastname = sb.ToString();
+            }
+
             return lastname;
         }
 
