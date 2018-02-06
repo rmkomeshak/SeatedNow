@@ -12,5 +12,9 @@ namespace SeatedNow.Controllers
         {
             return View();
         }
+        public IActionResult Designer()
+        {
+            return View();
+        }
     }
 }
