@@ -27,6 +27,7 @@ namespace SeatedNow.Controllers
 
         public IActionResult Login()
         {
+            ViewBag.Register = TempData["Register"];
             return View();
         }
 
@@ -52,6 +53,7 @@ namespace SeatedNow.Controllers
                 UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
 
                 _userRepository.RegisterNewUser(userAccount);
+                TempData["Register"] = "Success";
                 return Redirect("Login");
             }
         }
@@ -77,7 +79,7 @@ namespace SeatedNow.Controllers
             return View("Login");
 
         }
-
+    
         public IActionResult LogoutUser()
         {
             _userSessionManager.Destroy();
