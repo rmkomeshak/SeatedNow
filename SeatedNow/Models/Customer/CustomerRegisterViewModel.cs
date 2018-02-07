@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Models
 {
-    public class RegisterViewModel
+    public class CustomerRegisterViewModel
     {
         [Required(ErrorMessage = "Please enter your first and last name")]
         public string Name { get; set; }

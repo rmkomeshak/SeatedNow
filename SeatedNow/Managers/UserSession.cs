@@ -22,7 +22,7 @@ namespace SeatedNow.Managers
             }
         }
 
-        public void Create(UserAccount account)
+        public void Create(CustomerAccount account)
         {
             setID(account.UserID);
             SetFirstName(account.getFirstName());

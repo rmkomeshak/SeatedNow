@@ -19,7 +19,7 @@ namespace SeatedNow.Repositories
             connection = dataRepo.getDBConnection();
         }
 
-        public void RegisterNewUser(UserAccount account)
+        public void RegisterNewUser(CustomerAccount account)
         {
 
             try
@@ -58,12 +58,12 @@ namespace SeatedNow.Repositories
             return hashedPass;
         }
 
-        public void DeleteUser(UserAccount account)
+        public void DeleteUser(CustomerAccount account)
         {
             throw new NotImplementedException();
         }
 
-        public UserAccount GetUserByEmail(string email)
+        public CustomerAccount GetUserByEmail(string email)
         {
             int dbuserid = -1;
             string dbname = "", dbphone="", dbemail="", dbpass="", dbrole="";
@@ -85,15 +85,15 @@ namespace SeatedNow.Repositories
 
             connection.Close();
 
-            return new UserAccount(dbuserid, dbname, dbemail, dbphone, dbpass);
+            return new CustomerAccount(dbuserid, dbname, dbemail, dbphone, dbpass);
         }
 
-        public UserAccount GetUserByFirstLastName(string firstname, string lastname)
+        public CustomerAccount GetUserByFirstLastName(string firstname, string lastname)
         {
             throw new NotImplementedException();
         }
 
-        public UserAccount GetUserByID(int id)
+        public CustomerAccount GetUserByID(int id)
         {
             throw new NotImplementedException();
         }

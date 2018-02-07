@@ -8,9 +8,9 @@ using System.Text;
 
 namespace SeatedNow.Models
 {
-    public class UserAccount
+    public class CustomerAccount
     {
-        public UserAccount(int id, string name, string email, string phoneNumber, string password)
+        public CustomerAccount(int id, string name, string email, string phoneNumber, string password)
         {
             UserID = id;
             Name = name;
@@ -19,7 +19,7 @@ namespace SeatedNow.Models
             Password = password;
         }
 
-        public UserAccount(string name, string email, string phoneNumber, string password)
+        public CustomerAccount(string name, string email, string phoneNumber, string password)
         {
             Name = name;
             Email = email;

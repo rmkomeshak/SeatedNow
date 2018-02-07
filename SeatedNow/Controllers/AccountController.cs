@@ -50,7 +50,7 @@ namespace SeatedNow.Controllers
             else
             {
                 String HashedPassword = GenerateHash(Password);
-                UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
+                CustomerAccount userAccount = new CustomerAccount(Name, Email, PhoneNumber, HashedPassword);
 
                 _userRepository.RegisterNewUser(userAccount);
                 TempData["Register"] = "Success";
@@ -66,7 +66,7 @@ namespace SeatedNow.Controllers
 
                 if (EmailExists(Email) && PasswordsMatch(_userRepository.GetHashedPassword(Email), HashedPassword))
                 {
-                    UserAccount account = _userRepository.GetUserByEmail(Email);
+                    CustomerAccount account = _userRepository.GetUserByEmail(Email);
                     _userSessionManager.Create(account);
                     return Redirect("~/Restaurant/List");
                 }

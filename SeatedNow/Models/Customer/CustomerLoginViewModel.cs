@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Models
 {
-    public class LoginViewModel
+    public class CustomerLoginViewModel
     {
         [Required(ErrorMessage = "Must not leave this field empty")]
         [DataType(DataType.EmailAddress)]
