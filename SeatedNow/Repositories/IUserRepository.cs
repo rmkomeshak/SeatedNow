@@ -10,6 +10,7 @@ namespace SeatedNow.Repositories
     {
         void RegisterNewUser(UserAccount account);
         void DeleteUser(UserAccount account);
+
         UserAccount GetUserByID(int id);
         UserAccount GetUserByFirstLastName(string firstname, string lastname);
         UserAccount GetUserByEmail(string email);

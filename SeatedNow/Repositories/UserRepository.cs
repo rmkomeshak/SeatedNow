@@ -83,6 +83,8 @@ namespace SeatedNow.Repositories
                 dbpass = reader["password"].ToString();
             }
 
+            connection.Close();
+
             return new UserAccount(dbuserid, dbname, dbemail, dbphone, dbpass);
         }
 

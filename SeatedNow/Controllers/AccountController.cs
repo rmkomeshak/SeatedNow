@@ -18,10 +18,11 @@ namespace SeatedNow.Controllers
 
         UserSession _userSessionManager = new UserSession();
         IUserRepository _userRepository = new UserRepository();
+        IRestaurantRepository _restaurantRepository = new RestaurantRepository();
 
         public IActionResult Index()
         {
-            return View();
+            return View(_restaurantRepository.GetRestaurants());
         }
 
         public IActionResult Login()
@@ -41,17 +42,17 @@ namespace SeatedNow.Controllers
 
         public IActionResult RegisterUser(String Name, String Email, String PhoneNumber, String Password)
         {
-            String HashedPassword = GenerateHash(Password);
-            UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
-
-            if (_userRepository.IsEmailRegistered(userAccount.Email))
+            if (_userRepository.IsEmailRegistered(Email))
             {
                 return Content("Error this email is already registered");
             }
             else
             {
+                String HashedPassword = GenerateHash(Password);
+                UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword);
+
                 _userRepository.RegisterNewUser(userAccount);
-                return Content("You have successfully registered!");
+                return Redirect("Login");
             }
         }
 
@@ -61,11 +62,11 @@ namespace SeatedNow.Controllers
             {
                 string HashedPassword = GenerateHash(Password);
 
-                if (PasswordsMatch(_userRepository.GetHashedPassword(Email), HashedPassword))
+                if (EmailExists(Email) && PasswordsMatch(_userRepository.GetHashedPassword(Email), HashedPassword))
                 {
                     UserAccount account = _userRepository.GetUserByEmail(Email);
                     _userSessionManager.Create(account);
-                    return Redirect("Index");
+                    return Redirect("~/Restaurant/List");
                 }
                 else
                 {
@@ -92,6 +93,16 @@ namespace SeatedNow.Controllers
             }
 
             return Json(false);
+        }
+
+        public Boolean EmailExists(string Email)
+        {
+            if (_userRepository.IsEmailRegistered(Email))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private Boolean PasswordsMatch(string savedPass, string inputPass)
