@@ -16,5 +16,9 @@ namespace SeatedNow.Controllers
         {
             return View();
         }
+        public IActionResult FloorPlan()
+        {
+            return View();
+        }
     }
 }
