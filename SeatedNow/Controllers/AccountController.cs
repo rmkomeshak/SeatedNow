@@ -17,7 +17,7 @@ namespace SeatedNow.Controllers
     {
 
         UserSession _userSessionManager = new UserSession();
-        IUserRepository _userRepository = new UserRepository();
+        ICustomerRepository _userRepository = new CustomerRepository();
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
 
         public IActionResult Index()

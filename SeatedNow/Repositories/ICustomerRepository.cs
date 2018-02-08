@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Repositories
 {
-    interface IUserRepository
+    interface ICustomerRepository
     {
         void RegisterNewUser(CustomerAccount account);
         void DeleteUser(CustomerAccount account);

@@ -7,5 +7,6 @@ namespace SeatedNow.Models
 {
     public class AdminAccount
     {
+        public CustomerAccount customerAccount;
     }
 }

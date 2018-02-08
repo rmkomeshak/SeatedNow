@@ -9,14 +9,14 @@ using SeatedNow.Models;
 
 namespace SeatedNow.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class CustomerRepository : ICustomerRepository
     {
         SqlConnection connection;
 
-        public UserRepository()
+        public CustomerRepository()
         {
-            DataRepository dataRepo = new DataRepository();
-            connection = dataRepo.getDBConnection();
+            IDataRepository dataRepo = new DataRepository();
+            connection = dataRepo.GetDBConnection();
         }
 
         public void RegisterNewUser(CustomerAccount account)

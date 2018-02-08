@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="DTO\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\Api\" />
   </ItemGroup>
 
   <ItemGroup>
