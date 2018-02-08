@@ -66,7 +66,7 @@ namespace SeatedNow.Repositories
         public CustomerAccount GetUserByEmail(string email)
         {
             int dbuserid = -1;
-            string dbname = "", dbphone="", dbemail="", dbpass="", dbrole="";
+            string dbname = "", dbphone="", dbemail="", dbpass="";
             string checkquery = "SELECT userid, firstname, lastname, phone, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
 
             connection.Open();
