@@ -14,8 +14,8 @@ namespace SeatedNow.Repositories
 
         public RestaurantRepository()
         {
-            DataRepository dataRepo = new DataRepository();
-            connection = dataRepo.getDBConnection();
+            IDataRepository dataRepo = new DataRepository();
+            connection = dataRepo.GetDBConnection();
         }
 
         public void RegisterNewRestaurant(Restaurant restaurant)
