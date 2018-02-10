@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace SeatedNow.Models
 {
-    public class RestaurantAdminAccount
+    public class BaseUser
     {
-        public int RestaurantId { get; set; }
-
     }
 }

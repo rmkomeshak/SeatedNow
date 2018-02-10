@@ -89,5 +89,15 @@ namespace SeatedNow.Managers
         {
             return (accessor.HttpContext.Session.GetString("_phone"));
         }
+
+        public void SetRole(String role)
+        {
+            accessor.HttpContext.Session.SetString("_role", role);
+        }
+
+        public string GetRole()
+        {
+            return (accessor.HttpContext.Session.GetString("_role"));
+        }
     }
 }
