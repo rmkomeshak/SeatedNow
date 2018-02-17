@@ -67,7 +67,7 @@ namespace SeatedNow.Repositories
         {
             int dbuserid = -1;
             string dbname = "", dbphone="", dbemail="", dbpass="";
-            string checkquery = "SELECT userid, firstname, lastname, phone, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
+            string checkquery = "SELECT id, firstname, lastname, phone, email, password FROM [dbo].[Users] WHERE email = '" + email + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -76,7 +76,7 @@ namespace SeatedNow.Repositories
 
             while (reader.Read())
             {
-                dbuserid = (int) reader["userid"];
+                dbuserid = (int) reader["id"];
                 dbname = reader["firstname"] + " " + reader["lastname"];
                 dbphone = reader["phone"].ToString();
                 dbemail = reader["email"].ToString();

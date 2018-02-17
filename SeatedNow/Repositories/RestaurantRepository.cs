@@ -25,7 +25,7 @@ namespace SeatedNow.Repositories
                 using (connection)
                 {
                     connection.Open();
-                    string sendquery = "INSERT INTO [dbo].[Restaurant] VALUES ('" + restaurant.Name + "', '"
+                    string sendquery = "INSERT INTO [dbo].[Restaurants] VALUES ('" + restaurant.Name + "', '"
                                         + restaurant.Address + "', '" + restaurant.City + "', '"
                                         + restaurant.State + "', '" + restaurant.ZipCode + "', '"
                                         + restaurant.PhoneNumber + "', '" + restaurant.ImagePath + "')";
@@ -53,7 +53,7 @@ namespace SeatedNow.Repositories
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
 
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
-            string checkquery = "SELECT name, address, city, state, zipcode, image FROM [dbo].[Restaurant]";
+            string checkquery = "SELECT name, address, city, state, zipcode, image FROM [dbo].[Restaurants]";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
