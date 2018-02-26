@@ -39,9 +39,9 @@
                     @Html.DisplayFor(modelItem => item.Role)
                 </td>
                 <td>
-                    <a href="" onclick="loadUpdateAccount(@item.Id); return false; ">Edit</a> |
-                    <a href="" onclick="loadDetailsAccount(@item.Id); return false; ">Details</a> |
-                    @Html.ActionLink("Delete", "SendDeleteAccount", new { id = item.Id })
+                    <button class="btn btn-primary" onclick="loadUpdateAccount(@item.Id); return false; ">Edit</button>
+                    <button class="btn btn-secondary" onclick="loadDetailsAccount(@item.Id); return false; ">Details</button>
+                    @Html.ActionLink("Delete", "SendDeleteAccount", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

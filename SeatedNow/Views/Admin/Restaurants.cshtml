@@ -38,9 +38,9 @@
                     @Html.CheckBoxFor(modelItem => item.IsVerified, new { @disabled = "disabled" })
                 </td>
                 <td>
-                    <a href="" onclick="loadUpdateRestaurant(@item.Id); return false; ">Edit</a> |
-                    <a href="" onclick="loadDetailsRestaurant(@item.Id); return false; ">Details</a> |
-                    @Html.ActionLink("Delete", "SendDeleteRestaurant", new { id = item.Id })
+                    <button class="btn btn-primary" onclick="loadUpdateRestaurant(@item.Id); return false; ">Edit</button> |
+                    <button class="btn btn-secondary" onclick="loadDetailsRestaurant(@item.Id); return false; ">Details</button> |
+                    @Html.ActionLink("Delete", "SendDeleteRestaurant", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
