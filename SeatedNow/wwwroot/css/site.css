@@ -6,6 +6,24 @@ body {
     line-height: 1.4em;
 }
 
+/* -- Danes Changes, move somewhere appropritate*/
+
+table {
+    border: 2px solid green;
+}
+
+thead tr {
+    background-color: #aaa
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #eee;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
 /* -- General Changes to Bootstrap --*/
 
 .btn {

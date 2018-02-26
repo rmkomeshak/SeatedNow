@@ -1,108 +1,111 @@
 ﻿@model IEnumerable<SideAdminRestaurantListViewModel>
 
 @{
-    ViewData["Title"] = "Index Management";
+    ViewData["Title"] = "Restaurant Management";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <h1 class="text-center">Restaurants</h1>
 
-<p>
-    <a asp-action="Index">Back</a> |
-    @Html.ActionLink("Create New Restaurant", "Create", new { }, new { onclick = "loadCreateRestaurant(); return false;" })
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsVerified)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-action="Index">Back</a> |
+        @Html.ActionLink("Create New Restaurant", "Create", new { }, new { onclick = "loadCreateRestaurant(); return false;" })
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.CheckBoxFor(modelItem => item.IsVerified, new { @disabled = "disabled" })
-                </td>
-                <td>
-                    <button class="btn btn-primary" onclick="loadUpdateRestaurant(@item.Id); return false; ">Edit</button> |
-                    <button class="btn btn-secondary" onclick="loadDetailsRestaurant(@item.Id); return false; ">Details</button> |
-                    @Html.ActionLink("Delete", "SendDeleteRestaurant", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsVerified)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => item.IsVerified, new { @disabled = "disabled" })
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" onclick="loadUpdateRestaurant(@item.Id); return false; ">Edit</button>
+                        <button class="btn btn-secondary" onclick="loadDetailsRestaurant(@item.Id); return false; ">Details</button>
+                        @Html.ActionLink("Delete", "SendDeleteRestaurant", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
-<div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="testTitle">Update Account</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="update-modal-body">
-                Loading...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" form="updateRestaurantForm" class="btn btn-sn">Update</button>
+    <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testTitle">Update Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="update-modal-body">
+                    Loading...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" form="updateRestaurantForm" class="btn btn-sn">Update</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="testTitle">Create Restaurant</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="create-modal-body">
-                Loading...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" form="createRestaurantForm" class="btn btn-sn">Create</button>
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testTitle">Create Restaurant</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="create-modal-body">
+                    Loading...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" form="createRestaurantForm" class="btn btn-sn">Create</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="testTitle">Restaurant Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="details-modal-body">
-                Loading...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="test" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testTitle">Restaurant Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="details-modal-body">
+                    Loading...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
