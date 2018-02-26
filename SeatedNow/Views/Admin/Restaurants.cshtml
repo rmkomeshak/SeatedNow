@@ -38,8 +38,8 @@
                     @Html.CheckBoxFor(modelItem => item.IsVerified, new { @disabled = "disabled" })
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { onclick = "loadUpdateRestaurant(" + item.Id + "); return false;" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { onclick = "loadDetailsRestaurant(" + item.Id + "); return false;" }) |
+                    <a href="" onclick="loadUpdateRestaurant(@item.Id); return false; ">Edit</a> |
+                    <a href="" onclick="loadDetailsRestaurant(@item.Id); return false; ">Details</a> |
                     @Html.ActionLink("Delete", "SendDeleteRestaurant", new { id = item.Id })
                 </td>
             </tr>

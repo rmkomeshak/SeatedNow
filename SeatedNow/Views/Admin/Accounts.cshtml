@@ -39,9 +39,9 @@
                     @Html.DisplayFor(modelItem => item.Role)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { onclick = "loadUpdateAccount(" + item.Id + "); return false;" }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id }, new { onclick = "loadDetailsAccount(" + item.Id + "); return false;" }) |
-                    @Html.ActionLink("Delete", "SendDeleteAccount", new { id=item.Id })
+                    <a href="" onclick="loadUpdateAccount(@item.Id); return false; ">Edit</a> |
+                    <a href="" onclick="loadDetailsAccount(@item.Id); return false; ">Details</a> |
+                    @Html.ActionLink("Delete", "SendDeleteAccount", new { id = item.Id })
                 </td>
             </tr>
         }
