@@ -22,13 +22,14 @@ namespace SeatedNow.Managers
             }
         }
 
-        public void Create(CustomerAccount account)
+        public void Create(UserAccount account)
         {
             setID(account.UserID);
             SetFirstName(account.getFirstName());
             SetLastName(account.getLastName());
             SetEmail(account.Email);
             SetPhone(account.PhoneNumber);
+            SetRole(account.Role);
         }
 
         public void Destroy()
@@ -38,6 +39,7 @@ namespace SeatedNow.Managers
             accessor.HttpContext.Session.Remove("_lastname");
             accessor.HttpContext.Session.Remove("_email");
             accessor.HttpContext.Session.Remove("_phone");
+            accessor.HttpContext.Session.Remove("_role");
         }
 
         public void setID(int id)

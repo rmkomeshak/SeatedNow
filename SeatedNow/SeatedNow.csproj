@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTO\**" />
+    <Compile Remove="Views\Api\**" />
+    <Content Remove="DTO\**" />
+    <Content Remove="Views\Api\**" />
+    <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="Views\Api\**" />
+    <None Remove="DTO\**" />
+    <None Remove="Views\Api\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\Login - Copy.cshtml" />
   </ItemGroup>
 
@@ -23,9 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\Api\" />
   </ItemGroup>
 
   <ItemGroup>

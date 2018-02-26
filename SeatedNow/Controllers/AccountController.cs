@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Security.Principal;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Managers;
 using SeatedNow.Models;
@@ -17,7 +13,7 @@ namespace SeatedNow.Controllers
     {
 
         UserSession _userSessionManager = new UserSession();
-        ICustomerRepository _userRepository = new CustomerRepository();
+        IUserRepository _userRepository = new UserRepository();
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
 
         public IActionResult Index()
@@ -41,7 +37,7 @@ namespace SeatedNow.Controllers
             return View(_userRepository.GetUserByEmail(HttpContext.Session.GetString("_email")));
         }
 
-        public IActionResult RegisterUser(String Name, String Email, String PhoneNumber, String Password)
+        public IActionResult RegisterUser(String Name, String Email, String PhoneNumber, String Password, String Role)
         {
             if (_userRepository.IsEmailRegistered(Email))
             {
@@ -49,8 +45,17 @@ namespace SeatedNow.Controllers
             }
             else
             {
+
                 String HashedPassword = GenerateHash(Password);
-                CustomerAccount userAccount = new CustomerAccount(Name, Email, PhoneNumber, HashedPassword);
+
+                if (_userSessionManager.GetRole() == "Admin")
+                {
+                    UserAccount account = new UserAccount(Name, Email, PhoneNumber, HashedPassword, Role);
+                    _userRepository.RegisterNewUser(account);
+                    return Redirect("Accounts");
+                }
+
+                UserAccount userAccount = new UserAccount(Name, Email, PhoneNumber, HashedPassword, "General");
 
                 _userRepository.RegisterNewUser(userAccount);
                 TempData["Register"] = "Success";
@@ -66,7 +71,7 @@ namespace SeatedNow.Controllers
 
                 if (EmailExists(Email) && PasswordsMatch(_userRepository.GetHashedPassword(Email), HashedPassword))
                 {
-                    CustomerAccount account = _userRepository.GetUserByEmail(Email);
+                    UserAccount account = _userRepository.GetUserByEmail(Email);
                     _userSessionManager.Create(account);
                     return Redirect("~/Restaurant/List");
                 }

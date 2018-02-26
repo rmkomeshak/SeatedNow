@@ -11,7 +11,7 @@ namespace SeatedNow.Controllers
     public class ApiController : Controller
     {
 
-        ICustomerRepository _customerRepo = new CustomerRepository();
+        IUserRepository _customerRepo = new UserRepository();
         AccountController accountController = new AccountController();
         public JsonResult LoginAuth()
         {
@@ -22,7 +22,7 @@ namespace SeatedNow.Controllers
 
                 if (_customerRepo.IsEmailRegistered(email) && PasswordsMatch(_customerRepo.GetHashedPassword(email), pass)){
 
-                    CustomerAccount customer = _customerRepo.GetUserByEmail(email);
+                    UserAccount customer = _customerRepo.GetUserByEmail(email);
 
                     return Json(customer);
                 }

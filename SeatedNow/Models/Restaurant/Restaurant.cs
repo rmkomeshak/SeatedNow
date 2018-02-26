@@ -7,7 +7,7 @@ namespace SeatedNow.Models
 {
     public class Restaurant
     {
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath)
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId)
         {
             Id = id;
             Name = name;
@@ -17,6 +17,21 @@ namespace SeatedNow.Models
             ZipCode = zipcode;
             PhoneNumber = phoneNumber;
             ImagePath = ImagePath;
+            IsVerified = isVerified;
+            OwnerId = ownerId;
+        }
+
+        public Restaurant(string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId)
+        {
+            Name = name;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phoneNumber;
+            ImagePath = ImagePath;
+            IsVerified = isVerified;
+            OwnerId = ownerId;
         }
 
         public int Id { get; set; }
@@ -34,5 +49,9 @@ namespace SeatedNow.Models
         public string PhoneNumber { get; set; }
 
         public string ImagePath { get; set; }
+
+        public bool IsVerified { get; set; }
+
+        public int OwnerId { get; set; }
     }
 }

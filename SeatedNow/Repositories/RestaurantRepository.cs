@@ -20,32 +20,57 @@ namespace SeatedNow.Repositories
 
         public void RegisterNewRestaurant(Restaurant restaurant)
         {
-            try
+            using (connection)
             {
-                using (connection)
-                {
-                    connection.Open();
-                    string sendquery = "INSERT INTO [dbo].[Restaurants] VALUES ('" + restaurant.Name + "', '"
-                                        + restaurant.Address + "', '" + restaurant.City + "', '"
-                                        + restaurant.State + "', '" + restaurant.ZipCode + "', '"
-                                        + restaurant.PhoneNumber + "', '" + restaurant.ImagePath + "')";
+                connection.Open();
+                string sendquery = "INSERT INTO [dbo].[Restaurants] VALUES ('" + restaurant.Name + "', '"
+                                    + restaurant.Address + "', '" + restaurant.City + "', '"
+                                    + restaurant.State + "', '" + restaurant.ZipCode + "', '"
+                                    + restaurant.PhoneNumber + "', '" + restaurant.ImagePath + "', '"
+                                    + restaurant.IsVerified + "', '" + restaurant.OwnerId + "')";
 
-                    using (SqlCommand command = new SqlCommand(sendquery, connection))
-                    {
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
                 }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
             }
         }
 
-        public void DeleteRestaurant(Restaurant restaurant)
+        public void DeleteRestaurant(int id)
         {
-            throw new NotImplementedException();
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "DELETE FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
+        public bool UpdateRestaurant(Restaurant restaurant)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurants] SET name = '" + restaurant.Name
+                    + "', address = '" + restaurant.Address + "', city = '" + restaurant.City
+                    + "', state = '" + restaurant.State + "', zipcode = '" + restaurant.ZipCode
+                    + "', phone = '" + restaurant.PhoneNumber + "', image = '" + restaurant.ImagePath
+                    + "', verified = '" + restaurant.IsVerified + "', owner_id = '" + restaurant.OwnerId
+                    + "' WHERE id = " + restaurant.Id;
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
         }
 
         public List<RestaurantListViewModel> GetRestaurants()
@@ -53,7 +78,7 @@ namespace SeatedNow.Repositories
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
 
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
-            string checkquery = "SELECT name, address, city, state, zipcode, image FROM [dbo].[Restaurants]";
+            string checkquery = "SELECT name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE verified = 'true'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -76,6 +101,33 @@ namespace SeatedNow.Repositories
             return restaurants;
         }
 
+        public List<SideAdminRestaurantListViewModel> GetRestaurantsAdminList()
+        {
+            List<SideAdminRestaurantListViewModel> restaurants = new List<SideAdminRestaurantListViewModel>();
+
+            string dbname;
+            int dbid;
+            bool dbisVerified;
+            string checkquery = "SELECT id, name, verified FROM [dbo].[Restaurants]";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = int.Parse(reader["id"].ToString());
+                dbname = reader["name"] as String ?? "";
+                dbisVerified = reader.GetBoolean(reader.GetOrdinal("verified"));
+
+                restaurants.Add(new SideAdminRestaurantListViewModel(dbid, dbname, dbisVerified));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
         public Restaurant GetRestaurantByAddress(string address, string city, string state, string zipcode)
         {
             throw new NotImplementedException();
@@ -83,7 +135,33 @@ namespace SeatedNow.Repositories
 
         public Restaurant GetRestaurantByID(int id)
         {
-            throw new NotImplementedException();
+            int dbrestaurantid = -1, dbownerid = -1;
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
+            bool dbverified = false;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+                dbphone = reader["phone"].ToString();
+                dbverified = reader.GetBoolean(reader.GetOrdinal("verified"));
+                dbownerid = (int)reader["owner_id"];
+            }
+
+            connection.Close();
+
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
         }
 
         public Restaurant GetrestaurantByPhone(string phone)

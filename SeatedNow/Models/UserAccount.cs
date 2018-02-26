@@ -3,23 +3,25 @@ using System.Text;
 
 namespace SeatedNow.Models
 {
-    public class CustomerAccount
+    public class UserAccount
     {
-        public CustomerAccount(int id, string name, string email, string phoneNumber, string password)
+        public UserAccount(int id, string name, string email, string phoneNumber, string password, string role)
         {
             UserID = id;
             Name = name;
             Email = email;
             PhoneNumber = phoneNumber;
             Password = password;
+            Role = role;
         }
 
-        public CustomerAccount(string name, string email, string phoneNumber, string password)
+        public UserAccount(string name, string email, string phoneNumber, string password, string role)
         {
             Name = name;
             Email = email;
             PhoneNumber = phoneNumber;
             Password = password;
+            Role = role;
         }
 
         [Key]
@@ -60,6 +62,12 @@ namespace SeatedNow.Models
                 }
 
                 lastname = sb.ToString();
+            } else if (names.Length == 2)
+            {
+                return names[1];
+            } else
+            {
+                return " ";
             }
 
             return lastname;

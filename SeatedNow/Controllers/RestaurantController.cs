@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SeatedNow.Managers;
+using SeatedNow.Models;
 using SeatedNow.Repositories;
 
 namespace SeatedNow.Controllers
@@ -10,6 +12,7 @@ namespace SeatedNow.Controllers
     public class RestaurantController : Controller
     {
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
+        UserSession _userSessionManager = new UserSession();
 
         public IActionResult Login()
         {
@@ -35,5 +38,6 @@ namespace SeatedNow.Controllers
         {
             return View(_restaurantRepository.GetRestaurants());
         }
+
     }
 }
