@@ -15,11 +15,18 @@ namespace SeatedNow.Controllers
         {
             return View();
         }
+
         public IActionResult Designer()
         {
             return View();
         }
+
         public IActionResult FloorPlan()
+        {
+            return View();
+        }
+
+        public IActionResult Generic()
         {
             return View();
         }
