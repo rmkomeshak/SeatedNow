@@ -5,19 +5,36 @@
 
 <div class="container-fluid" style="background: #5d7337; padding-top: 80px; padding-bottom: 70px;">
     <div class="container text-center">
-        <h1 style="font-size: 50px; margin-bottom: 10px; color: #fff;">Restaurant Title</h1>
-        <button type="button" class="btn btn-outline-light" style="margin: 5px;">italian</button>
-        <button type="button" class="btn btn-outline-light" style="margin: 5px;">casual</button>
-        <button type="button" class="btn btn-outline-light" style="margin: 5px;">pasta</button>
+        <h1 id="restaurant-title" style="font-size: 50px; margin-bottom: 10px; color: #fff;">Restaurant Title</h1>
+        <button id="restauraunt-keyword-1" type="button" class="btn btn-outline-light" style="margin: 5px;">italian</button>
+        <button id="restauraunt-keyword-2" type="button" class="btn btn-outline-light" style="margin: 5px;">casual</button>
+        <button id="restauraunt-keyword-3" type="button" class="btn btn-outline-light" style="margin: 5px;">pasta</button>
     </div>
 </div>
 <div class="container">
-    <div class="row" style="padding-top: 50px; padding-bottom: 50px;">
-        <div class="col-lg-9">
-            Left
-        </div>
-        <div class="col-lg-3">
-            Right
+    <div class="row justify-content-lg-center" style="padding-top: 50px; padding-bottom: 50px;">
+        <div class="col-lg-8">
+            <p id="restaurant-description" style="text-align: justify; margin-bottom: 40px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis vulputate arcu. Quisque tristique metus vel lectus vestibulum gravida. Praesent eget tortor id ipsum bibendum sodales vel eget velit. Phasellus eget mollis lorem. Sed a lectus eget mi porta efficitur eu ut mi.</p>
+            <hr />
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-lg-4 text-center">
+                    <img id="restaurant-logo" src="~/images/gustoso-logo.png" style="max-width: 100%; max-height: 180px;"/>
+                </div>
+                <div class="col-lg-7 offset-1" id="restaurant-info">
+                    <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">123 S. Main Street, Rochester, NY 12345</span></p>
+                    <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 (234) 567-8910</span></p>
+                    <p><i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">https://www.google.com/</span></p>
+                    <p><i class="fas fa-clock"></i><span id="restaurant-hours">
+                            <b>Sunday:</b> 10am - 9pm <br />
+                            <b>Monday:</b> 9am - 9pm <br />
+                            <b>Tuesday:</b> 9am - 9pm <br />
+                            <b>Wednesday:</b> 9am - 9pm <br />
+                            <b>Thursday:</b> 9am - 9pm <br />
+                            <b>Friday:</b> 9am - 10pm <br />
+                            <b>Saturday:</b> 9am - 10pm <br />
+                        </span></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
