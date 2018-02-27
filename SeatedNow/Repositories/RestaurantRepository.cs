@@ -164,6 +164,37 @@ namespace SeatedNow.Repositories
             return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
         }
 
+        public Restaurant GetRestaurantByOwnerID(int id)
+        {
+            int dbrestaurantid = -1, dbownerid = -1;
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
+            bool dbverified = false;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE owner_id = '" + id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+                dbphone = reader["phone"].ToString();
+                dbverified = reader.GetBoolean(reader.GetOrdinal("verified"));
+                dbownerid = (int)reader["owner_id"];
+            }
+
+            connection.Close();
+
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
+        }
+
         public Restaurant GetrestaurantByPhone(string phone)
         {
             throw new NotImplementedException();

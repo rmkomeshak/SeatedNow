@@ -16,7 +16,7 @@ namespace SeatedNow.Models
             State = state;
             ZipCode = zipcode;
             PhoneNumber = phoneNumber;
-            ImagePath = ImagePath;
+            ImagePath = imagePath;
             IsVerified = isVerified;
             OwnerId = ownerId;
         }
@@ -29,7 +29,7 @@ namespace SeatedNow.Models
             State = state;
             ZipCode = zipcode;
             PhoneNumber = phoneNumber;
-            ImagePath = ImagePath;
+            ImagePath = imagePath;
             IsVerified = isVerified;
             OwnerId = ownerId;
         }

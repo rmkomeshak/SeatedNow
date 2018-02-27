@@ -1,0 +1,23 @@
+﻿@model Restaurant
+@{ 
+    var restaurant = Model;
+}
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@Html.Partial("~/Views/Shared/Sidebar.cshtml")
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+
+
+
+@Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
+
+<script>document.URL</script>
+
+
+
+
+
