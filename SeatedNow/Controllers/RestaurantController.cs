@@ -29,6 +29,11 @@ namespace SeatedNow.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            return View(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()));
+        }
+
         public IActionResult Generic()
         {
             return View();
