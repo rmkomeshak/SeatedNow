@@ -31,7 +31,21 @@ namespace SeatedNow.Controllers
 
         public IActionResult Dashboard()
         {
+            if (!_userSessionManager.IsValid() || _userSessionManager.GetRole().Equals("General"))
+                return Redirect("~/");
+
             return View(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()));
+
+        }
+
+        public IActionResult DashOverview()
+        {
+            return PartialView();
+        }
+
+        public IActionResult DashStatistics()
+        {
+            return PartialView();
         }
 
         public IActionResult Generic()

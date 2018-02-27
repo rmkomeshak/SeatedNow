@@ -13,17 +13,17 @@
             <div class="dashboard-title">@restaurant.Name</div>
             <div class="menu-list">
                 <ul class="dashboard-content">
-                    <a href="#" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_overview.png" class="dash-icon" />Overview</li></a>
-                    <a href="#" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_graph.png" class="dash-icon" />Statistics</li></a>
-                    <a href="#" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_table.png" class="dash-icon" />Floor Plan</li></a>
-                    <a href="#" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_gear.png" class="dash-icon" />Filler</li></a>
+                    <a onclick=""href="?=overview" style="display:block"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_overview.png" class="dash-icon" />Overview</li></a>
+                    <a href="?=statistics" style="display:block"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_graph.png" class="dash-icon" />Statistics</li></a>
+                    <a href="?=floorplan" style="display:block"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_table.png" class="dash-icon" />Floor Plan</li></a>
+                    <a href="?=profile" style="display:block"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_profile.png" class="dash-icon" />Profile</li></a>
                     <li class="dashboard-filler"></li>
-                    <a href="#" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_gear.png" class="dash-icon" />Settings</li></a>
+                    <a href="?=settings" style="display:block"><li class="dashboard-category"><img src="~/images/dashboardicon_gear.png" class="dash-icon" />Settings</li></a>
                 </ul>
             </div>
         </div>
 
-        <div class="content-overview">
+        <div class="content">
 
         </div>
     </div>
@@ -35,7 +35,7 @@
         width: 16.5%;
     }
 
-    .content-overview {
+    .content {
         margin-left: 0%;
         height: 100%;
         border-top: 1px solid #bababa;

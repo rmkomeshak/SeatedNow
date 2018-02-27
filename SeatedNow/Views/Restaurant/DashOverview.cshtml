@@ -1,0 +1,11 @@
+﻿@model Restaurant
+@{
+    var restaurant = Model;
+}
+
+<div style="margin-left:350px; margin-top:50px;">
+    <p>@restaurant.Name</p>
+    <p>@restaurant.Address</p>
+    <p>@restaurant.State</p>
+    <img src="~/images/restaurants/@restaurant.ImagePath" />
+</div>
