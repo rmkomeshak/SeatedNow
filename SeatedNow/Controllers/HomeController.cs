@@ -25,12 +25,7 @@ namespace SeatedNow.Controllers
             return View();
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult Register()
+        public IActionResult Search()
         {
             return View();
         }
