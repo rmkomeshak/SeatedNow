@@ -21,7 +21,7 @@ namespace SeatedNow.Models
             OwnerId = ownerId;
         }
 
-        public Restaurant(string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId)
+        public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId)
         {
             Name = name;
             Address = address;
@@ -53,5 +53,7 @@ namespace SeatedNow.Models
         public bool IsVerified { get; set; }
 
         public int OwnerId { get; set; }
+
+        public RestaurantStats Stats { get; set; }
     }
 }

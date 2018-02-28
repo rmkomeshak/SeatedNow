@@ -14,6 +14,7 @@ namespace SeatedNow.Repositories
         List<SideAdminRestaurantListViewModel> GetRestaurantsAdminList();
         Restaurant GetRestaurantByID(int id);
         Restaurant GetRestaurantByOwnerID(int id);
+        RestaurantStats GetStatsByRestaurantID(int id);
         Restaurant GetRestaurantByAddress(string address, string city, string state, string zipcode);
         Restaurant GetrestaurantByPhone(string phone);
         bool UpdateRestaurant(Restaurant restaurant);

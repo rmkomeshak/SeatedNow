@@ -15,6 +15,7 @@ namespace SeatedNow.Repositories
         public RestaurantRepository()
         {
             IDataRepository dataRepo = new DataRepository();
+            IStatsRepository statsRepo = new StatsRepository();
             connection = dataRepo.GetDBConnection();
         }
 
@@ -59,7 +60,7 @@ namespace SeatedNow.Repositories
                 connection.Open();
                 string sendquery = "UPDATE [dbo].[Restaurants] SET name = '" + restaurant.Name
                     + "', address = '" + restaurant.Address + "', city = '" + restaurant.City
-                    + "', state = '" + restaurant.State + "', zipcode = '" + restaurant.ZipCode
+                    + "', zipcode = '" + restaurant.ZipCode + "', state = '" + restaurant.State
                     + "', phone = '" + restaurant.PhoneNumber + "', image = '" + restaurant.ImagePath
                     + "', verified = '" + restaurant.IsVerified + "', owner_id = '" + restaurant.OwnerId
                     + "' WHERE id = " + restaurant.Id;
@@ -138,7 +139,7 @@ namespace SeatedNow.Repositories
             int dbrestaurantid = -1, dbownerid = -1;
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
             bool dbverified = false;
-            string checkquery = "SELECT id, name, address, city, state, zipcode, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -169,7 +170,7 @@ namespace SeatedNow.Repositories
             int dbrestaurantid = -1, dbownerid = -1;
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
             bool dbverified = false;
-            string checkquery = "SELECT id, name, address, city, state, zipcode, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE owner_id = '" + id + "'";
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE owner_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -193,6 +194,30 @@ namespace SeatedNow.Repositories
             connection.Close();
 
             return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
+        }
+
+        public RestaurantStats GetStatsByRestaurantID(int id)
+        {
+            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbid = -1;
+            string checkquery = "SELECT id, reservations, cur_customers, wait_time, restaurant_id FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbreservations = (int)reader["reservations"];
+                dbcustomers = (int)reader["cur_customers"];
+                dbwaittime = (int)reader["wait_time"];
+                dbrestaurantid = (int)reader["restaurant_id"];
+            }
+
+            connection.Close();
+
+            return new RestaurantStats(dbid, dbreservations, dbcustomers, dbwaittime, dbrestaurantid);
         }
 
         public Restaurant GetrestaurantByPhone(string phone)

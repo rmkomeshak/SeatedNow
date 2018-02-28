@@ -12,6 +12,7 @@ namespace SeatedNow.Controllers
     public class RestaurantController : Controller
     {
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
+        IStatsRepository _statsRepository = new StatsRepository();
         UserSession _userSessionManager = new UserSession();
 
         public IActionResult Login()
@@ -34,7 +35,9 @@ namespace SeatedNow.Controllers
             if (!_userSessionManager.IsValid() || _userSessionManager.GetRole().Equals("General"))
                 return Redirect("~/");
 
-            return View(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()));
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(restaurant.Id);
+            return View(restaurant);
 
         }
 
@@ -46,6 +49,14 @@ namespace SeatedNow.Controllers
         public IActionResult DashStatistics()
         {
             return PartialView();
+        }
+
+        public IActionResult test()
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(restaurant.Id);
+
+            return View(restaurant);
         }
 
         public IActionResult Generic()
