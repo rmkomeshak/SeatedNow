@@ -1,5 +1,5 @@
 ﻿@model Restaurant
-@{ 
+@{
     var restaurant = Model;
 }
 
@@ -7,15 +7,103 @@
     ViewData["Title"] = "Dashboard";
 }
 
-@Html.Partial("~/Views/Shared/Sidebar.cshtml")
+<!--Sidebar-->
+<body>
+    <div>
+        <div class="dashboard-menu">
+            <div class="dashboard-title">@restaurant.Name</div>
+            <div class="menu-list">
+                <ul class="dashboard-content">
+                    <a href="?=overview" style="display:block;"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_overview.png" class="dash-icon" />Overview</li></a>
+                    <a href="" style="display:block;"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_graph.png" class="dash-icon" />Statistics</li></a>
+                    <a href="?=floorplan" style="display:block;"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_table.png" class="dash-icon" />Floor Plan</li></a>
+                    <a href="?=profile" style="display:block;"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_profile.png" class="dash-icon" />Profile</li></a>
+                    <!--NEED THIS TO AUTO ADJUST SIZE TO FIT SCREEN-->
+                    <li class="dashboard-filler"></li>
+                    <a href="?=settings" style="display:block"><li class="dashboard-category"><img src="~/images/dashboard-icons/dashboardicon_gear.png" class="dash-icon" />Settings</li></a>
+                </ul>
+            </div>
+        </div>
 
-<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+        <div class="content">
 
+        </div>
+    </div>
+</body>
 
+<style>
+    .dashboard-menu {
+        float: left;
+        width: 16.5%;
+    }
 
+    .content {
+        margin-left: 0%;
+        height: 100%;
+        border-top: 1px solid #bababa;
+    }
+
+    .dashboard-content {
+        list-style-type: none;
+        background-color: #1a242f;
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 0px;
+        height: auto;
+        min-height: 100%;
+    }
+
+    .dashboard-category {
+        opacity: 0.8;
+        margin-left: -40px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: white;
+        border-top: 1px solid #10171e;
+    }
+
+        .dashboard-category:hover {
+            background-color: #10171e;
+            opacity: 1;
+            border-left: 8px solid #5D7337;
+        }
+
+    .dashboard-filler {
+        margin-left: -40px;
+        border-top: 1px solid #10171e;
+        height: 54.4vh;
+    }
+
+    html, body {
+        overflow: hidden;
+    }
+
+    .global-footer {
+        visibility: hidden;
+    }
+
+    .dash-icon {
+        width: 25px;
+        height: 25px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .dashboard-title {
+        width: 100%;
+        background-color: #1a242f;
+        color: white;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 20px;
+        font-size: 20px;
+    }
+</style>
+
+<!--Views-->
 @Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
 
-<script>document.URL</script>
+
 
 
 
