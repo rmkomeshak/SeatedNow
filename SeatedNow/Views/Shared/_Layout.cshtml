@@ -49,6 +49,13 @@
                     </li>
                 }
 
+                @if (userSession.GetRole() != "General")
+                {
+                    <li class="nav-item">
+                        <a class="btn btn-warning mr-0 mr-sm-2" asp-area="" asp-controller="Restaurant" asp-action="Dashboard">Dashboard</a>
+                    </li>
+                }
+
                 <li class="nav-item">
                     <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Profile">Hello, @userSession.GetFirstName()</a>
                 </li>

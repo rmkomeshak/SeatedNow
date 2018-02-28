@@ -32,8 +32,10 @@ namespace SeatedNow.Controllers
 
         public IActionResult Dashboard()
         {
-            if (!_userSessionManager.IsValid() || _userSessionManager.GetRole().Equals("General"))
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
                 return Redirect("~/");
+            else if (_userSessionManager.GetRole().Equals("General") && _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
 
             Restaurant restaurant = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(restaurant.Id);
