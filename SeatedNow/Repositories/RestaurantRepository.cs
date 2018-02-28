@@ -162,7 +162,7 @@ namespace SeatedNow.Repositories
 
             connection.Close();
 
-            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid);
         }
 
         public Restaurant GetRestaurantByOwnerID(int id)
@@ -193,7 +193,7 @@ namespace SeatedNow.Repositories
 
             connection.Close();
 
-            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbphone, dbimage, dbverified, dbownerid);
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid);
         }
 
         public RestaurantStats GetStatsByRestaurantID(int id)
