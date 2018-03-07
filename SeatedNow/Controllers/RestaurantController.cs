@@ -27,7 +27,12 @@ namespace SeatedNow.Controllers
 
         public IActionResult FloorPlan()
         {
-            return View();
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
+                return Redirect("~/");
+            else if (_userSessionManager.GetRole().Equals("General") && _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
+
+            return View(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()));
         }
 
         public IActionResult Dashboard()

@@ -63,7 +63,7 @@ namespace SeatedNow.Repositories
                     + "', zipcode = '" + restaurant.ZipCode + "', state = '" + restaurant.State
                     + "', phone = '" + restaurant.PhoneNumber + "', image = '" + restaurant.ImagePath
                     + "', verified = '" + restaurant.IsVerified + "', owner_id = '" + restaurant.OwnerId
-                    + "' WHERE id = " + restaurant.Id;
+                    + "', event_key = '" + restaurant.EventKey + "' WHERE id = " + restaurant.Id;
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {
@@ -137,9 +137,9 @@ namespace SeatedNow.Repositories
         public Restaurant GetRestaurantByID(int id)
         {
             int dbrestaurantid = -1, dbownerid = -1;
-            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "", dbeventkey = "";
             bool dbverified = false;
-            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id, event_key FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -158,19 +158,20 @@ namespace SeatedNow.Repositories
                 dbphone = reader["phone"].ToString();
                 dbverified = reader.GetBoolean(reader.GetOrdinal("verified"));
                 dbownerid = (int)reader["owner_id"];
+                dbeventkey = reader["event_key"].ToString();
             }
 
             connection.Close();
 
-            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid);
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid, dbeventkey);
         }
 
         public Restaurant GetRestaurantByOwnerID(int id)
         {
             int dbrestaurantid = -1, dbownerid = -1;
-            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "";
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "", dbeventkey = "";
             bool dbverified = false;
-            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id FROM [dbo].[Restaurants] WHERE owner_id = '" + id + "'";
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id, event_key FROM [dbo].[Restaurants] WHERE owner_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -189,11 +190,12 @@ namespace SeatedNow.Repositories
                 dbphone = reader["phone"].ToString();
                 dbverified = reader.GetBoolean(reader.GetOrdinal("verified"));
                 dbownerid = (int)reader["owner_id"];
+                dbeventkey = reader["event_key"].ToString();
             }
 
             connection.Close();
 
-            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid);
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid, dbeventkey);
         }
 
         public RestaurantStats GetStatsByRestaurantID(int id)
