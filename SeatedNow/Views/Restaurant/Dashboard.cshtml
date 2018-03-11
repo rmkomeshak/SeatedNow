@@ -26,36 +26,32 @@
         </div>
     -->
 
-    <aside class="sidebar">
-        <div class="sidebar-title">
-            <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
-        </div>
-        <div class="sidebar-links">
-            <a href="?=overview"><i class="fas fa-list-alt"></i> Overview</a>
-            <a href="?=statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
-            <a href="?=floorplan"><i class="fas fa-desktop"></i> Floor Plan</a>
-            <a href="?=profile"><i class="fas fa-user-circle"></i> Profile</a>
-            <a href="?=settings"><i class="fas fa-cog"></i> Settings</a>
-            <a href="~/Restaurant/List"><i class="fas fa-arrow-left"></i>Return to Home</a>
-        </div>
-    </aside>
+    <div class="content">
+        <div class="row">
+            <div class="sidebar">
+                <div class="sidebar-title">
+                    <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
+                </div>
+                <div class="sidebar-links">
+                    <a onclick="loadPage(@restaurant.Id, 'DashOverview');"><i class="fas fa-list-alt"></i> Overview</a>
+                    <a onclick="loadPage(@restaurant.Id, 'DashStatistics');"><i class="fas fa-chart-bar"></i> Statistics</a>
+                    <a onclick="loadPage(@restaurant.Id, 'DashFloorplan');"><i class="fas fa-desktop"></i> Floor Plan</a>
+                    <a onclick="loadPage(@restaurant.Id, 'DashProfile');"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a onclick="loadPage(@restaurant.Id, 'DashSettings');"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="~/Restaurant/List"><i class="fas fa-arrow-left"></i>Return to Home</a>
+                </div>
+            </div> 
 
-        <div class="content">
-
+            <div id="dashboardView">
+                @Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
+            </div>
         </div>
     </div>
 </body>
 
 <style>
-    .global-footer, nav.navbar {
-        visibility: hidden;
-        display: none;
-    }
 
     .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 300px;
         height: 100%;
         background: #111;
@@ -69,13 +65,13 @@
         font-weight: 300;
     }
 
-    .sidebar-title img {
-        max-height: 50px;
-        max-width: 50px;
-        border-radius: 5px;
-        margin-right: 10px;
-        background: #fff;
-    }
+        .sidebar-title img {
+            max-height: 50px;
+            max-width: 50px;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: #fff;
+        }
 
     .sidebar-links a {
         display: block;
@@ -84,16 +80,16 @@
         color: #fff;
     }
 
-    .sidebar-links a:hover {
-        background-color: #222;
-    }
+        .sidebar-links a:hover {
+            background-color: #222;
+        }
 
-    .sidebar-links a i {
-        width: 24px;
-        margin-right: 10px;
-        font-size: 16px;
-        text-align: center;
-    }
+        .sidebar-links a i {
+            width: 24px;
+            margin-right: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
 
 
     /*
@@ -164,7 +160,6 @@
 </style>
 
 <!--Views-->
-@Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
 
 
 

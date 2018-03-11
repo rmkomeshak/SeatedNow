@@ -118,13 +118,35 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
+            UserAccount oldAccount = _userRepository.GetUserByID(UserId);
+
+            if (String.IsNullOrEmpty(Name))
+            {
+                Name = oldAccount.Name;
+            }
+
             if (String.IsNullOrEmpty(Password))
             {
                 Password = _userRepository.GetHashedPassword(Email);
-            } else
-            {
-                Password = GenerateHash(Password);
             }
+
+            if (String.IsNullOrEmpty(Name))
+            {
+                Email = oldAccount.Email;
+            }
+
+            if (String.IsNullOrEmpty(Name))
+            {
+                PhoneNumber = oldAccount.PhoneNumber;
+            }
+
+            if (String.IsNullOrEmpty(Name))
+            {
+                Role = oldAccount.Role;
+            }
+
+
+            Password = GenerateHash(Password);
 
             UserAccount account = new UserAccount(UserId, Name, Email, PhoneNumber, Password, Role);
             _userRepository.UpdateUserAccount(account);

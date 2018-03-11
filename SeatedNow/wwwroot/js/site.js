@@ -5,9 +5,20 @@ $(function () {
 })
 
 
+function loadPage(id, page) {
+    $.ajax({
+        url: '/Restaurant/' + page + '/' + id,
+        cache: false,
+        success: function (data) {
+            $('#dashboardView').html(data);
+        }
+    });
+}
+
+
 function loadUpdateAccount(id) {
     $.ajax({
-        url: '/Admin/UpdateAccount/'+id,
+        url: '/Admin/UpdateAccount/' + id,
         cache: false,
         success: function (data) {
             $('#update-modal-body').html(data);
