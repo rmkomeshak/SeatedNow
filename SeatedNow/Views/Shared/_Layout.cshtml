@@ -27,9 +27,22 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
+            @{
+        UserSession userSession2 = new UserSession();
+        Console.WriteLine(userSession2.IsValid());
+        if (userSession2.IsValid())
+        {
+            <a asp-area="" asp-controller="Restaurant" asp-action="List" class="navbar-brand">
+                <img src="~/images/seatednow-logo-small.png" height="22" alt="SeatedNow">
+            </a>
+        }
+        else
+        {
             <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
                 <img src="~/images/seatednow-logo-small.png" height="22" alt="SeatedNow">
             </a>
+        }
+            }
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,43 +50,51 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-sm-0"></ul>
                 <ul class="navbar-nav mt-2 mt-sm-0">
                     @{
-        UserSession userSession = new UserSession();
-        Console.WriteLine(userSession.IsValid());
-        if (userSession.IsValid())
-        {
-
-                @if (userSession.GetRole() == "Admin")
+                UserSession userSession = new UserSession();
+                Console.WriteLine(userSession.IsValid());
+                if (userSession.IsValid())
                 {
-                    <li class="nav-item">
-                        <a class="btn btn-warning mr-0 mr-sm-2" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
-                    </li>
-                }
 
-                @if (userSession.GetRole() != "General")
-                {
-                    <li class="nav-item">
-                        <a class="btn btn-warning mr-0 mr-sm-2" asp-area="" asp-controller="Restaurant" asp-action="Dashboard">Dashboard</a>
-                    </li>
-                }
-
+                    @if (userSession.GetRole() == "Admin")
+            {
                 <li class="nav-item">
-                    <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Profile">Hello, @userSession.GetFirstName()</a>
+                    <div class="dropdown">
+                        <button class="btn btn-warning dropdown-toggle mr-0 mr-sm-2" type="button" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin Panel
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/admin/accounts">Accounts</a>
+                            <a class="dropdown-item" href="/admin/restaurants">Restaurants</a>
+                        </div>
+                    </div>
                 </li>
+    }
 
-                <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
-                    <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="LogoutUser">Logout</a>
+                    @if (userSession.GetRole() != "General")
+            {
+                <li class="nav-item">
+                    <a class="btn btn-secondary mr-0 mr-sm-2" asp-area="" asp-controller="Restaurant" asp-action="Dashboard">Dashboard</a>
                 </li>
+    }
+
+                    <li class="nav-item">
+                        <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Profile">Hello, @userSession.GetFirstName()</a>
+                    </li>
+
+                    <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
+                        <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="LogoutUser">Logout</a>
+                    </li>
         }
         else
         {
-                <li class="nav-item">
-                    <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
-                </li>
+            <li class="nav-item">
+                <a class="btn btn-dark mr-0 mr-sm-2" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
+            </li>
 
-                <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
-                    <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                </li>
-        }
+            <li class="nav-item mt-2 mt-sm-0 mb-2 mb-sm-0">
+                <a class="btn btn-outline-sn" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+}
                     }
                 </ul>
             </div>

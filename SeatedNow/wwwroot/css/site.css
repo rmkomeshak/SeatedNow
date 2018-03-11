@@ -8,6 +8,8 @@ body {
 
 /* -- Danes Changes, move somewhere appropritate*/
 
+/*
+
 table {
     border: 2px solid green;
 }
@@ -23,6 +25,8 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
     background-color: #fff;
 }
+
+    */
 
 /* -- General Changes to Bootstrap --*/
 
