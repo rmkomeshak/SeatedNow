@@ -1,7 +1,7 @@
 ﻿@model List<RestaurantListViewModel>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Reservations made simple";
 }
 
 <div class="container-fluid body-content sn-image sn8 fade70" style="color: #fff; padding: 100px 0;">
@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" style="background: #f0f0f0;">
     <div class="container" style="padding-top: 30px;">
         <div class="row">
             <div class="col-lg-8 text-center text-sm-left">
@@ -48,7 +48,7 @@
                         <div class="col-lg-3">
                             <div class="logo">
                                 <a href="/">
-                                    <img src="~/images/restaurants/@restaurant.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                    <img src="~/images/restaurants/@restaurant.ImagePath" alt="@restaurant.Name" onerror="this.style.display='none'" />
                                 </a>
                             </div>
                         </div>
@@ -80,7 +80,61 @@
             </div>
             <div class="col-lg-4">
                 <div class="sn-sidebar">
-                    Sidebar
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Your Recent Reservations</h5>
+                            <div class="recent-reservations">
+                                <!-- RECENT RESTAURANT LISTING -->
+                                <div class="row recent-restaurant align-items-start">
+                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
+                                        <div class="logo">
+                                            <a href="/">
+                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" style="padding-right: 0;">
+                                        <h5>Restaurant Title</h5>
+                                        <p>Reserved on 02/04/17</p>
+                                        <p class="small-info">For 4 people in the Booth section</p>
+                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
+                                    </div>
+                                </div>
+                                <!-- RECENT RESTAURANT LISTING -->
+                                <div class="row recent-restaurant align-items-start">
+                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
+                                        <div class="logo">
+                                            <a href="/">
+                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" style="padding-right: 0;">
+                                        <h5>Restaurant Title</h5>
+                                        <p>Reserved on 02/04/17</p>
+                                        <p class="small-info">For 4 people in the Booth section</p>
+                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
+                                    </div>
+                                </div>
+                                <!-- RECENT RESTAURANT LISTING -->
+                                <div class="row recent-restaurant align-items-start">
+                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
+                                        <div class="logo">
+                                            <a href="/">
+                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" style="padding-right: 0;">
+                                        <h5>Restaurant Title</h5>
+                                        <p>Reserved on 02/04/17</p>
+                                        <p class="small-info">For 4 people in the Booth section</p>
+                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
