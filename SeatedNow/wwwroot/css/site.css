@@ -8,6 +8,8 @@ body {
 
 /* -- Danes Changes, move somewhere appropritate*/
 
+/*
+
 table {
     border: 2px solid green;
 }
@@ -23,6 +25,8 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
     background-color: #fff;
 }
+
+    */
 
 /* -- General Changes to Bootstrap --*/
 
@@ -349,8 +353,51 @@ h1.title {
     display: block;
     border: 1px #ddd solid;
     border-radius: 5px;
-    padding: 20px;
+    padding:  25px 20px 0px 20px;
     margin-bottom: 50px;
+    background: #fff;
+}
+
+.recent-restaurant {
+    color: #333;
+    border-top: 1px #ddd solid;
+    margin: 0 -20px;
+    padding: 20px;
+}
+
+.recent-restaurant .logo {
+    max-width: 100%;
+    text-align: center;
+}
+
+.recent-restaurant .logo img {
+    max-width: 100%;
+    max-height: 60px;
+}
+
+.recent-restaurant h5 {
+    color: #5d7337;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.recent-restaurant p {
+    font-size: 14px;
+    line-height: 16px;
+    margin: 5px 0;
+    padding: 0;
+}
+
+.recent-restaurant p.small-info {
+    font-size: 11px;
+    font-style: italic;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.recent-restaurant button {
+    font-size: 14px;
 }
 
 /* -- Logged In Keywords -- */
@@ -385,6 +432,7 @@ h1.title {
     min-height: 100px;
     border: 1px #ddd solid;
     border-radius: 5px;
+    background: #fff;
     padding: 10px 30px;
     margin-bottom: 30px;
 }

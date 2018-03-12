@@ -49,14 +49,39 @@ namespace SeatedNow.Controllers
 
         }
 
+        /*
         public IActionResult DashOverview()
         {
             return PartialView();
         }
+        */
 
-        public IActionResult DashStatistics()
+        public IActionResult DashOverview(int Id)
         {
-            return PartialView();
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashStatistics(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashProfile(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashSettings(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            return PartialView(restaurant);
         }
 
         public IActionResult test()
