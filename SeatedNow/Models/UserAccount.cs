@@ -27,12 +27,15 @@ namespace SeatedNow.Models
         [Key]
         public int UserID { get; set; }
 
+        [Required(ErrorMessage = "This field is erquired")]
         public string Name { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "This field is erquired")]
         public string Email { get; set; }
 
         [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "This field is erquired")]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.Password)]
@@ -58,7 +61,13 @@ namespace SeatedNow.Models
 
                 for (int i = 1; i < names.Length; i++)
                 {
-                    sb.Append(names[i] + " ");
+                    if (i == names.Length - 1)
+                    {
+                        sb.Append(names[i]);
+                    } else
+                    {
+                        sb.Append(names[i] + " ");
+                    }
                 }
 
                 lastname = sb.ToString();
@@ -67,7 +76,7 @@ namespace SeatedNow.Models
                 return names[1];
             } else
             {
-                return " ";
+                return "";
             }
 
             return lastname;

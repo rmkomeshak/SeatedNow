@@ -8,8 +8,7 @@
     <h1 class="text-center">Restaurants</h1>
 
     <p>
-        <a asp-action="Index">Back</a> |
-        @Html.ActionLink("Create New Restaurant", "Create", new { }, new { onclick = "loadCreateRestaurant(); return false;" })
+        @Html.ActionLink("Create New Restaurant", "Create", new { }, new { onclick = "loadCreateRestaurant(); return false;", @class = "btn btn-success" })
     </p>
     <table class="table">
         <thead>

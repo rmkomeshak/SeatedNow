@@ -50,17 +50,12 @@ namespace SeatedNow.Controllers
 
         }
 
-        /*
-        public IActionResult DashOverview()
-        {
-            return PartialView();
-        }
-        */
-
         public IActionResult DashOverview(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Tables = _restaurantRepository.GetTablesByRestaurantID(Id);
+
             return PartialView(restaurant);
         }
 
@@ -68,6 +63,7 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
             return PartialView(restaurant);
         }
 
@@ -75,6 +71,7 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
             return PartialView(restaurant);
         }
 
@@ -82,6 +79,15 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashFloorplan(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
             return PartialView(restaurant);
         }
 

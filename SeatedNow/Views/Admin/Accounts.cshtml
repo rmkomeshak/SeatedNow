@@ -9,8 +9,7 @@
     <h1 class="text-center">Accounts</h1>
 
     <p>
-        <a asp-action="Index">Back</a> |
-        @Html.ActionLink("Create New Account", "Create", new { }, new { onclick = "loadCreateAccount(); return false;" })
+        @Html.ActionLink("Create New Account", "Create", new { }, new { onclick = "loadCreateAccount(); return false;", @class = "btn btn-success" })
     </p>
     <table class="table">
         <thead>

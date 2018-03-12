@@ -130,17 +130,17 @@ namespace SeatedNow.Controllers
                 Password = _userRepository.GetHashedPassword(Email);
             }
 
-            if (String.IsNullOrEmpty(Name))
+            if (String.IsNullOrEmpty(Email))
             {
                 Email = oldAccount.Email;
             }
 
-            if (String.IsNullOrEmpty(Name))
+            if (String.IsNullOrEmpty(PhoneNumber))
             {
                 PhoneNumber = oldAccount.PhoneNumber;
             }
 
-            if (String.IsNullOrEmpty(Name))
+            if (String.IsNullOrEmpty(Role))
             {
                 Role = oldAccount.Role;
             }

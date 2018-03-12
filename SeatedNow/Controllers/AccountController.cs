@@ -91,6 +91,33 @@ namespace SeatedNow.Controllers
             return Redirect("../Home/Index");
         }
 
+        public IActionResult SendUpdateAccount(int UserId, string Name, string Email, string PhoneNumber, string Password)
+        {
+            if (_userSessionManager.GetRole() != "Admin")
+            {
+                return Redirect("~/");
+            }
+
+            UserId = _userSessionManager.getID();
+            UserAccount oldAccount = _userRepository.GetUserByID(UserId);
+
+
+            if (String.IsNullOrEmpty(Password))
+            {
+                Password = _userRepository.GetHashedPassword(_userSessionManager.GetEmail());
+            } else
+            {
+                Password = GenerateHash(Password);
+            }
+
+            String Role = _userSessionManager.GetRole();
+
+            UserAccount account = new UserAccount(UserId, Name, Email, PhoneNumber, Password, Role);
+            _userRepository.UpdateUserAccount(account);
+            TempData["UpdateProfile"] = "Success";
+            return Redirect("Profile");
+        }
+
         public JsonResult EmailIsRegistered(string Email)
         {
             HttpContext.Session.SetString("Email", Email);

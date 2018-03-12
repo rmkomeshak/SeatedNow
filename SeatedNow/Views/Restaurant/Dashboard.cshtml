@@ -27,8 +27,8 @@
     -->
 
     <div class="content">
-        <div class="row">
-            <div class="sidebar">
+        <div class="row dashboard">
+            <div class="sidebar menu">
                 <div class="sidebar-title">
                     <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
                 </div>
@@ -40,9 +40,8 @@
                     <a onclick="loadPage(@restaurant.Id, 'DashSettings');"><i class="fas fa-cog"></i> Settings</a>
                     <a href="~/Restaurant/List"><i class="fas fa-arrow-left"></i>Return to Home</a>
                 </div>
-            </div> 
-
-            <div id="dashboardView">
+            </div>
+            <div id="dashboardView" class="mainContent">
                 @Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
             </div>
         </div>
@@ -51,9 +50,24 @@
 
 <style>
 
+    .dashboard {
+        border: 1px solid;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .dashboard > .mainContent {
+        flex: 1;
+    }
+
+    .dashboard > .menu {
+
+    }
+
     .sidebar {
         width: 300px;
-        height: 100%;
         background: #111;
         color: #fff;
     }
@@ -65,13 +79,13 @@
         font-weight: 300;
     }
 
-        .sidebar-title img {
-            max-height: 50px;
-            max-width: 50px;
-            border-radius: 5px;
-            margin-right: 10px;
-            background: #fff;
-        }
+    .sidebar-title img {
+        max-height: 50px;
+        max-width: 50px;
+        border-radius: 5px;
+        margin-right: 10px;
+        background: #fff;
+    }
 
     .sidebar-links a {
         display: block;
@@ -80,16 +94,16 @@
         color: #fff;
     }
 
-        .sidebar-links a:hover {
-            background-color: #222;
-        }
+    .sidebar-links a:hover {
+        background-color: #222;
+    }
 
-        .sidebar-links a i {
-            width: 24px;
-            margin-right: 10px;
-            font-size: 16px;
-            text-align: center;
-        }
+    .sidebar-links a i {
+        width: 24px;
+        margin-right: 10px;
+        font-size: 16px;
+        text-align: center;
+    }
 
 
     /*
@@ -159,7 +173,6 @@
 
 </style>
 
-<!--Views-->
 
 
 
