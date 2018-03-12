@@ -98,7 +98,8 @@ namespace SeatedNow.Repositories
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
 
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
-            string checkquery = "SELECT name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE verified = 'true'";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE verified = 'true'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -107,6 +108,7 @@ namespace SeatedNow.Repositories
 
             while (reader.Read())
             {
+                dbid = (int)reader["id"];
                 dbname = reader["name"].ToString();
                 dbaddress = reader["address"].ToString();
                 dbcity = reader["city"].ToString();
@@ -114,7 +116,7 @@ namespace SeatedNow.Repositories
                 dbzipcode = reader["zipcode"].ToString();
                 dbimage = reader["image"].ToString();
 
-                restaurants.Add(new RestaurantListViewModel(dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage));
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage));
             }
 
             connection.Close();

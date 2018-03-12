@@ -1,6 +1,8 @@
-﻿@model List<RestaurantListViewModel>
+﻿@model ListPage
+
 
 @{
+    var contents = Model;
     ViewData["Title"] = "Reservations made simple";
 }
 
@@ -41,7 +43,7 @@
                 </div>
                 <h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">Most Recently Reserved Restaurants</h2>
 
-                @foreach(var restaurant in Model) {
+                @foreach(var restaurant in contents.RestaurantList) {
                 <!-- RESTAURANT LISTING -->
                 <div class="sn-listing">
                     <div class="row align-items-center">
@@ -85,23 +87,45 @@
                             <h5 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Your Recent Reservations</h5>
                             <div class="recent-reservations">
                                 <!-- RECENT RESTAURANT LISTING -->
-                                <div class="row recent-restaurant align-items-start">
-                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
-                                        <div class="logo">
-                                            <a href="/">
-                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
-                                            </a>
+                                @{ 
+                                    var name = "";
+                                }
+                                
+                                @if (contents.UserReservations.Count > 0) {
+                                    foreach (var reservation in contents.UserReservations) {
+                                        <div class="row recent-restaurant align-items-start">
+                                            <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
+                                                <div class="logo">
+                                                    <a href="/">
+                                                        @foreach (var restaurant in contents.Restaurants)
+                                                        {
+                                                            if (restaurant.ID == reservation.RestaurantID)
+                                                            {
+                                                                <img src="~/images/restaurants/@restaurant.ImagePath" alt="@restaurant.Name" onerror="this.style.display='none'" />
+                                                                name = restaurant.Name;
+                                                                break;
+                                                            }
+                                                        }
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9" style="padding-right: 0;">
+                                                <h5>@name</h5>
+                                                <p>Reserved for @reservation.Time.ToString().Substring(0,9)</p>
+                                                <p class="small-info">For @reservation.Guests people in the @reservation.Section section</p>
+                                                <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-9" style="padding-right: 0;">
-                                        <h5>Restaurant Title</h5>
-                                        <p>Reserved on 02/04/17</p>
-                                        <p class="small-info">For 4 people in the Booth section</p>
-                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
-                                    </div>
-                                </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="row recent-restaurant align-items-start">
+                                            <h5>No recent reservations.</h5>
+                                     </div>
+                                }
                                 <!-- RECENT RESTAURANT LISTING -->
-                                <div class="row recent-restaurant align-items-start">
+                                <!--<div class="row recent-restaurant align-items-start">
                                     <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                         <div class="logo">
                                             <a href="/">
@@ -115,9 +139,9 @@
                                         <p class="small-info">For 4 people in the Booth section</p>
                                         <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
                                     </div>
-                                </div>
+                                </div>-->
                                 <!-- RECENT RESTAURANT LISTING -->
-                                <div class="row recent-restaurant align-items-start">
+                                <!--<div class="row recent-restaurant align-items-start">
                                     <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                         <div class="logo">
                                             <a href="/">
@@ -131,7 +155,7 @@
                                         <p class="small-info">For 4 people in the Booth section</p>
                                         <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

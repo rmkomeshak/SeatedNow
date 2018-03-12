@@ -14,6 +14,7 @@ namespace SeatedNow.Repositories
         List<SiteAdminAccountListViewModel> GetUserListSiteAdmin();
         UserAccount GetUserByID(int id);
         UserAccount GetUserByEmail(string email);
+        List<DiningReservation> GetReservationsByCustomerID(int id);
         bool UpdateUserAccount(UserAccount account);
         Boolean IsEmailRegistered(string email);
         string GetHashedPassword(string email);

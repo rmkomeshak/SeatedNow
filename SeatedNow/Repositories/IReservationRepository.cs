@@ -8,8 +8,7 @@ namespace SeatedNow.Repositories
 {
     interface IReservationRepository
     {
-        DiningReservation GetReservationsByCustomer(int CustomerId);
-        List<DiningReservation> getReservationsByRestaurant(int RestaurantId);
+        List<DiningReservation> GetReservationsByCustomerID(int CustomerId);
 
     }
 }

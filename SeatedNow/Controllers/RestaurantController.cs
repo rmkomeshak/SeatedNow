@@ -13,6 +13,7 @@ namespace SeatedNow.Controllers
     {
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
         IStatsRepository _statsRepository = new StatsRepository();
+        IReservationRepository _reservationRepository = new ReservationRepository();
         UserSession _userSessionManager = new UserSession();
 
         public IActionResult Login()
@@ -99,7 +100,8 @@ namespace SeatedNow.Controllers
 
         public IActionResult List()
         {
-            return View(_restaurantRepository.GetRestaurants());
+            ListPage contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(_userSessionManager.getID()), _restaurantRepository.GetRestaurants(), _restaurantRepository.GetRestaurants());
+            return View(contents);
         }
 
     }
