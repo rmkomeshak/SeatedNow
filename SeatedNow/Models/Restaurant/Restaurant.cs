@@ -74,5 +74,7 @@ namespace SeatedNow.Models
         public string EventKey { get; set; }
 
         public RestaurantStats Stats { get; set; }
+
+        public List<RestaurantTableList> Tables { get; set; }
     }
 }

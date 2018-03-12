@@ -15,6 +15,8 @@ namespace SeatedNow.Repositories
         Restaurant GetRestaurantByID(int id);
         Restaurant GetRestaurantByOwnerID(int id);
         RestaurantStats GetStatsByRestaurantID(int id);
+        List<RestaurantTableList> GetTablesByRestaurantID(int id);
+        bool UpdateRestaurantTable(RestaurantTableList t);
         Restaurant GetRestaurantByAddress(string address, string city, string state, string zipcode);
         Restaurant GetrestaurantByPhone(string phone);
         bool UpdateRestaurant(Restaurant restaurant);

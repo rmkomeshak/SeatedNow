@@ -74,6 +74,25 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public bool UpdateRestaurantTable(RestaurantTableList t)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET restaurant_id = '" + t.RestaurantId
+                    + "', table_name = '" + t.TableName + "', taken = '" + t.IsTaken
+                    + "', reservation_id = '" + t.ReservationId + "', table_id = '" + t.TableId
+                    + "' WHERE restaurant_id = " + t.RestaurantId + " AND table_id = " + t.TableId;
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+        }
+
         public List<RestaurantListViewModel> GetRestaurants()
         {
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
@@ -220,6 +239,35 @@ namespace SeatedNow.Repositories
             connection.Close();
 
             return new RestaurantStats(dbid, dbreservations, dbcustomers, dbwaittime, dbrestaurantid);
+        }
+
+        public List<RestaurantTableList> GetTablesByRestaurantID(int id)
+        {
+            List<RestaurantTableList> tablelist = new List<RestaurantTableList>();
+            int dbrestaurantid = -1, dbreservationid = -1, dbtableid = -1;
+            string dbtablename = "";
+            bool dbtaken = false;
+
+            string checkquery = "SELECT restaurant_id, table_name, taken, reservation_id, table_id FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["restaurant_id"];
+                dbtablename = (string)reader["table_name"];
+                dbtaken = (bool)reader["taken"];
+                dbreservationid = (int)reader["reservation_id"];
+                dbtableid = (int)reader["table_id"];
+                tablelist.Add(new RestaurantTableList(dbrestaurantid, dbtablename, dbtaken, dbreservationid, dbtableid));
+            }
+
+            connection.Close();
+
+            return tablelist;
         }
 
         public Restaurant GetrestaurantByPhone(string phone)

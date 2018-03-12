@@ -44,6 +44,7 @@ namespace SeatedNow.Controllers
 
             Restaurant restaurant = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(restaurant.Id);
+            restaurant.Tables = _restaurantRepository.GetTablesByRestaurantID(restaurant.Id);
             return View(restaurant);
 
         }

@@ -1,17 +1,25 @@
-﻿<h2>FloorPlan</h2>
+﻿@model Restaurant
+
+@{
+    var restaurant = Model;
+    ViewData["Title"] = "FloorPlan";
+}
+
+<h2>@restaurant.Name FloorPlan</h2>
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
-    <div id="chart" height="500px" width=100%></div>
+    <div id="chart" height: 200px;
+         width: 50%;></div>
 
     <script type="text/javascript" src="https://cdn.seats.io/chart.js"></script>
     <script>
         var chart = new seatsio.SeatingChart({
             divId: "chart",
             publicKey: "8a825432-a12d-449c-875e-4e8956fd7126",
-            event: "04648da6-5369-479d-9d20-0af30037b198"
+            event: "@restaurant.EventKey"
         }).render();
     </script>
 </body>
