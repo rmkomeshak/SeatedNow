@@ -75,6 +75,6 @@ namespace SeatedNow.Models
 
         public RestaurantStats Stats { get; set; }
 
-        public List<RestaurantTableList> Tables { get; set; }
+        public IEnumerable<RestaurantTableList> Tables { get; set; }
     }
 }

@@ -2,16 +2,15 @@
 {
     public class RestaurantStats
     {
-        public RestaurantStats(int id, int reservations, int customers, int waittime, int restaurant_id)
+        public RestaurantStats(int restaurant_id, int reservations, int customers, int waittime, double rating)
         {
-            Id = id;
+            RestaurantId = restaurant_id;
             Reservations = reservations;
             Customers = customers;
             WaitTime = waittime;
-            RestaurantId = restaurant_id;
+            Rating = rating;
         }
-
-        public int Id { get; set; }
+        public int RestaurantId { get; set; }
 
         public int Reservations { get; set; }
 
@@ -19,6 +18,6 @@
 
         public int WaitTime { get; set; }
 
-        public int RestaurantId { get; set; }
+        public double Rating { get; set; }
     }
 }

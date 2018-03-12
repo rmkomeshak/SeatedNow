@@ -18,15 +18,24 @@ namespace SeatedNow.Repositories
             connection = dataRepo.GetDBConnection();
         }
 
-        public List<DiningReservation> GetReservationsByCustomerID(int id)
+        public List<DiningReservation> GetReservationsByCustomerID(int id, int results)
         {
+
             List<DiningReservation> reservations = new List<DiningReservation>();
 
             int dbreservationid = -1, dbrestaurantid = -1, dbaccountid = -1, dbseatsreserved = -1, dbtableid = -1;
             DateTime dbreservationdatetime;
             string dbsection = "";
+            string checkquery;
 
-            string checkquery = "SELECT reservation_id, restaurant_id, account_id, seats_reserved, reservation_datetime, table_id, section FROM [dbo].[Reservations] WHERE account_id = '" + id + "'";
+            if (results == -1)
+            {
+                checkquery = "SELECT reservation_id, restaurant_id, account_id, seats_reserved, reservation_datetime, table_id, section FROM [dbo].[Reservations] WHERE account_id = '" + id + "' limit " + results;
+            }
+            else
+            {
+                checkquery = "SELECT reservation_id, restaurant_id, account_id, seats_reserved, reservation_datetime, table_id, section FROM [dbo].[Reservations] WHERE account_id = '" + id + "'";
+            }
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);

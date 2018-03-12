@@ -18,7 +18,7 @@ namespace SeatedNow.Controllers
 
         public IActionResult Index()
         {
-            return View(_restaurantRepository.GetRestaurants());
+            return View();
         }
 
         public IActionResult Login()

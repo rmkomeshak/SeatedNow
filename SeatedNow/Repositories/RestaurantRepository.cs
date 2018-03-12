@@ -24,17 +24,27 @@ namespace SeatedNow.Repositories
             using (connection)
             {
                 connection.Open();
-                string sendquery = "INSERT INTO [dbo].[Restaurants] VALUES ('" + restaurant.Name + "', '"
+                string sendqueryRestaurant = "INSERT INTO [dbo].[Restaurants] VALUES ('" + restaurant.Name + "', '"
                                     + restaurant.Address + "', '" + restaurant.City + "', '"
                                     + restaurant.State + "', '" + restaurant.ZipCode + "', '"
                                     + restaurant.PhoneNumber + "', '" + restaurant.ImagePath + "', '"
                                     + restaurant.IsVerified + "', '" + restaurant.OwnerId + "')";
-
-                using (SqlCommand command = new SqlCommand(sendquery, connection))
+           
+                using (SqlCommand command = new SqlCommand(sendqueryRestaurant, connection))
                 {
                     command.ExecuteNonQuery();
-                    connection.Close();
                 }
+
+                /*
+                string sendqueryRestaurants_Stats = "INSERT INTO [dbo].[Restaurant_Stats] VALUES ('" + restaurant.Id + "', '0', '0', '0', '0')";
+
+                using (SqlCommand command = new SqlCommand(sendqueryRestaurants_Stats, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                */
+
+                connection.Close();
             }
         }
 
@@ -100,6 +110,96 @@ namespace SeatedNow.Repositories
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
             int dbid = -1;
             string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE verified = 'true'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
+        public List<RestaurantListViewModel> GetRestaurantsByReservations()
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] AS m JOIN [dbo].[Restaurant_Stats] AS p on p.restaurant_id = m.id WHERE m.verified = 'true' ORDER BY p.reservations DESC";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
+        public List<RestaurantListViewModel> GetRestaurantsByRatings()
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] AS m JOIN [dbo].[Restaurant_Stats] AS p on p.restaurant_id = m.id WHERE m.verified = 'true' ORDER BY p.rating DESC";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
+        public List<RestaurantListViewModel> GetRestaurantsByWaitTime()
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] AS m JOIN [dbo].[Restaurant_Stats] AS p on p.restaurant_id = m.id WHERE m.verified = 'true' ORDER BY p.wait_time ASC";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -281,5 +381,6 @@ namespace SeatedNow.Repositories
         {
             throw new NotImplementedException();
         }
+
     }
 }

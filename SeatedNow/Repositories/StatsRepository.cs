@@ -25,8 +25,7 @@ namespace SeatedNow.Repositories
                 connection.Open();
                 string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET reservations = '" + stats.Reservations
                     + "', cur_customers = '" + stats.Customers + "', wait_time '" + stats.WaitTime
-                    + "', restaurant_id = '" + stats.RestaurantId
-                    + "' WHERE id = " + stats.Id;
+                    + "' WHERE restaurant_id = " + stats.RestaurantId;
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {
@@ -39,8 +38,9 @@ namespace SeatedNow.Repositories
 
         public RestaurantStats GetStatsByRestaurantId(int id)
         {
-            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbid = -1;
-            string checkquery = "SELECT id, reservations, cur_customers, wait_time, restaurant_id FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
+            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1;
+            double dbrating = 0.0;
+            string checkquery = "SELECT restaurant_id, reservations, cur_customers, wait_time, rating FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -49,16 +49,16 @@ namespace SeatedNow.Repositories
 
             while (reader.Read())
             {
-                dbid = (int)reader["id"];
+                dbrestaurantid = (int)reader["restaurant_id"];
                 dbreservations = (int)reader["reservations"];
                 dbcustomers = (int)reader["cur_customers"];
                 dbwaittime = (int)reader["wait_time"];
-                dbrestaurantid = (int)reader["restaurant_id"];
+                dbrating = (double)reader["rating"];
             }
 
             connection.Close();
 
-            return new RestaurantStats(dbid, dbreservations, dbcustomers, dbwaittime, dbrestaurantid);
+            return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating);
         }
 
 

@@ -106,7 +106,8 @@ namespace SeatedNow.Controllers
 
         public IActionResult List()
         {
-            ListPage contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(_userSessionManager.getID()), _restaurantRepository.GetRestaurants(), _restaurantRepository.GetRestaurants());
+            int userId = _userSessionManager.getID();
+            ListPage contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
             return View(contents);
         }
 

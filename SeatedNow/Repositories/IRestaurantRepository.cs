@@ -11,6 +11,9 @@ namespace SeatedNow.Repositories
         void RegisterNewRestaurant(Restaurant restaurant);
         void DeleteRestaurant(int id);
         List<RestaurantListViewModel> GetRestaurants();
+        List<RestaurantListViewModel> GetRestaurantsByReservations();
+        List<RestaurantListViewModel> GetRestaurantsByRatings();
+        List<RestaurantListViewModel> GetRestaurantsByWaitTime();
         List<SideAdminRestaurantListViewModel> GetRestaurantsAdminList();
         Restaurant GetRestaurantByID(int id);
         Restaurant GetRestaurantByOwnerID(int id);
