@@ -117,11 +117,12 @@
                                         <div class="row recent-restaurant align-items-start">
                                             <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                                 <div class="logo">
-                                                    <a href="/">
+                                                    <a href="Listing/@reservation.RestaurantID">
                                                         @foreach (var restaurant in contents.Restaurants)
                                                         {
                                                             if (restaurant.ID == reservation.RestaurantID)
                                                             {
+                                    
                                                                 <img src="~/images/restaurants/@restaurant.ImagePath" style="max-height:100px; max-width: 75px; margin-left: 5px;" alt="@restaurant.Name" onerror="this.style.display='none'" />
                                                                 name = restaurant.Name;
                                                                 break;
