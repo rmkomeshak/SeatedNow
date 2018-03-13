@@ -91,23 +91,38 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult test()
+        public IActionResult Listing(int Id)
         {
-            Restaurant restaurant = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
-            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(restaurant.Id);
-
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             return View(restaurant);
         }
 
-        public IActionResult Generic()
-        {
-            return View();
-        }
-
-        public IActionResult List()
+        public IActionResult List(string SortBy)
         {
             int userId = _userSessionManager.getID();
-            ListPage contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
+            ListPage contents;
+
+            switch (SortBy)
+            {
+                case "reservations":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
+                    ViewBag.SortBy = "Most Reserved Restaurants";
+                    break;
+                case "ratings":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByRatings(), _restaurantRepository.GetRestaurantsByRatings());
+                    ViewBag.SortBy = "Highest Rated Restaurants";
+                    break;
+                case "waittime":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByWaitTime(), _restaurantRepository.GetRestaurantsByWaitTime());
+                    ViewBag.SortBy = "Shortest Wait Time";
+                    break;
+                default:
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
+                    ViewBag.SortBy = "Most Reserved Restaurants";
+                    break;
+            }
+
             return View(contents);
         }
 

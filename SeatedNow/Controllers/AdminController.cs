@@ -165,7 +165,7 @@ namespace SeatedNow.Controllers
         }
 
 
-        public IActionResult SendCreateRestaurant(string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId)
+        public IActionResult SendCreateRestaurant(string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId, string Description)
         {
 
             if (_userSessionManager.GetRole() != "Admin")
@@ -173,7 +173,7 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
-            Restaurant restaurant = new Restaurant(Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId);
+            Restaurant restaurant = new Restaurant(Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId, Description);
             _restaurantRepository.RegisterNewRestaurant(restaurant);
 
             if (_userSessionManager.GetRole() == "Admin")
@@ -190,7 +190,7 @@ namespace SeatedNow.Controllers
             }
         }
 
-        public IActionResult SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId)
+        public IActionResult SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId, string Description)
         {
 
             if (_userSessionManager.GetRole() != "Admin")
@@ -198,7 +198,7 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
-            Restaurant restaurant = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId);
+            Restaurant restaurant = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId, Description);
             _restaurantRepository.UpdateRestaurant(restaurant);
             return Redirect("Restaurants");
         }

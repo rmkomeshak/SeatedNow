@@ -8,7 +8,7 @@ namespace SeatedNow.Models
     public class RestaurantListViewModel
     {
 
-        public RestaurantListViewModel(int id, string name, string address, string city, string state, string zipcode, string imagePath)
+        public RestaurantListViewModel(int id, string name, string address, string city, string state, string zipcode, string imagePath, RestaurantStats stats)
         {
             ID = id;
             Name = name;
@@ -17,6 +17,7 @@ namespace SeatedNow.Models
             State = state;
             ZipCode = zipcode;
             ImagePath = imagePath;
+            Stats = stats;
         }
 
         public int ID { get; set; }
@@ -34,5 +35,7 @@ namespace SeatedNow.Models
         public string PhoneNumber { get; set; }
 
         public string ImagePath { get; set; }
+
+        public RestaurantStats Stats { get; set; }
     }
 }

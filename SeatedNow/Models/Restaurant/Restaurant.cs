@@ -7,7 +7,7 @@ namespace SeatedNow.Models
 {
     public class Restaurant
     {
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey)
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description)
         {
             Id = id;
             Name = name;
@@ -20,9 +20,10 @@ namespace SeatedNow.Models
             IsVerified = isVerified;
             OwnerId = ownerId;
             EventKey = eventKey;
+            Description = description;
         }
 
-        public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId)
+        public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
         {
             Name = name;
             Address = address;
@@ -34,9 +35,10 @@ namespace SeatedNow.Models
             IsVerified = isVerified;
             OwnerId = ownerId;
             EventKey = "";
+            Description = description;
         }
 
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId)
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
         {
             Id = id;
             Name = name;
@@ -49,6 +51,7 @@ namespace SeatedNow.Models
             IsVerified = isVerified;
             OwnerId = ownerId;
             EventKey = "";
+            Description = description;
         }
 
         public int Id { get; set; }
@@ -73,8 +76,13 @@ namespace SeatedNow.Models
         
         public string EventKey { get; set; }
 
+        public string Description { get; set; }
+
         public RestaurantStats Stats { get; set; }
 
         public IEnumerable<RestaurantTableList> Tables { get; set; }
+
+        public RestaurantHours Hours { get; set; }
+
     }
 }

@@ -1,11 +1,12 @@
-﻿
+﻿@model Restaurant
+
 @{
-    ViewData["Title"] = "Generic";
+    ViewData["Title"] = "Listing";
 }
 
 <div class="container-fluid" style="background: #5d7337; padding-top: 80px; padding-bottom: 70px;">
     <div class="container text-center">
-        <h1 id="restaurant-title" style="font-size: 50px; margin-bottom: 10px; color: #fff;">Restaurant Title</h1>
+        <h1 id="restaurant-title" style="font-size: 50px; margin-bottom: 10px; color: #fff;">@Model.Name</h1>
         <button id="restauraunt-keyword-1" type="button" class="btn btn-outline-light" style="margin: 5px;">italian</button>
         <button id="restauraunt-keyword-2" type="button" class="btn btn-outline-light" style="margin: 5px;">casual</button>
         <button id="restauraunt-keyword-3" type="button" class="btn btn-outline-light" style="margin: 5px;">pasta</button>
@@ -14,7 +15,7 @@
 <div class="container">
     <div class="row justify-content-lg-center" style="padding-top: 50px; padding-bottom: 50px;">
         <div class="col-lg-8">
-            <p id="restaurant-description" style="text-align: justify; margin-bottom: 40px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis vulputate arcu. Quisque tristique metus vel lectus vestibulum gravida. Praesent eget tortor id ipsum bibendum sodales vel eget velit. Phasellus eget mollis lorem. Sed a lectus eget mi porta efficitur eu ut mi.</p>
+            <p id="restaurant-description" style="text-align: justify; margin-bottom: 40px;">@Model.Description</p>
             <div class="row" style="background: #dddddd; padding: 30px 20px; border-radius: 5px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2)">
                 <div class="col-lg-6 align-self-center text-left">
                     <h4 class="display-4" style="margin: 0; font-size: 20px;">Ready to get started?</h4>
@@ -25,15 +26,21 @@
             </div>
             <div class="row" style="margin-top: 50px;">
                 <div class="col-lg-4 text-center">
-                    <img id="restaurant-logo" src="~/images/gustoso-logo.png" style="max-width: 100%; max-height: 180px;"/>
+                    <img id="restaurant-logo" src="~/images/restaurants/@Model.ImagePath" style="max-width: 100%; max-height: 180px;"/>
                 </div>
                 <div class="col-lg-7 offset-1" id="restaurant-info">
-                    <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>4.4 stars</b> based on 10 reviews</span></p>
+                    @if(Model.Stats.TotalRatings > 0)
+                    {
+                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
+                    } else
+                    {
+                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
+                    }
                     <p><i class="fas fa-utensils"></i><span id="restaurant-menu">
                         <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a></span></p>
                     <p><i class="fas fa-credit-card"></i><span id="restaurant-prices">$30 and under per person</span></p>
-                    <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">123 S. Main Street, Rochester, NY 12345</span></p>
-                    <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 (234) 567-8910</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode </span></p>
+                    <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 @Model.PhoneNumber</span></p>
                     <p><i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">
                         <a href="https://www.google.com/" target="_blank">https://www.google.com/</a></span></p>
                     <p><i class="fas fa-clock"></i><span id="restaurant-hours">

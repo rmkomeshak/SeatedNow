@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <h2 style="text-align: center; margin-bottom: 20px; font-size: 48px;" class="display-4">What are you craving?</h2>
-                <form class="form-inline my-2 my-lg-0" style="max-width: 700px; margin: 0 auto;">
+                <form asp-action="SearchRestaurants" class="form-inline my-2 my-lg-0" style="max-width: 700px; margin: 0 auto;">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search for a restaurant or keyword" aria-label="Search" style="width: calc(100% - 80px);">
                     <button class="btn btn-sn" type="submit">Search</button>
                 </form>
@@ -41,16 +41,26 @@
                         </div>
                     </div>
                 </div>
-                <h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">Most Recently Reserved Restaurants</h2>
+
+                <div class="sn-listing">
+                    <div class="row col-lg-12 border">
+                        <p class="col-lg-3">Sort By: </p>
+                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="reservations"> Reservations</a>
+                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="ratings"> Ratings</a>
+                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="waittime"> Wait Time</a>
+                    </div>
+                </div>
+
+                <center><h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">@ViewBag.SortBy</h2></center>
 
                 @foreach(var restaurant in contents.RestaurantList) {
                 <!-- RESTAURANT LISTING -->
                 <div class="sn-listing">
                     <div class="row align-items-center">
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <div class="logo">
                                 <a href="/">
-                                    <img src="~/images/restaurants/@restaurant.ImagePath" alt="@restaurant.Name" onerror="this.style.display='none'" />
+                                    <img src="~/images/restaurants/@restaurant.ImagePath"  alt="@restaurant.Name" onerror="this.style.display='none'" />
                                 </a>
                             </div>
                         </div>
@@ -63,14 +73,25 @@
                                 <button type="button" class="btn btn-light btn-sm">keyword</button>
                             </div>
                         </div>
-                        <div class="col-lg-3 text-center">
+                        <div class="col-lg-4 text-center">
+                            <a>Estimated Wait Time: @restaurant.Stats.WaitTime Minutes</a>
                             <div class="ratings">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <a class="ratings-link" href="/">Based on 12 reviews</a>
+                                @if(restaurant.Stats.TotalRatings > 0)
+                                {
+                                    for (int i = 0; i < restaurant.Stats.Rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+
+                                    for (int i = 4; i > restaurant.Stats.Rating; i--)
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                    <a class="ratings-link" href="/">Based on @restaurant.Stats.TotalRatings reviews</a>
+                                } else
+                                {
+                                    <a><b>No Reviews</b></a>
+                                }
                             </div>
                             <button class="btn btn-sn btn-reserve" type="submit">Reserve Now</button>
                         </div>
@@ -101,7 +122,7 @@
                                                         {
                                                             if (restaurant.ID == reservation.RestaurantID)
                                                             {
-                                                                <img src="~/images/restaurants/@restaurant.ImagePath" alt="@restaurant.Name" onerror="this.style.display='none'" />
+                                                                <img src="~/images/restaurants/@restaurant.ImagePath" style="max-height:100px; max-width: 75px; margin-left: 5px;" alt="@restaurant.Name" onerror="this.style.display='none'" />
                                                                 name = restaurant.Name;
                                                                 break;
                                                             }

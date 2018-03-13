@@ -38,9 +38,9 @@ namespace SeatedNow.Repositories
 
         public RestaurantStats GetStatsByRestaurantId(int id)
         {
-            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1;
+            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbtotalratings = -1;
             double dbrating = 0.0;
-            string checkquery = "SELECT restaurant_id, reservations, cur_customers, wait_time, rating FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
+            string checkquery = "SELECT restaurant_id, reservations, cur_customers, wait_time, rating, total_ratings FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -54,13 +54,17 @@ namespace SeatedNow.Repositories
                 dbcustomers = (int)reader["cur_customers"];
                 dbwaittime = (int)reader["wait_time"];
                 dbrating = (double)reader["rating"];
+                dbtotalratings = (int)reader["total_ratings"];
             }
 
             connection.Close();
 
-            return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating);
+            return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating, dbtotalratings);
         }
 
-
+        public RestaurantHours GetHoursByRestaurantId(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
