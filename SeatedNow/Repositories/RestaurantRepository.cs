@@ -161,8 +161,9 @@ namespace SeatedNow.Repositories
                 dbimage = reader["image"].ToString();
 
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
 
-                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
             }
 
             connection.Close();
@@ -193,8 +194,9 @@ namespace SeatedNow.Repositories
                 dbimage = reader["image"].ToString();
 
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
 
-                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
             }
 
             connection.Close();
@@ -225,8 +227,9 @@ namespace SeatedNow.Repositories
                 dbimage = reader["image"].ToString();
 
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
 
-                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
             }
             connection.Close();
             return restaurants;

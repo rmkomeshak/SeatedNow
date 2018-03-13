@@ -54,6 +54,23 @@ namespace SeatedNow.Models
             Description = description;
         }
 
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description, List<string> tags)
+        {
+            Id = id;
+            Name = name;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phoneNumber;
+            ImagePath = imagePath;
+            IsVerified = isVerified;
+            OwnerId = ownerId;
+            EventKey = "";
+            Description = description;
+            Tags = tags;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -81,6 +98,8 @@ namespace SeatedNow.Models
         public RestaurantStats Stats { get; set; }
 
         public IEnumerable<RestaurantTableList> Tables { get; set; }
+
+        public List<string> Tags { get; set; }
 
         public RestaurantHours Hours { get; set; }
 

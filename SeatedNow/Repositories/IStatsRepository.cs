@@ -10,6 +10,7 @@ namespace SeatedNow.Repositories
     {
         bool UpdateStats(RestaurantStats stats);
         RestaurantStats GetStatsByRestaurantId(int id);
+        List<string> GetTagsByRestaurantID(int id);
         RestaurantHours GetHoursByRestaurantId(int Id);
     }
 }

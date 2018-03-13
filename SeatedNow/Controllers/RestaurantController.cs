@@ -95,6 +95,7 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
             return View(restaurant);
         }
 

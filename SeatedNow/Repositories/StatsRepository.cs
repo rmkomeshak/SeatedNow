@@ -62,6 +62,35 @@ namespace SeatedNow.Repositories
             return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating, dbtotalratings);
         }
 
+        public List<string> GetTagsByRestaurantID(int id)
+        {
+            List<string> tags = new List<string>();
+            int dbrestaurantid = -1;
+            string dbtag1 = "", dbtag2 = "", dbtag3 = "";
+            string checkquery = "SELECT restaurant_id, keyword1, keyword2, keyword3 FROM [dbo].[Restaurant_Keywords] WHERE restaurant_id = '" + id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["restaurant_id"];
+                dbtag1 = reader["keyword1"].ToString();
+                dbtag2 = reader["keyword2"].ToString();
+                dbtag3 = reader["keyword3"].ToString();
+            }
+
+            tags.Add(dbtag1);
+            tags.Add(dbtag2);
+            tags.Add(dbtag3);
+
+            connection.Close();
+
+            return tags;
+        }
+
         public RestaurantHours GetHoursByRestaurantId(int Id)
         {
             throw new NotImplementedException();

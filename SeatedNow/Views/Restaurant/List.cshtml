@@ -68,9 +68,13 @@
                             <h3 class="restaurant-title"><a href="/">@restaurant.Name</a></h3>
                             <span class="restaurant-location"><a href="/">@restaurant.Address, @restaurant.City, @restaurant.State @restaurant.ZipCode</a></span>
                             <div class="keywords">
-                                <button type="button" class="btn btn-light btn-sm">keyword</button>
-                                <button type="button" class="btn btn-light btn-sm">keyword</button>
-                                <button type="button" class="btn btn-light btn-sm">keyword</button>
+                                @if (restaurant.Tags != null)
+                                {
+                                    foreach (var tag in restaurant.Tags)
+                                    {
+                                        <button type="button" class="btn btn-light btn-sm">@tag</button>
+                                    }
+                                }
                             </div>
                         </div>
                         <div class="col-lg-4 text-center">
