@@ -28,6 +28,10 @@ tbody tr:nth-child(even) {
 
     */
 
+.listing-hover:hover {
+    background-color: grey;
+}
+
 /* -- General Changes to Bootstrap --*/
 
 .btn {

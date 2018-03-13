@@ -55,11 +55,11 @@
 
                 @foreach(var restaurant in contents.RestaurantList) {
                 <!-- RESTAURANT LISTING -->
-                <div class="sn-listing">
+                <div onclick="location.href='Listing/@restaurant.ID';" style="cursor: pointer;" class="sn-listing listing-hover">
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="logo">
-                                <a href="/">
+                                <a href="~/Restaurant/Listing/@restaurant.ID">
                                     <img src="~/images/restaurants/@restaurant.ImagePath"  alt="@restaurant.Name" onerror="this.style.display='none'" />
                                 </a>
                             </div>
