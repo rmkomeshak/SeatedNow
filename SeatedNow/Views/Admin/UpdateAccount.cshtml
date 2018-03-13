@@ -31,7 +31,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control white-bg" />
+                <select asp-for="Role" class="form-control white-bg" autocomplete="off">
+                    <option>General</option>
+                    <option>Restaurant</option>
+                    <option>Admin</option>
+                </select>
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
         </form>

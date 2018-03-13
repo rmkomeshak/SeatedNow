@@ -4,17 +4,16 @@
     ViewData["Title"] = "Account Management";
 }
 
+<div class="container" style="width: 900px;">
+    <h1 class="text-center display-4" style="margin-top: 50px; margin-bottom: 20px;">Accounts</h1>
 
-<div class="container">
-    <h1 class="text-center">Accounts</h1>
-
-    <p>
+    <p class="text-center">
         @Html.ActionLink("Create New Account", "Create", new { }, new { onclick = "loadCreateAccount(); return false;", @class = "btn btn-success" })
     </p>
-    <table class="table">
-        <thead>
+    <table class="table table-bordered" style="margin-top: 50px; margin-bottom: 50px;">
+        <thead class="thead-light">
             <tr>
-                <th>
+                <th class="text-center" style="text-transform: uppercase; width: 70px;">
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
@@ -23,23 +22,25 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Role)
                 </th>
-                <th></th>
+                <th class="text-center" style="width: 240px;">
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td class="text-center" style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
-                    <td>
+                    <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                    <td>
+                    <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Role)
                     </td>
-                    <td>
+                    <td class="text-center">
                         <button class="btn btn-primary" onclick="loadUpdateAccount(@item.Id); return false; ">Edit</button>
                         <button class="btn btn-secondary" onclick="loadDetailsAccount(@item.Id); return false; ">Details</button>
                         @Html.ActionLink("Delete", "SendDeleteAccount", new { id = item.Id }, new { @class = "btn btn-danger" })
@@ -64,7 +65,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" form="updateAccountForm" class="btn btn-sn">Update</button>
+                    <button type="submit" form="updateAccountForm" class="btn btn-success">Update</button>
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" form="createAccountForm" class="btn btn-sn">Create</button>
+                    <button type="submit" form="createAccountForm" class="btn btn-success">Create</button>
                 </div>
             </div>
         </div>

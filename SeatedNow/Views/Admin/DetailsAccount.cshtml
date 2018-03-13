@@ -1,43 +1,31 @@
 ﻿@model SeatedNow.Models.UserAccount
 
 <div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-        <dd>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.UserID)</b> <br />
             @Html.DisplayFor(model => model.UserID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
+        </li>
+        <li class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.Name)</b> <br />
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
+        </li>
+        <li class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.Email)</b> <br />
             @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
+        </li>
+        <li class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.PhoneNumber)</b> <br />
             @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd>
+        </li>
+        <li hidden class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.Password)</b> <br />
             @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd>
+        </li>
+        <li class="list-group-item">
+            <b>@Html.DisplayNameFor(model => model.Role)</b> <br />
             @Html.DisplayFor(model => model.Role)
-        </dd>
-    </dl>
+        </li>
+    </ul>
 </div>
 
