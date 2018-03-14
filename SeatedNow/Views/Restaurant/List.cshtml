@@ -106,8 +106,8 @@ else
                         <a><b>No Reviews</b></a>
 }
                             </div>
-                            <button class="btn btn-sn btn-reserve" type="submit">Reserve</button>
-                            <button onclick="location.href='Listing/@restaurant.ID';" class="btn btn-secondary btn-reserve" type="submit">Info</button>
+                            <a href="~/Restaurant/Listing/@restaurant.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
+                            <a href="~/Restaurant/Listing/@restaurant.ID" role="button" class="btn btn-secondary btn-reserve">Info</a>
                             <div class="wait-time">
                                 <b>Estimated Wait:</b> @restaurant.Stats.WaitTime min
                             </div>
