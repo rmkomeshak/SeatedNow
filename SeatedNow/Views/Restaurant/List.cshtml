@@ -42,20 +42,29 @@
                     </div>
                 </div>
 
-                <div class="sn-listing">
-                    <div class="row col-lg-12 border">
-                        <p class="col-lg-3">Sort By: </p>
-                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="reservations"> Reservations</a>
-                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="ratings"> Ratings</a>
-                        <a class="col-lg-3 text-lg-center" asp-action="List" asp-route-SortBy="waittime"> Wait Time</a>
+                <div class="sn-list-filter row">
+                    <div class="col-6">
+                        <h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">@ViewBag.SortBy</h2>
+                    </div>
+                    <div class="col-6">
+                        <div class="btn-toolbar float-right" role="toolbar">
+                            <div class="btn-group mr-2" role="group">
+                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="reservations">Reservations</a>
+                            </div>
+                            <div class="btn-group mr-2" role="group">
+                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="ratings">Ratings</a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="waittime">Wait Time</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <center><h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">@ViewBag.SortBy</h2></center>
+            
 
                 @foreach(var restaurant in contents.RestaurantList) {
                 <!-- RESTAURANT LISTING -->
-                <div onclick="location.href='Listing/@restaurant.ID';" style="cursor: pointer;" class="sn-listing listing-hover">
+                <div class="sn-listing">
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="logo">
@@ -65,8 +74,8 @@
                             </div>
                         </div>
                         <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="/">@restaurant.Name</a></h3>
-                            <span class="restaurant-location"><a href="/">@restaurant.Address, @restaurant.City, @restaurant.State @restaurant.ZipCode</a></span>
+                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Name</a></h3>
+                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Address, @restaurant.City, @restaurant.State @restaurant.ZipCode</a></span>
                             <div class="keywords">
                                 @if (restaurant.Tags != null)
                                 {
@@ -78,26 +87,30 @@
                             </div>
                         </div>
                         <div class="col-lg-4 text-center">
-                            <a>Estimated Wait Time: @restaurant.Stats.WaitTime Minutes</a>
                             <div class="ratings">
-                                @if(restaurant.Stats.TotalRatings > 0)
-                                {
-                                    for (int i = 0; i < restaurant.Stats.Rating; i++)
-                                    {
-                                        <i class="fas fa-star"></i>
-                                    }
+                                @if (restaurant.Stats.TotalRatings > 0)
+        {
+            for (int i = 0; i < restaurant.Stats.Rating; i++)
+            {
+                        <i class="fas fa-star"></i>
+}
 
-                                    for (int i = 4; i > restaurant.Stats.Rating; i--)
-                                    {
-                                        <i class="far fa-star"></i>
-                                    }
-                                    <a class="ratings-link" href="/">Based on @restaurant.Stats.TotalRatings reviews</a>
-                                } else
-                                {
-                                    <a><b>No Reviews</b></a>
-                                }
+for (int i = 4; i > restaurant.Stats.Rating; i--)
+{
+                        <i class="far fa-star"></i>
+}
+                        <a class="ratings-link" href="~/Restaurant/Listing/@restaurant.ID">Based on @restaurant.Stats.TotalRatings reviews</a>
+}
+else
+{
+                        <a><b>No Reviews</b></a>
+}
                             </div>
-                            <button class="btn btn-sn btn-reserve" type="submit">Reserve Now</button>
+                            <button class="btn btn-sn btn-reserve" type="submit">Reserve</button>
+                            <button onclick="location.href='Listing/@restaurant.ID';" class="btn btn-secondary btn-reserve" type="submit">Info</button>
+                            <div class="wait-time">
+                                <b>Estimated Wait:</b> @restaurant.Stats.WaitTime min
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,38 +163,6 @@
                                             <h5>No recent reservations.</h5>
                                      </div>
                                 }
-                                <!-- RECENT RESTAURANT LISTING -->
-                                <!--<div class="row recent-restaurant align-items-start">
-                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
-                                        <div class="logo">
-                                            <a href="/">
-                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" style="padding-right: 0;">
-                                        <h5>Restaurant Title</h5>
-                                        <p>Reserved on 02/04/17</p>
-                                        <p class="small-info">For 4 people in the Booth section</p>
-                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
-                                    </div>
-                                </div>-->
-                                <!-- RECENT RESTAURANT LISTING -->
-                                <!--<div class="row recent-restaurant align-items-start">
-                                    <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
-                                        <div class="logo">
-                                            <a href="/">
-                                                <img src="~/images/restaurants/tacobell.png" alt="Restaurant Title" onerror="this.style.display='none'" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" style="padding-right: 0;">
-                                        <h5>Restaurant Title</h5>
-                                        <p>Reserved on 02/04/17</p>
-                                        <p class="small-info">For 4 people in the Booth section</p>
-                                        <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
-                                    </div>
-                                </div>-->
                             </div>
                         </div>
                     </div>

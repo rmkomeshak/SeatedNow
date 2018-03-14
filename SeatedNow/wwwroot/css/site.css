@@ -6,32 +6,6 @@ body {
     line-height: 1.4em;
 }
 
-/* -- Danes Changes, move somewhere appropritate*/
-
-/*
-
-table {
-    border: 2px solid green;
-}
-
-thead tr {
-    background-color: #aaa
-}
-
-tbody tr:nth-child(odd) {
-    background-color: #eee;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #fff;
-}
-
-    */
-
-.listing-hover:hover {
-    background-color: grey;
-}
-
 /* -- General Changes to Bootstrap --*/
 
 .btn {
@@ -431,6 +405,11 @@ h1.title {
 
 /* -- Logged In Listings -- */
 
+.sn-list-filter {
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+
 .sn-listing {
     display: block;
     min-height: 100px;
@@ -510,9 +489,14 @@ h1.title {
 
 .sn-listing button.btn-reserve {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.sn-listing .wait-time {
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 #restaurant-info p {
