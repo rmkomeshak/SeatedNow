@@ -5,6 +5,11 @@ $(function () {
 })
 
 
+function refreshRestaurantListPage(SortBy, url) {
+    window.history.pushState(SortBy, 'SortBy', url);
+    location.reload();
+}
+
 function loadPage(id, page) {
     $.ajax({
         url: '/Restaurant/' + page + '/' + id,
