@@ -9,6 +9,7 @@ namespace SeatedNow.Repositories
     interface IReservationRepository
     {
         List<DiningReservation> GetReservationsByCustomerID(int CustomerId, int results);
+        void CreateReservation(DiningReservation reservation);
 
     }
 }

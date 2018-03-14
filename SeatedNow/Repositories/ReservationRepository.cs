@@ -59,6 +59,22 @@ namespace SeatedNow.Repositories
             return reservations;
         }
 
+        public void CreateReservation(DiningReservation reservation)
+        {
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "INSERT INTO [dbo].[Reservations] VALUES ('" + reservation.RestaurantID + "', '" + reservation.OwnerID + "', '" + reservation.Guests + "', '" + reservation.Time + "', '" + reservation.TableID + "', '" + reservation.Section + "')";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
+
 
     }
 }

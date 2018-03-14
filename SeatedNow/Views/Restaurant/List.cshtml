@@ -130,14 +130,39 @@ else
                                 }
                                 
                                 @if (contents.UserReservations.Count > 0) {
-                                    foreach (var reservation in contents.UserReservations) {
+                                    var array_length = 5;
+
+                                    if(contents.UserReservations.Count <= 5)
+                                    {
+                                        array_length = contents.UserReservations.Count;
+                                    }
+
+                                    DiningReservation[] recent = contents.UserReservations.ToArray();
+                                    DiningReservation swap;
+
+                                    for(int i = 0; i < contents.UserReservations.Count; i++)
+                                    {
+                                        for(int k = 0; k < contents.UserReservations.Count-1; k++)
+                                        {
+                                            if(recent[k].Time.CompareTo(recent[k+1].Time) < 0)
+                                            {
+                                                swap = recent[k];
+                                                recent[k] = recent[k+1];
+                                                recent[k+1] = swap;
+                                            }
+
+                                        }
+
+                                    }
+
+                                    for (int i = 0; i < array_length; i++) {
                                         <div class="row recent-restaurant align-items-start">
                                             <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                                 <div class="logo">
-                                                    <a href="Listing/@reservation.RestaurantID">
+                                                    <a href="Listing/@recent[i].RestaurantID">
                                                         @foreach (var restaurant in contents.Restaurants)
                                                         {
-                                                            if (restaurant.ID == reservation.RestaurantID)
+                                                            if (restaurant.ID == recent[i].RestaurantID)
                                                             {
                                     
                                                                 <img src="~/images/restaurants/@restaurant.ImagePath" style="max-height:100px; max-width: 75px; margin-left: 5px;" alt="@restaurant.Name" onerror="this.style.display='none'" />
@@ -150,8 +175,8 @@ else
                                             </div>
                                             <div class="col-lg-9" style="padding-right: 0;">
                                                 <h5>@name</h5>
-                                                <p>Reserved for @reservation.Time.ToString().Substring(0,9)</p>
-                                                <p class="small-info">For @reservation.Guests people in the @reservation.Section section</p>
+                                                <p>Reserved for @recent[i].Time.ToString().Substring(0,9)</p>
+                                                <p class="small-info">For @recent[i].Guests people in the @recent[i].Section section</p>
                                                 <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
                                             </div>
                                         </div>

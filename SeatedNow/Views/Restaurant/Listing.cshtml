@@ -1,7 +1,7 @@
 ﻿@model Restaurant
 
 @{
-    ViewData["Title"] = "Listing";
+    ViewData["Title"] = "Listing - " + Model.Name;
 }
 
 <div class="container-fluid" style="background: #5d7337; padding-top: 80px; padding-bottom: 70px;">
@@ -70,40 +70,42 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-action="ReserveAction" type="submit">
                     <img style="max-width: 100%; margin: 0 auto 20px auto;" src="http://4.bp.blogspot.com/-3FSnC6TQ5iM/T9XAuQUhHOI/AAAAAAAABGA/doakEq5PsXM/s1600/restaurant+layout.jpg" />
                     <div class="form-group">
-                        <label for="reserveName">Name for Reservation</label>
-                        <input type="text" class="form-control white-bg" id="reserveName" placeholder="Name">
-                    </div>
-                    <div class="form-group">
                         <label for="reservePartySize">Party Size</label>
-                        <select class="form-control white-bg" id="reservePartySize">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
+                        <select id="guests" name="guests" class="form-control white-bg">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="reserveSection">Preferred Seating Section</label>
-                        <select class="form-control white-bg" id="reserveSection">
-                            <option>Table</option>
-                            <option>Booth</option>
-                            <option>Bar</option>
-                            <option>Patio</option>
-                            <option>Second Floor</option>
+                        <select id="section" name="section" class="form-control white-bg">
+                            <option value="table">Table</option>
+                            <option value="booth">Booth</option>
+                            <option value="bar">Bar</option>
+                            <option value="patio">Patio</option>
+                            <option value="second floor">Second Floor</option>
                         </select>
                     </div>
+                    <div class="form-group" style="display:none;">
+                        <select id="restaurant_id" name="restaurant_id" class="form-control white-bg">
+                            <option value="@Model.Id"></option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Confirm reservation</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Confirm reservation</button>
+                
             </div>
         </div>
     </div>

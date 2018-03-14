@@ -99,6 +99,14 @@ namespace SeatedNow.Controllers
             return View(restaurant);
         }
 
+        public IActionResult ReserveAction(int guests, string section, int restaurant_id)
+        {
+            DateTime dt = DateTime.Today;
+            DiningReservation r = new DiningReservation(restaurant_id, _userSessionManager.getID(), guests, dt, 10, section);
+            _reservationRepository.CreateReservation(r);
+            return Redirect("~/Restaurant/List");
+        }
+
         public IActionResult List(string SortBy)
         {
             int userId = _userSessionManager.getID();
