@@ -96,6 +96,7 @@ namespace SeatedNow.Controllers
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
+            restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
             return View(restaurant);
         }
 
@@ -133,6 +134,18 @@ namespace SeatedNow.Controllers
             }
 
             return View(contents);
+        }
+
+        public IActionResult SendRating(float rating, string comment, int restaurant_id)
+        {
+
+            int userId = _userSessionManager.getID();
+            DateTime time = DateTime.Now;
+
+            _restaurantRepository.InputRating(restaurant_id, rating, comment, time, userId);
+
+            return Redirect(Request.Headers["Referer"].ToString());
+
         }
 
     }
