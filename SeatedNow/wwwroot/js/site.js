@@ -1,9 +1,16 @@
 ﻿// Write your JavaScript code.
 $(function () {
+    $('#commentBox').hide();
 
+    $('#showCommentBox').click(function () {
+        $('#commentBox').show();
+    });
 
 })
 
+function showRatingComment() {
+    $('#ratingBox').show();
+}
 
 function refreshRestaurantListPage(SortBy, url) {
     window.history.pushState(SortBy, 'SortBy', url);

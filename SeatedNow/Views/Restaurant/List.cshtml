@@ -89,22 +89,22 @@
                         <div class="col-lg-4 text-center">
                             <div class="ratings">
                                 @if (restaurant.Stats.TotalRatings > 0)
-        {
-            for (int i = 0; i < restaurant.Stats.Rating; i++)
-            {
-                        <i class="fas fa-star"></i>
-}
+                                {
+                                    for (int i = 0; i < (int)restaurant.Stats.Rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
 
-for (int i = 4; i > restaurant.Stats.Rating; i--)
-{
-                        <i class="far fa-star"></i>
-}
-                        <a class="ratings-link" href="~/Restaurant/Listing/@restaurant.ID">Based on @restaurant.Stats.TotalRatings reviews</a>
-}
-else
-{
-                        <a><b>No Reviews</b></a>
-}
+                                    for (int i = 5; i > (int)restaurant.Stats.Rating; i--)
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                    <a class="ratings-link" href="~/Restaurant/Listing/@restaurant.ID">Based on @restaurant.Stats.TotalRatings reviews</a>
+                                    }
+                                 else
+                                 {
+                                    <a><b>No Reviews</b></a>
+                                 }
                             </div>
                             <button class="btn btn-sn btn-reserve" type="submit">Reserve</button>
                             <button onclick="location.href='Listing/@restaurant.ID';" class="btn btn-secondary btn-reserve" type="submit">Info</button>

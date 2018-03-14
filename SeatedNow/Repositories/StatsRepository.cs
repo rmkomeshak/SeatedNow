@@ -95,5 +95,30 @@ namespace SeatedNow.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<RestaurantRatings> GetRatingsByRestaurantId(int Id)
+        {
+            List<RestaurantRatings> ratings = new List<RestaurantRatings>();
+
+            string dbcomment = "";
+            double dbrating = 0.0;
+            string checkquery = "SELECT comment, rating FROM [dbo].[Restaurant_Ratings] WHERE restaurant_id = '" + Id + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbcomment = reader["comment"].ToString();
+                dbrating = (double)reader["rating"];
+
+                ratings.Add(new RestaurantRatings(dbrating, dbcomment));
+            }
+
+            connection.Close();
+            return ratings;
+        }
     }
 }

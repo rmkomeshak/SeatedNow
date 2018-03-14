@@ -29,24 +29,32 @@
             </div>
             <div class="row" style="margin-top: 50px;">
                 <div class="col-lg-4 text-center">
-                    <img id="restaurant-logo" src="~/images/restaurants/@Model.ImagePath" style="max-width: 100%; max-height: 180px;"/>
+                    <img id="restaurant-logo" src="~/images/restaurants/@Model.ImagePath" style="max-width: 100%; max-height: 180px;" />
                 </div>
                 <div class="col-lg-7 offset-1" id="restaurant-info">
-                    @if(Model.Stats.TotalRatings > 0)
-                    {
-                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
-                    } else
-                    {
-                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
-                    }
-                    <p><i class="fas fa-utensils"></i><span id="restaurant-menu">
-                        <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a></span></p>
+                    @if (Model.Stats.TotalRatings > 0)
+            {
+                <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
+    }
+    else
+    {
+        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
+}
+                    <p>
+                        <i class="fas fa-utensils"></i><span id="restaurant-menu">
+                            <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a>
+                        </span>
+                    </p>
                     <p><i class="fas fa-credit-card"></i><span id="restaurant-prices">$30 and under per person</span></p>
                     <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode </span></p>
                     <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 @Model.PhoneNumber</span></p>
-                    <p><i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">
-                        <a href="https://www.google.com/" target="_blank">https://www.google.com/</a></span></p>
-                    <p><i class="fas fa-clock"></i><span id="restaurant-hours">
+                    <p>
+                        <i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">
+                            <a href="https://www.google.com/" target="_blank">https://www.google.com/</a>
+                        </span>
+                    </p>
+                    <p>
+                        <i class="fas fa-clock"></i><span id="restaurant-hours">
                             <b>Sunday:</b> 10am - 9pm <br />
                             <b>Monday:</b> 9am - 9pm <br />
                             <b>Tuesday:</b> 9am - 9pm <br />
@@ -54,9 +62,56 @@
                             <b>Thursday:</b> 9am - 9pm <br />
                             <b>Friday:</b> 9am - 10pm <br />
                             <b>Saturday:</b> 9am - 10pm <br />
-                        </span></p>
+                        </span>
+                    </p>
+                    <div class="border">
+                        <form asp-action="SendRating" type="submit">
+                            <div class="form-group">
+                                <label for="reservePartySize"><b>Select the amount of stars</b></label>
+                                <select name="rating" class="form-control white-bg">
+                                    <option value="0">0 Stars</option>
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="5">5 Fantastical Stars!</option>
+                                </select>
+                            </div>
+                            <input hidden name="restaurant_id" value="@Model.Id" />
+                            <a id="showCommentBox"><b>Leave Comment</b></a>
+                            <div class="form-group">
+                                <textarea maxlength="250" id="commentBox" name="comment" class="form-control white-bg"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit Review</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            @foreach(var rating in Model.Ratings)
+            {
+                <div class="border">
+                    <a><b>Rating: </b></a>
+                @if (Model.Stats.TotalRatings > 0)
+                {
+                    for (int i = 0; i < (int)rating.Rating; i++)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+
+                    for (int i = 5; i > (int)rating.Rating; i--)
+                    {
+                        <i class="far fa-star"></i>
+                    }
+                }
+                else
+                {
+                    <a><b>No Reviews</b></a>
+                }
+                
+                    <a><b>Comment: @rating.Comment</b></a>
+                </div>
+
+            }
         </div>
     </div>
 </div>

@@ -373,5 +373,52 @@ namespace SeatedNow.Repositories
             throw new NotImplementedException();
         }
 
+        public bool InputRating(int restaurant_id, float rating, string review, DateTime time, int userId)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendqueryRestaurant = "INSERT INTO [dbo].[Restaurant_Ratings] VALUES ('" + review + "', '"
+                                    + rating + "', '" + time + "', '"
+                                    + userId + "', '" + restaurant_id + "')";
+
+
+                string checkqueryTotalRatings = "SELECT count(*) FROM [dbo].[Restaurant_Ratings] WHERE restaurant_id = '" + restaurant_id + "'";
+
+                string checkquerySumRatings = "SELECT SUM(rating) as rating from [dbo].[Restaurant_Ratings] WHERE restaurant_id = '" + restaurant_id + "'";
+
+                int totalReviews = 0;
+                double overallRating = 0.0, sumRatings = 0.0;
+
+                using (SqlCommand command = new SqlCommand(sendqueryRestaurant, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                using (SqlCommand command = new SqlCommand(checkqueryTotalRatings, connection))
+                {
+                    totalReviews = (int)command.ExecuteScalar();
+                }
+
+                using (SqlCommand command = new SqlCommand(checkquerySumRatings, connection))
+                {
+                    sumRatings = (double)command.ExecuteScalar();
+                }
+
+                overallRating = (sumRatings / totalReviews);
+                string sendqueryUpdateOverallRating = "UPDATE [dbo].[Restaurant_Stats] SET rating = '" + overallRating
+                    + "', total_ratings = '" + totalReviews + "' WHERE restaurant_id = " + restaurant_id; ;
+
+                using (SqlCommand command = new SqlCommand(sendqueryUpdateOverallRating, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+
+            return true;
+        }
+
     }
 }

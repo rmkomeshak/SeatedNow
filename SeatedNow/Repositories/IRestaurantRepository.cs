@@ -23,5 +23,6 @@ namespace SeatedNow.Repositories
         Restaurant GetrestaurantByPhone(string phone);
         bool UpdateRestaurant(Restaurant restaurant);
         Boolean IsRestaurantRegistered(string email);
+        Boolean InputRating(int restaurant_id, float rating, string review, DateTime time, int userId);
     }
 }
