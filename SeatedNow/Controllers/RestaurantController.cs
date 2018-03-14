@@ -96,7 +96,16 @@ namespace SeatedNow.Controllers
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
+            restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
             return View(restaurant);
+        }
+
+        public IActionResult ReserveAction(int guests, string section, int restaurant_id)
+        {
+            DateTime dt = DateTime.Today;
+            DiningReservation r = new DiningReservation(restaurant_id, _userSessionManager.getID(), guests, dt, 10, section);
+            _reservationRepository.CreateReservation(r);
+            return Redirect("~/Restaurant/List");
         }
 
         public IActionResult List(string SortBy)
@@ -125,6 +134,18 @@ namespace SeatedNow.Controllers
             }
 
             return View(contents);
+        }
+
+        public IActionResult SendRating(float rating, string comment, int restaurant_id)
+        {
+
+            int userId = _userSessionManager.getID();
+            DateTime time = DateTime.Now;
+
+            _restaurantRepository.InputRating(restaurant_id, rating, comment, time, userId);
+
+            return Redirect(Request.Headers["Referer"].ToString());
+
         }
 
     }

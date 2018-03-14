@@ -103,5 +103,7 @@ namespace SeatedNow.Models
 
         public RestaurantHours Hours { get; set; }
 
+        public List<RestaurantRatings> Ratings { get; set; }
+
     }
 }

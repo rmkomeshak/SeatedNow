@@ -16,6 +16,21 @@ namespace SeatedNow.Models
             Section = section;
         }
 
+        public DiningReservation(int restaurant_id, int owner_id, int guests, DateTime time, int table_id, string section)
+        {
+            RestaurantID = restaurant_id;
+            OwnerID = owner_id;
+            Guests = guests;
+            Time = time;
+            TableID = table_id;
+            Section = section;
+        }
+
+        public DiningReservation()
+        {
+            Time = new DateTime(1990, 1, 1);
+        }
+
         public int ReservationID { get; set; }
 
         public int RestaurantID { get; set; }
