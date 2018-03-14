@@ -20,7 +20,9 @@
                     <a class="active-link" onclick="loadPage(@restaurant.Id, 'DashOverview');"><i class="fas fa-list-alt"></i> Overview</a>
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashStatistics');"><i class="fas fa-chart-bar"></i> Statistics</a>
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashFloorplan');"><i class="fas fa-desktop"></i> Floor Plan</a>
-                    <a class="" onclick="loadPage(@restaurant.Id, 'DashProfile');"><i class="fas fa-user-circle"></i> Profile</a>
+                    <!--
+                        <a class="" onclick="loadPage(@restaurant.Id, 'DashProfile');"><i class="fas fa-user-circle"></i> Profile</a>
+                    -->
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashSettings');"><i class="fas fa-cog"></i> Settings</a>
                     <a href="~/Restaurant/List"><i class="fas fa-arrow-left"></i>Return to Home</a>
                 </div>
@@ -34,13 +36,24 @@
 
 <style>
 
-    .main-content {
+    nav.navbar {
         position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 99999;
+    }
+
+    .main-content {
+        position: absolute;
         top: 52px;
         left: 300px;
         padding: 50px;
-        height: calc(100% - 152px);
-        width: calc(100% - 400px);
+        height: calc(100% - 52px);
+        width: calc(100% - 300px);
+        overflow-y: scroll;
+        background: #252525;
+        color: #fff;
     }
 
     footer.global-footer {
@@ -80,12 +93,8 @@
         cursor: pointer;
     }
 
-    .siderbar-links a.active-link {
-        background-color: #222 !important;
-    }
-
     .sidebar-links a:hover {
-        background-color: #222;
+        background-color: #1a1a1a;
     }
 
     .sidebar-links a i {

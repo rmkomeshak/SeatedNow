@@ -29,7 +29,7 @@
         }
     }
 
-    <div id="dropdown">
+    <div id="dropdown" hidden>
         @Html.DropDownListFor(model => model.Id, list, "Reserve a table", new { onchange = "reserveTable(this.value)" })
     </div>
 
