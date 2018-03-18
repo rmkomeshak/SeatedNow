@@ -4,6 +4,16 @@
     ViewData["Title"] = "Listing - " + Model.Name;
 }
 
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
 <div class="container-fluid" style="background: #5d7337; padding-top: 80px; padding-bottom: 70px;">
     <div class="container text-center">
         <h1 id="restaurant-title" style="font-size: 50px; color: #fff;">@Model.Name</h1>
@@ -33,13 +43,13 @@
                 </div>
                 <div class="col-lg-7 offset-1" id="restaurant-info">
                     @if (Model.Stats.TotalRatings > 0)
-            {
-                <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
-    }
-    else
-    {
-        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
-}
+                    {
+                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
+                    }
+                    else
+                    {
+                        <p><i class="fas fa-star" style="color: #ffc107"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
+                    }
                     <p>
                         <i class="fas fa-utensils"></i><span id="restaurant-menu">
                             <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a>
@@ -87,33 +97,71 @@
                     </div>
                 </div>
             </div>
-            @foreach(var rating in Model.Ratings)
+            @foreach (var rating in Model.Ratings)
             {
                 <div class="border">
                     <a><b>Rating: </b></a>
-                @if (Model.Stats.TotalRatings > 0)
-                {
-                    for (int i = 0; i < (int)rating.Rating; i++)
+                    @if (Model.Stats.TotalRatings > 0)
                     {
-                        <i class="fas fa-star"></i>
+                        for (int i = 0; i < (int)rating.Rating; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+
+                        for (int i = 5; i > (int)rating.Rating; i--)
+                        {
+                            <i class="far fa-star"></i>
+                        }
+                    }
+                    else
+                    {
+                        <a><b>No Reviews</b></a>
                     }
 
-                    for (int i = 5; i > (int)rating.Rating; i--)
-                    {
-                        <i class="far fa-star"></i>
-                    }
-                }
-                else
-                {
-                    <a><b>No Reviews</b></a>
-                }
-                
                     <a><b>Comment: @rating.Comment</b></a>
                 </div>
 
             }
         </div>
     </div>
+       
+    <!--GOOGLE MAPS STUFF-->
+    <div id="googlemap">
+        <div id="floating-panel" style="display:none;">
+            <input id="address" type="textbox" value="@Model.Address">
+            <input id="submit" type="button" value="Geocode">
+        </div>
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 8,
+                    center: { lat: -34.397, lng: 150.644 }
+                });
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
+
+            function geocodeAddress(geocoder, resultsMap) {
+                var address = document.getElementById('address').value;
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status === 'OK') {
+                        resultsMap.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: resultsMap,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfBylWQ5799KJI6ytzM3_uRYTqWVAphDo&callback=initMap">
+        </script>
+    </div>
+    <!--END OF GOOGLE MAPS STUFF-->
 </div>
 
 <div class="modal fade" id="reserveSeat" tabindex="-1" role="dialog" aria-labelledby="reserveSeat" aria-hidden="true">
@@ -166,3 +214,4 @@
         </div>
     </div>
 </div>
+</body>

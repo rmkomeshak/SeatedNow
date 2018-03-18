@@ -3,32 +3,44 @@
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
+
+<!DOCTYPE html>
+<html>
 <head>
+    <title>Geocoding service</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <style>
-        #map {
-            height: 400px;
-            width: 50%;
-        }
+         /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+         #map {
+             height: 100%;
+         }
+         /* Optional: Makes the sample page fill the window. */
+         html, body {
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+
+         #floating-panel {
+             position: absolute;
+             top: 10px;
+             left: 25%;
+             z-index: 5;
+             background-color: #fff;
+             padding: 5px;
+             border: 1px solid #999;
+             text-align: center;
+             font-family: 'Roboto','sans-serif';
+             line-height: 30px;
+             padding-left: 10px;
+         }
     </style>
 </head>
 <body>
-    <div>
-        <address>
-            Seated Now Rd.<br />
-            Rochester, MI 48309<br />
-            <abbr title="Phone">P:</abbr>
-            248-555-5555
-        </address>
-        <p>Rochester, MI</p>
-
-        <address>
-            <strong>Support:</strong> <a href="mailto:Support@seatednow.com">Support@seatednow.com</a><br />
-            <strong>Marketing:</strong> <a href="mailto:Marketing@seatednow.com">Marketing@seatednow.com</a>
-        </address>
-    </div>
-    <h3>Seated Now Headquarters</h3>
-    <div id="floating-panel" style="display:none;">
-        <input id="address" type="textbox" value="Rochester, MI">
+    <div id="floating-panel">
+        <input id="address" type="textbox" value="Sydney, NSW">
         <input id="submit" type="button" value="Geocode">
     </div>
     <div id="map"></div>
@@ -39,7 +51,10 @@
                 center: { lat: -34.397, lng: 150.644 }
             });
             var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map);
+
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
         }
 
         function geocodeAddress(geocoder, resultsMap) {
@@ -61,3 +76,4 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfBylWQ5799KJI6ytzM3_uRYTqWVAphDo&callback=initMap">
     </script>
 </body>
+</html>
