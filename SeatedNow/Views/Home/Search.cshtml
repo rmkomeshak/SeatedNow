@@ -1,4 +1,10 @@
-﻿@{
+﻿@model List<RestaurantListViewModel>
+
+@{ 
+    var results = Model;
+}
+
+@{
     ViewData["Title"] = "Search";
 }
 
@@ -53,6 +59,43 @@
                     </div>
                 </div>
             </div>
+
+            @foreach (var result in results)
+            {
+                <div class="sn-listing">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3">
+                            <div class="logo">
+                                <a href="/">
+                                    <img src="~/images/@result.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center text-sm-left">
+                            <h3 class="restaurant-title"><a href="/">Restaurant Name</a></h3>
+                            <span class="restaurant-location"><a href="/">Addresse</a></span>
+                            <div class="keywords">
+                                <button type="button" class="btn btn-light btn-sm">keyword</button>
+                                <button type="button" class="btn btn-light btn-sm">keyword</button>
+                                <button type="button" class="btn btn-light btn-sm">keyword</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 text-center">
+                            <div class="ratings">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <a class="ratings-link" href="/">Based on 12 reviews</a>
+                            </div>
+                            <button class="btn btn-sn btn-reserve" type="submit">Reserve Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
 
             <!-- RESTAURANT LISTING -->
             <div class="sn-listing">

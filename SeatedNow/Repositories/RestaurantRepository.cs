@@ -137,6 +137,72 @@ namespace SeatedNow.Repositories
             return restaurants;
         }
 
+        public List<RestaurantListViewModel> GetRestaurantsByName(string name)
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE name = '" + name + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
+        public List<RestaurantListViewModel> SearchRestaurantsByName(string name)
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE name = '" + name + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
         public List<RestaurantListViewModel> GetRestaurantsByReservations()
         {
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
@@ -168,6 +234,51 @@ namespace SeatedNow.Repositories
 
             connection.Close();
             return restaurants;
+        }
+
+        public List<RestaurantListViewModel> GetRestaurantsByTags(List<string> tags)
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+            List<int> ids = new List<int>();
+            SqlDataReader reader;
+            SqlCommand command;
+
+            int dbid;
+            connection.Open();
+
+            foreach (var tag in tags)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    dbid = -1;
+                    string checkquery = "SELECT restaurant_id FROM [dbo].[Restaurant_Keywords] WHERE keyword" + i + " = '" + tag + "'";
+                    command = new SqlCommand(checkquery, connection);
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        dbid = (int)reader["restaurant_id"];
+                        ids.Add(dbid);
+                    }
+                    reader.Close();
+
+                }
+            }
+            connection.Close();
+            List<int> used = new List<int>();
+
+            foreach(var id in ids)
+            {
+                if (!used.Contains(id))
+                {
+                    restaurants.Add(GetRestaurantListViewModelByID(id));
+                    used.Add(id);
+                }
+            }
+
+            return restaurants;
+
         }
 
         public List<RestaurantListViewModel> GetRestaurantsByRatings()
@@ -363,7 +474,45 @@ namespace SeatedNow.Repositories
             return tablelist;
         }
 
-        public Restaurant GetrestaurantByPhone(string phone)
+        public RestaurantListViewModel GetRestaurantListViewModelByID(int id)
+        {
+            int dbrestaurantid = -1, dbownerid = -1;
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "", dbeventkey = "", dbdescription = "";
+            bool dbverified = false;
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id, event_key, description FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+                dbphone = reader["phone"].ToString();
+                dbverified = reader.GetBoolean(reader.GetOrdinal("verified"));
+                dbownerid = (int)reader["owner_id"];
+                dbeventkey = reader["event_key"].ToString();
+                dbdescription = reader["description"].ToString();
+                
+            }
+            connection.Close();
+
+            RestaurantStats stats = _statsRepository.GetStatsByRestaurantId(dbrestaurantid);
+            List<string> tags = _statsRepository.GetTagsByRestaurantID(dbrestaurantid);
+            
+
+            return new RestaurantListViewModel(dbrestaurantid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, stats, tags);
+        }
+
+            public Restaurant GetrestaurantByPhone(string phone)
         {
             throw new NotImplementedException();
         }

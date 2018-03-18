@@ -63,8 +63,10 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            List<RestaurantListViewModel> other = _restaurantRepository.GetRestaurants();
+            DashStats content = new DashStats(restaurant, other);
 
-            return PartialView(restaurant);
+            return PartialView(content);
         }
 
         public IActionResult DashProfile(int Id)
@@ -146,6 +148,18 @@ namespace SeatedNow.Controllers
 
             return Redirect(Request.Headers["Referer"].ToString());
 
+        }
+
+        public IActionResult SearchRestaurants(string searchquery)
+        {
+            SearchContent content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(searchquery)));
+            return View(content);
+        }
+
+        public IActionResult Test()
+        {
+            return View(_restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Name)));
+            //return View(_restaurantRepository.GetRestaurantListViewModelByID(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id));
         }
 
     }

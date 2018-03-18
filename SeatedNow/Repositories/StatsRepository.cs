@@ -62,6 +62,26 @@ namespace SeatedNow.Repositories
             return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating, dbtotalratings);
         }
 
+        public List<string> GetTagsByRestaurantName(string name)
+        {
+            int dbrestaurantid = -1;
+            string checkquery = "SELECT id FROM [dbo].[Restaurants] WHERE name = '" + name + "'";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbrestaurantid = (int)reader["id"];
+            }
+
+            connection.Close();
+
+            return GetTagsByRestaurantID(dbrestaurantid);
+        }
+
         public List<string> GetTagsByRestaurantID(int id)
         {
             List<string> tags = new List<string>();
