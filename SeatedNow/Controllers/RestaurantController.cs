@@ -152,7 +152,20 @@ namespace SeatedNow.Controllers
 
         public IActionResult SearchRestaurants(string searchquery)
         {
-            SearchContent content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(searchquery)));
+            SearchContent content;
+
+            if (searchquery[0].Equals('#'))
+            {
+                List<string> tags = new List<string>();
+                tags.Add(searchquery.Substring(1));
+                content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(tags));
+
+            }
+            else
+            {
+                content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(searchquery)));
+            }
+
             return View(content);
         }
 

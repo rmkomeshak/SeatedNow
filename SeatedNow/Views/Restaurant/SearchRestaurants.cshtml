@@ -3,6 +3,11 @@
 @{ 
     var results = Model.Results;
     var query = Model.Query;
+
+    if (query[0].Equals('#'))
+    {
+        query = query.Substring(1);
+    }
 }
 
 @{
