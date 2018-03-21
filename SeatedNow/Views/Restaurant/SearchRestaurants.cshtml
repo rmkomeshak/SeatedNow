@@ -49,14 +49,14 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                             <div class="logo">
-                                <a href="/">
-                                    <img src="~/images/restaurants/@result.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                <a href="~/Restaurant/Listing/@result.ID">
+                                    <img src="~/images/restaurants/@result.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'"/>
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="/">@result.Name</a></h3>
-                            <span class="restaurant-location"><a href="/">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
+                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
+                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
                             <div class="keywords">
                                 @foreach (var tag in result.Tags)
                                 {
