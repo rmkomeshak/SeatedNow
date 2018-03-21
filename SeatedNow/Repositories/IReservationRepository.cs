@@ -10,6 +10,7 @@ namespace SeatedNow.Repositories
     {
         List<DiningReservation> GetReservationsByCustomerID(int CustomerId, int results);
         void CreateReservation(DiningReservation reservation);
+        void DeleteReservation(int reservation_id);
 
     }
 }

@@ -75,6 +75,19 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public void DeleteReservation(int reservation_id)
+        {
+            connection.Open();
+            string sendquery = "DELETE FROM [dbo].[Reservations] WHERE reservation_id = " + reservation_id + ";";
+
+            using (SqlCommand command = new SqlCommand(sendquery, connection))
+            {
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
+
 
     }
 }

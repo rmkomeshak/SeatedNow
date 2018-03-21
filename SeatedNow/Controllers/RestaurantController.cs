@@ -110,10 +110,15 @@ namespace SeatedNow.Controllers
             return Redirect("~/Restaurant/List");
         }
 
-        public IActionResult List(string SortBy)
+        public IActionResult List(string SortBy="", int resid=0)
         {
             int userId = _userSessionManager.getID();
             ListPage contents;
+
+            if(resid > 0)
+            {
+                _reservationRepository.DeleteReservation(resid);
+            }
 
             switch (SortBy)
             {
@@ -169,11 +174,6 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public IActionResult Test()
-        {
-            return View(_restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Name)));
-            //return View(_restaurantRepository.GetRestaurantListViewModelByID(_restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id));
-        }
 
     }
 }
