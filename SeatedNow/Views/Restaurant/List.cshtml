@@ -81,7 +81,10 @@
                                 {
                                     foreach (var tag in restaurant.Tags)
                                     {
-                                        <button type="button" class="btn btn-light btn-sm">@tag</button>
+                                        <div class="btn-group mr-2" role="group">
+                                            <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                        </div>
+                                        
                                     }
                                 }
                             </div>
@@ -179,7 +182,7 @@
                                                 <p class="small-info">For @recent[i].Guests people in the @recent[i].Section section</p>
                                                 <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
                                                 <div class="btn-group mr-2" role="group">
-                                                    <a asp-action="List" asp-route-resid="@recent[i].ReservationID" style="color:red;margin-left:5px;"><b>X</b></a>
+                                                    <a asp-action="List" asp-route-resid="@recent[i].ReservationID" style="color:red; margin-left:5px;"><b>X</b></a>
                                                 </div>
                                             </div>
                                         </div>

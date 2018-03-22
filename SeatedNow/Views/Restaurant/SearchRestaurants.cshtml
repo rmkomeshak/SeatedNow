@@ -84,7 +84,7 @@
                                     <a><b>No Reviews</b></a>
                                 }
                             </div>
-                            <button class="btn btn-sn btn-reserve" type="submit">Reserve Now</button>
+                            <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                         </div>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                             </div>
                         </div>
                         <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="/">@result.Name</a></h3>
-                            <span class="restaurant-location"><a href="/">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
+                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
+                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
                             <div class="keywords">
                                 @foreach (var tag in result.Tags)
                                 {
@@ -137,7 +137,7 @@
                                     <a><b>No Reviews</b></a>
                                 }
                             </div>
-                            <button class="btn btn-sn btn-reserve" type="submit">Reserve Now</button>
+                            <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                         </div>
                     </div>
                 </div>
