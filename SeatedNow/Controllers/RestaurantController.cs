@@ -95,6 +95,9 @@ namespace SeatedNow.Controllers
 
         public IActionResult Listing(int Id)
         {
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
+                return Redirect("~/");
+
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
@@ -112,6 +115,9 @@ namespace SeatedNow.Controllers
 
         public IActionResult List(string SortBy="", int resid=0)
         {
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
+                return Redirect("~/");
+           
             int userId = _userSessionManager.getID();
             ListPage contents;
 
