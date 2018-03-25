@@ -75,7 +75,7 @@ namespace SeatedNow.Repositories
                     + "', phone = '" + restaurant.PhoneNumber + "', image = '" + restaurant.ImagePath
                     + "', verified = '" + restaurant.IsVerified + "', owner_id = '" + restaurant.OwnerId
                     + "', event_key = '" + restaurant.EventKey + "', description = '" + restaurant.Description  
-                    + "' WHERE id = " + restaurant.Id;
+                    + "', color = '" + restaurant.Color + "' WHERE id = " + restaurant.Id;
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {

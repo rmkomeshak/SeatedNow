@@ -106,7 +106,7 @@
                     <!--END OF GOOGLE MAPS STUFF-->
                     @if (Model.Stats.TotalRatings > 0)
     {
-                <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Model.Stats.Rating stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
+                <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Math.Round(Model.Stats.Rating, 1) stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
 }
 else
 {
