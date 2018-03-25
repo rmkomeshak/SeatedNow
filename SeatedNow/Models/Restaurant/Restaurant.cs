@@ -88,6 +88,22 @@ namespace SeatedNow.Models
             Tags = tags;
         }
 
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string color, string keyword1, string keyword2, string keyword3)
+        {
+            Id = id;
+            Name = name;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phoneNumber;
+            Color = color;
+            Keyword1 = keyword1;
+            Keyword2 = keyword2;
+            Keyword3 = keyword3;
+
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -117,12 +133,18 @@ namespace SeatedNow.Models
         public RestaurantStats Stats { get; set; }
 
         public IEnumerable<RestaurantTableList> Tables { get; set; }
-
+         
         public List<string> Tags { get; set; }
 
         public RestaurantHours Hours { get; set; }
 
         public List<RestaurantRatings> Ratings { get; set; }
+
+        public string Keyword1 { get; set; }
+
+        public string Keyword2 { get; set; }
+
+        public string Keyword3 { get; set; }
 
     }
 }

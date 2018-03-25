@@ -49,6 +49,16 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public void getRestaurantTags()
+        {
+            using (connection)
+            {
+                connection.Open();
+
+            }
+
+        }
+
         public void DeleteRestaurant(int id)
         {
             using (connection)
@@ -381,9 +391,9 @@ namespace SeatedNow.Repositories
         public Restaurant GetRestaurantByID(int id)
         {
             int dbrestaurantid = -1, dbownerid = -1;
-            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "", dbeventkey = "", dbdescription = "", dbcolor = "";
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "", dbphone = "", dbeventkey = "", dbdescription = "";
             bool dbverified = false;
-            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id, event_key, description, color FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
+            string checkquery = "SELECT id, name, address, city, zipcode, state, phone, image, verified, owner_id, event_key, description FROM [dbo].[Restaurants] WHERE id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -404,12 +414,11 @@ namespace SeatedNow.Repositories
                 dbownerid = (int)reader["owner_id"];
                 dbeventkey = reader["event_key"].ToString();
                 dbdescription = reader["description"].ToString();
-                dbcolor = reader["color"].ToString();
             }
 
             connection.Close();
 
-            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid, dbeventkey, dbdescription, dbcolor);
+            return new Restaurant(dbrestaurantid, dbname, dbaddress, dbcity, dbzipcode, dbstate, dbphone, dbimage, dbverified, dbownerid, dbeventkey, dbdescription);
         }
 
         public Restaurant GetRestaurantByOwnerID(int id)
