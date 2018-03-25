@@ -542,3 +542,36 @@ h1.title {
     font-style: italic;
     font-size: 14px;
 }
+
+select.embedded-input {
+    background: transparent;
+    height: auto !important;
+    padding: 0;
+}
+
+.multi-form .form-control:focus {
+    box-shadow: none;
+}
+
+.input-group-text {
+    background: #eee;
+}
+
+.multi-form .input-group-text {
+    border: none;
+}
+
+select.form-control.embedded-input:focus {
+    box-shadow: none;
+    background-color: inherit;
+    color: inherit;
+}
+
+.multi-form input.form-control:disabled, .form-control.embedded-input:disabled {
+    background: #eee;
+    color: #bbb;
+}
+
+.multi-form input.form-control:disabled::-webkit-input-placeholder {
+    color: #bbb;
+}
