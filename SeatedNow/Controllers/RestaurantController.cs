@@ -174,10 +174,10 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified)
+        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, List<String> Tags)
         {
 
-            _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, State, ZipCode, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color));
+            _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, State, ZipCode, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Tags));
             return Redirect("~/Restaurant/Dashboard");
         }
 
