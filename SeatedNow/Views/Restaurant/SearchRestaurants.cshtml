@@ -60,7 +60,9 @@
                             <div class="keywords">
                                 @foreach (var tag in result.Tags)
                                 {
-                                    <button type="button" class="btn btn-light btn-sm">@tag</button>
+                                    <div class="btn-group mr-2" role="group">
+                                        <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -113,7 +115,9 @@
                             <div class="keywords">
                                 @foreach (var tag in result.Tags)
                                 {
-                                    <button type="button" class="btn btn-light btn-sm">@tag</button>
+                                    <div class="btn-group mr-2" role="group">
+                                        <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                    </div>
                                 }
                             </div>
                         </div>

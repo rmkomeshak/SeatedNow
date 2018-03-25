@@ -5,14 +5,112 @@
     ViewData["Title"] = "FloorPlan";
 }
 
-<h2>@restaurant.Name FloorPlan</h2>
+<h2 class="display-4" style="font-size: 40px;">@restaurant.Name Floor Plan</h2>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
-    <div id="chart"
-         width: 25%;></div>
+    <div class="row" style="margin-top: 50px; max-width: 1000px;">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <div class="floor-plan-image" style="background: #fff; padding: 5px; border-radius: 5px;  margin-bottom: 30px;">
+                        <img src="http://4.bp.blogspot.com/-3FSnC6TQ5iM/T9XAuQUhHOI/AAAAAAAABGA/doakEq5PsXM/s1600/restaurant+layout.jpg" style="max-width: 100%;" />
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="control-label">Floor Plan Image</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="restaurantFloorPlan">
+                                <label class="custom-file-label" for="restaurantFloorPlan">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">Upload</span>
+                            </div>
+                        </div>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="col-12">
+                <label class="control-label">Section 1</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="control-label">Section 2</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="control-label">Section 3</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="control-label">Section 4</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="control-label">Section 5</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="control-label">Section 6</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                </div>
+            </div>
+            <div class="form-group col-12" style="margin-top: 30px;">
+                <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+    <!--
+
+    <div id="chart"></div>
 
     <script type="text/javascript" src="https://cdn.seats.io/chart.js"></script>
     <script>
@@ -22,4 +120,7 @@
             event: "@restaurant.EventKey"
         }).render();
     </script>
+
+    -->
+
 </body>

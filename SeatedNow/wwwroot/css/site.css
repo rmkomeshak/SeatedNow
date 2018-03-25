@@ -65,6 +65,10 @@ footer .row span {
     color: #888;
 }
 
+form[type="submit"] {
+    -webkit-appearance: none !important;
+}
+
 /*-- Header Image and Image Background --*/
 
 .sn-image {
@@ -518,4 +522,23 @@ h1.title {
 #restaurant-hours b {
     width: 100px;
     display: inline-block;
+}
+
+.listing-review {
+    padding-top: 15px;
+    margin-bottom: 15px;
+    border-top: 1px #eee solid;
+    min-height: 38px;
+}
+
+.listing-review .listing-rating {
+    color: #ffc107;
+    font-size: 12px;
+    margin-right: 10px;
+    float: left;
+}
+
+.listing-comment {
+    font-style: italic;
+    font-size: 14px;
 }

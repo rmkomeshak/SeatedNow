@@ -1,6 +1,6 @@
 ﻿// Write your JavaScript code.
 $(function () {
-    $('#commentBox').hide();
+    // $('#commentBox').hide();
 
     $('#showCommentBox').click(function () {
         $('#commentBox').show();
