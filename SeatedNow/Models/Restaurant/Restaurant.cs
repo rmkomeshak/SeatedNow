@@ -23,6 +23,23 @@ namespace SeatedNow.Models
             Description = description;
         }
 
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color)
+        {
+            Id = id;
+            Name = name;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phoneNumber;
+            ImagePath = imagePath;
+            IsVerified = isVerified;
+            OwnerId = ownerId;
+            EventKey = eventKey;
+            Description = description;
+            Color = color;
+        }
+
         public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
         {
             Name = name;
@@ -94,6 +111,8 @@ namespace SeatedNow.Models
         public string EventKey { get; set; }
 
         public string Description { get; set; }
+        
+        public string Color { get; set; }
 
         public RestaurantStats Stats { get; set; }
 
