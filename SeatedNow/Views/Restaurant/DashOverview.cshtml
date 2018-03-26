@@ -3,15 +3,65 @@
     var restaurant = Model;
 }
 
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <h2 class="display-4" style="font-size: 40px;">@restaurant.Name Seat Management</h2>
+    <div class="row" style="margin-top: 30px; max-width: 1000px;">
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                <b>Current wait time:</b> @restaurant.Stats.WaitTime  minutes
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px; max-width: 1000px;">
+        <div class="col-lg-6">
+            <div class="available-tables" style="background: #111; padding: 20px; border-radius: 5px;">
+                <h3 class="display-4" style="font-size: 30px;">Available Seats</h3>
+                <hr />
+                <div class="restaurant-section">
+                    <h5 style="font-weight: 700;">Table</h5>
+                    <button type="button" class="btn btn-success">Table 1</button>
+                    <button type="button" class="btn btn-success">Table 2</button>
+                    <button type="button" class="btn btn-success">Table 3</button>
+                    <button type="button" class="btn btn-success">Table 4</button>
+                </div>
+                <div class="restaurant-section">
+                    <h5 style="font-weight: 700;">Booth</h5>
+                    <button type="button" class="btn btn-success">Booth 1</button>
+                    <button type="button" class="btn btn-success">Booth 2</button>
+                    <button type="button" class="btn btn-success">Booth 3</button>
+                    <button type="button" class="btn btn-success">Booth 4</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="unavailable-tables" style="background: #111; padding: 20px; border-radius: 5px;">
+                <h3 class="display-4" style="font-size: 30px; margin-bottom: 15px;">Seats in Use</h3>
+                <div class="restaurant-section">
+                    <h5 style="font-weight: 700;">Table</h5>
+                    <button type="button" class="btn btn-danger">Table 5</button>
+                    <button type="button" class="btn btn-danger">Table 6</button>
+                    <button type="button" class="btn btn-danger">Table 7</button>
+                    <button type="button" class="btn btn-danger">Table 8</button>
+                </div>
+                <div class="restaurant-section">
+                    <h5 style="font-weight: 700;">Booth</h5>
+                    <button type="button" class="btn btn-danger">Booth 5</button>
+                    <button type="button" class="btn btn-danger">Booth 6</button>
+                    <button type="button" class="btn btn-danger">Booth 7</button>
+                    <button type="button" class="btn btn-danger">Booth 8</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 <div>
-    <img src="~/images/restaurants/@restaurant.ImagePath" style="max-width: 300px; max-height: 300px; margin-bottom: 30px;" />
-    <p>Name: @restaurant.Name</p>
-    <p>Address: @restaurant.Address</p>
-    <p>Zip Code: @restaurant.ZipCode</p>
-    <p>Reservations: @restaurant.Stats.Reservations</p>
-    <p>Wait Time: @restaurant.Stats.WaitTime  minutes</p>
-    <p>Current Customers: @restaurant.Stats.Customers</p>
-    <p>Color: @restaurant.Color</p>
 
     @{
         List<SelectListItem> list = new List<SelectListItem>();
@@ -29,10 +79,6 @@
             });
         }
     }
-
-    <div id="dropdown" hidden>
-        @Html.DropDownListFor(model => model.Id, list, "Reserve a table", new { onchange = "reserveTable(this.value)" })
-    </div>
 
 </div>
 

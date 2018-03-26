@@ -3,9 +3,8 @@
 <h2 class="display-4" style="font-size: 40px;">Restaurant Settings</h2>
 
 <form asp-action="UpdateAction" style="margin-top: 50px;">
-    <div class="row" style="max-width: 1000px;">
-        <div class="col-xl-5">
-            <h3 class="display-4" style="font-size: 30px; margin-bottom: 15px;">Information</h3>
+    <div class="row" style="max-width: 700px;">
+        <div class="col-12">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-row">
                 <div class="form-group col-12" hidden>
@@ -13,27 +12,27 @@
                     <input asp-for="Id" class="form-control white-bg" />
                     <span asp-validation-for="Id" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control white-bg" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label asp-for="Address" class="control-label"></label>
                     <input asp-for="Address" class="form-control white-bg" />
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label asp-for="City" class="control-label"></label>
                     <input asp-for="City" class="form-control white-bg" />
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-6" hidden>
                     <label asp-for="ZipCode" class="control-label"></label>
                     <input asp-for="ZipCode" class="form-control white-bg" />
                     <span asp-validation-for="ZipCode" class="text-danger"></span>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-6" hidden>
                     <label asp-for="State" class="control-label"></label>
                     <select asp-for="State" class="form-control white-bg">
                         <option value="AL">AL</option>
@@ -90,32 +89,42 @@
                     </select>
                     <span asp-validation-for="State" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label asp-for="PhoneNumber" class="control-label"></label>
                     <input asp-for="PhoneNumber" class="form-control white-bg" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label class="control-label">Website URL</label>
                     <input class="form-control white-bg" />
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label>Featured Color</label>
+                    <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="@Model.Color" class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-4" hidden>
                     <label class="control-label">Keyword 1</label>
                     <input class="form-control white-bg" />
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-4" hidden>
                     <label class="control-label">Keyword 2</label>
                     <input class="form-control white-bg" />
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-4" hidden>
                     <label class="control-label">Keyword 3</label>
                     <input class="form-control white-bg" />
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label class="control-label">Price Per Person</label>
                     <select class="form-control white-bg">
                         <option>Unspecified</option>
@@ -132,12 +141,12 @@
                     </select>
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label asp-for="ImagePath" class="control-label"></label>
                     <input asp-for="ImagePath" class="form-control white-bg" />
                     <span asp-validation-for="ImagePath" class="text-danger"></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-12" hidden>
                     <label class="control-label">Menu File</label>
                     <div class="input-group">
                         <div class="custom-file">
@@ -146,16 +155,6 @@
                         </div>
                     </div>
                     <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-12">
-                    <label>Featured Color</label>
-                    <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="@Model.Color" class="form-control white-bg" />    
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-12">
-                    <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group col-12" hidden>
                     <label asp-for="OwnerId" class="control-label"></label>
@@ -175,11 +174,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-xl-5 offset-xl-1">
-            <h3 class="display-4" style="font-size: 30px; margin-bottom: 15px;">Store Hours</h3>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <!-- BEGIN MONDAY -->
 
@@ -219,7 +213,7 @@
                     <span asp-validation-for="Hours.MondayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.MondayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -290,7 +284,7 @@
                     <span asp-validation-for="Hours.TuesdayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.TuesdayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -361,7 +355,7 @@
                     <span asp-validation-for="Hours.WednsedayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.WednsedayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -432,7 +426,7 @@
                     <span asp-validation-for="Hours.ThursdayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.ThursdayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -503,7 +497,7 @@
                     <span asp-validation-for="Hours.FridayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.FridayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -574,7 +568,7 @@
                     <span asp-validation-for="Hours.SaturdayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.SaturdayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -645,7 +639,7 @@
                     <span asp-validation-for="Hours.SundayOpen" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-4 offset-1">
                     <label class="control-label">Closes</label>
                     <select asp-for="Hours.SundayClose" class="form-control white-bg">
                         <option value="2100">9:00 PM</option>
@@ -678,10 +672,10 @@
             </div>
 
             <!-- END SUNDAY -->
-            <div class="form-group col-11" style="padding-left: 0; padding-right: 0; margin-top: 15px;">
+            <div class="form-group col-12" style="padding-left: 0; padding-right: 0; margin-top: 15px;">
                 <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
             </div>
         </div>
-            </div>
-        </div>
+    </div>
+    </div>
 </form>

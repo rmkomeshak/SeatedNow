@@ -1,0 +1,681 @@
+﻿@model SeatedNow.Models.Restaurant
+
+<h2 class="display-4" style="font-size: 40px;">Contact Settings</h2>
+
+<form asp-action="UpdateAction" style="margin-top: 50px;">
+    <div class="row" style="max-width: 700px;">
+        <div class="col-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control white-bg" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control white-bg" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control white-bg" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control white-bg" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="ZipCode" class="control-label"></label>
+                    <input asp-for="ZipCode" class="form-control white-bg" />
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="State" class="control-label"></label>
+                    <select asp-for="State" class="form-control white-bg">
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AR">AR</option>
+                        <option value="AZ">AZ</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DC">DC</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="IA">IA</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="MA">MA</option>
+                        <option value="MD">MD</option>
+                        <option value="ME">ME</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MO">MO</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="NC">NC</option>
+                        <option value="NE">NE</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NV">NV</option>
+                        <option value="NY">NY</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WI">WI</option>
+                        <option value="WV">WV</option>
+                        <option value="WY">WY</option>
+                    </select>
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control white-bg" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label class="control-label">Website URL</label>
+                    <input class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label>Featured Color</label>
+                    <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="@Model.Color" class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-4" hidden>
+                    <label class="control-label">Keyword 1</label>
+                    <input class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-4" hidden>
+                    <label class="control-label">Keyword 2</label>
+                    <input class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-4" hidden>
+                    <label class="control-label">Keyword 3</label>
+                    <input class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label class="control-label">Price Per Person</label>
+                    <select class="form-control white-bg">
+                        <option>Unspecified</option>
+                        <option>$10 and under</option>
+                        <option>$20 and under</option>
+                        <option>$30 and under</option>
+                        <option>$40 and under</option>
+                        <option>$50 and under</option>
+                        <option>$60 and under</option>
+                        <option>$70 and under</option>
+                        <option>$80 and under</option>
+                        <option>$90 and under</option>
+                        <option>$100 and under</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control white-bg" />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label class="control-label">Menu File</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                        </div>
+                    </div>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="OwnerId" class="control-label"></label>
+                    <input asp-for="OwnerId" class="form-control white-bg" />
+                    <span asp-validation-for="OwnerId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="EventKey" class="control-label"></label>
+                    <input asp-for="EventKey" class="form-control white-bg" />
+                    <span asp-validation-for="EventKey" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="IsVerified" /> @Html.DisplayNameFor(model => model.IsVerified)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEGIN MONDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Monday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.MondayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.MondayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.MondayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.MondayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END MONDAY -->
+            <!-- BEGIN TUESDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Tuesday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.TuesdayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.TuesdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.TuesdayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.TuesdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END TUESDAY -->
+            <!-- BEGIN WEDNESDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Wednesday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.WednsedayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.WednsedayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.WednsedayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.WednsedayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END WEDNESDAY -->
+            <!-- BEGIN THURSDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Thursday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.ThursdayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.ThursdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.ThursdayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.ThursdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END THURSDAY -->
+            <!-- BEGIN FRIDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Friday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.FridayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.FridayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.FridayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.FridayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END FRIDAY -->
+            <!-- BEGIN SATURDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Saturday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.SaturdayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.SaturdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.SaturdayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.SaturdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END SATURDAY -->
+            <!-- BEGIN SUNDAY -->
+
+            <div class="form-row" hidden>
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Sunday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.SundayOpen" class="form-control white-bg">
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                    </select>
+                    <span asp-validation-for="Hours.SundayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.SundayClose" class="form-control white-bg">
+                        <option value="2100">9:00 PM</option>
+                        <option value="2200">10:00 PM</option>
+                        <option value="2300">11:00 PM</option>
+                        <option value="0000">12:00 AM</option>
+                        <option value="0100">1:00 AM</option>
+                        <option value="0200">2:00 AM</option>
+                        <option value="0300">3:00 AM</option>
+                        <option value="0400">4:00 AM</option>
+                        <option value="0500">5:00 AM</option>
+                        <option value="0600">6:00 AM</option>
+                        <option value="0700">7:00 AM</option>
+                        <option value="0800">8:00 AM</option>
+                        <option value="0900">9:00 AM</option>
+                        <option value="1000">10:00 AM</option>
+                        <option value="1100">11:00 AM</option>
+                        <option value="1200">12:00 PM</option>
+                        <option value="1300">1:00 PM</option>
+                        <option value="1400">2:00 PM</option>
+                        <option value="1500">3:00 PM</option>
+                        <option value="1600">4:00 PM</option>
+                        <option value="1700">5:00 PM</option>
+                        <option value="1800">6:00 PM</option>
+                        <option value="1900">7:00 PM</option>
+                        <option value="2000">8:00 PM</option>
+                    </select>
+                    <span asp-validation-for="Hours.SundayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END SUNDAY -->
+            <div class="form-group col-12" style="padding-left: 0; padding-right: 0; margin-top: 15px;">
+                <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

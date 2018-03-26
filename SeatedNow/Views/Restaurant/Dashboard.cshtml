@@ -13,17 +13,23 @@
     <div class="content">
         <div class="row">
             <div class="sidebar">
-                <div class="sidebar-title">
-                    <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
-                </div>
+                <a href="/restaurant/listing/@restaurant.Id" target="_blank" style="color: #fff;">
+                    <div class="sidebar-title">
+                        <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
+                    </div>
+                </a>
                 <div class="sidebar-links">
-                    <a class="active-link" onclick="loadPage(@restaurant.Id, 'DashOverview');"><i class="fas fa-list-alt"></i> Manage Tables</a>
+                    <a class="active-link" onclick="loadPage(@restaurant.Id, 'DashOverview');"><i class="fas fa-list-alt"></i> Manage Seats</a>
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashStatistics');"><i class="fas fa-chart-bar"></i> Information</a>
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashFloorplan');"><i class="fas fa-desktop"></i> Floor Plan</a>
-                    <!--
-                        <a class="" onclick="loadPage(@restaurant.Id, 'DashProfile');"><i class="fas fa-user-circle"></i> Profile</a>
-                    -->
-                    <a class="" onclick="loadPage(@restaurant.Id, 'DashSettings');"><i class="fas fa-cog"></i> Settings</a>
+
+                    <a data-toggle="collapse" href="#settings-collapse"><i class="fas fa-cog"></i> Settings</a>
+                    <div class="collapse" id="settings-collapse">
+                        <a class="" onclick="loadPage(@restaurant.Id, 'DashContactSettings');"><i class="fas fa-angle-right"></i> Contact Settings</a>
+                        <a class="" onclick="loadPage(@restaurant.Id, 'DashProfileSettings');"><i class="fas fa-angle-right"></i> Profile Settings</a>
+                        <a class="" onclick="loadPage(@restaurant.Id, 'DashHoursSettings');"><i class="fas fa-angle-right"></i> Store Hours</a>
+                    </div>
+
                     <a href="~/Restaurant/List"><i class="fas fa-arrow-left"></i>Return to Home</a>
                 </div>
             </div>
@@ -97,10 +103,28 @@
         background-color: #1a1a1a;
     }
 
+    .sidebar-links #settings-collapse a {
+        background: #0a0a0a;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .sidebar-links #settings-collapse a:hover {
+        background-color: #1a1a1a;
+    }
+
     .sidebar-links a i {
         width: 24px;
         margin-right: 10px;
         font-size: 16px;
+        text-align: center;
+    }
+
+    .sidebar-links #settings-collapse a i {
+        width: 14px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 14px;
         text-align: center;
     }
 

@@ -77,7 +77,23 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashSettings(int Id)
+        public IActionResult DashContactSettings(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashProfileSettings(int Id)
+        {
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+
+            return PartialView(restaurant);
+        }
+
+        public IActionResult DashHoursSettings(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
