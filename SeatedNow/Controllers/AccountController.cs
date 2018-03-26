@@ -34,6 +34,9 @@ namespace SeatedNow.Controllers
 
         public IActionResult Profile()
         {
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
+                return Redirect("~/");
+
             return View(_userRepository.GetUserByEmail(HttpContext.Session.GetString("_email")));
         }
 
