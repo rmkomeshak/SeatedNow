@@ -199,7 +199,7 @@ namespace SeatedNow.Controllers
         public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified)
         {
 
-            _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, State, ZipCode, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color));
+            _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color));
             return Redirect("~/Restaurant/Dashboard");
         }
 
