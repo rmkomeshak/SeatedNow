@@ -82,7 +82,7 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashContactSettings(int Id)
+        public IActionResult DashSettingsContact(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
@@ -90,7 +90,7 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashProfileSettings(int Id)
+        public IActionResult DashSettingsProfile(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
@@ -98,10 +98,11 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashHoursSettings(int Id)
+        public IActionResult DashSettingsHours(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Hours = _statsRepository.GetHoursByRestaurantId(Id);
 
             return PartialView(restaurant);
         }
@@ -123,6 +124,7 @@ namespace SeatedNow.Controllers
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
             restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
+            restaurant.Hours = _statsRepository.GetHoursByRestaurantId(Id);
             return View(restaurant);
 
         }
@@ -181,6 +183,13 @@ namespace SeatedNow.Controllers
 
             return Redirect(Request.Headers["Referer"].ToString());
 
+        }
+
+        public IActionResult UpdateHours(int MondayOpen, int MondayClose, int TuesdayOpen, int TuesdayClose, int WednsedayOpen, int WednsedayClose, int ThursdayOpen, int ThursdayClose, int FridayOpen, int FridayClose, int SaturdayOpen, int SaturdayClose, int SundayOpen, int SundayClose, int RestaurantId)
+        {
+            RestaurantHours Hours = new RestaurantHours(MondayOpen, MondayClose, TuesdayOpen, TuesdayClose, WednsedayOpen, WednsedayClose, ThursdayOpen, ThursdayClose, FridayOpen, FridayClose, SaturdayOpen, SaturdayClose, SundayOpen, SundayClose);
+            _statsRepository.SetHoursByRestaurantId(RestaurantId, Hours);
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         public IActionResult SearchRestaurants(string searchquery)

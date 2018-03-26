@@ -4,33 +4,81 @@ namespace SeatedNow.Models
 {
     public class RestaurantHours
     {
-        public TimeSpan MondayOpen { get; set; }
 
-        public TimeSpan MondayClose { get; set; }
+        public RestaurantHours()
+        {
 
-        public DateTime TuesdayOpen { get; set; }
+        }
 
-        public DateTime TuesdayClose { get; set; }
+        public RestaurantHours(int mondayOpen, int mondayClose, int tuesdayOpen, int tuesdayClose, int wednsedayOpen, int wednsedayClose, int thursdayOpen, int thursdayClose, int fridayOpen, int fridayClose, int saturdayOpen, int saturdayClose, int sundayOpen, int sundayClose)
+        {
+            MondayOpen = mondayOpen;
+            MondayClose = mondayClose;
+            TuesdayOpen = tuesdayOpen;
+            TuesdayClose = tuesdayClose;
+            WednsedayOpen = wednsedayOpen;
+            WednsedayClose = wednsedayClose;
+            ThursdayOpen = thursdayOpen;
+            ThursdayClose = thursdayClose;
+            FridayOpen = fridayOpen;
+            FridayClose = fridayClose;
+            SaturdayOpen = saturdayOpen;
+            SaturdayClose = saturdayClose;
+            SundayOpen = sundayOpen;
+            SundayClose = sundayClose;
+        }
 
-        public DateTime WednsedayOpen { get; set; }
+        public int MondayOpen { get; set; }
 
-        public DateTime WednsedayClose { get; set; }
+        public int MondayClose { get; set; }
 
-        public DateTime ThursdayOpen { get; set; }
+        public int TuesdayOpen { get; set; }
 
-        public DateTime ThursdayClose { get; set; }
+        public int TuesdayClose { get; set; }
 
-        public DateTime FridayOpen { get; set; }
+        public int WednsedayOpen { get; set; }
 
-        public DateTime FridayClose { get; set; }
+        public int WednsedayClose { get; set; }
 
-        public DateTime SaturdayOpen { get; set; }
+        public int ThursdayOpen { get; set; }
 
-        public DateTime SaturdayClose { get; set; }
+        public int ThursdayClose { get; set; }
 
-        public DateTime SundayOpen { get; set; }
+        public int FridayOpen { get; set; }
 
-        public DateTime SundayClose { get; set; }
+        public int FridayClose { get; set; }
+
+        public int SaturdayOpen { get; set; }
+
+        public int SaturdayClose { get; set; }
+
+        public int SundayOpen { get; set; }
+
+        public int SundayClose { get; set; }
+
+        public string ToAMPM(int Hours)
+        {
+            if (Hours == 25)
+            {
+                return ("Closed");
+            }
+            else if (Hours == 0)
+            {
+                return ("Midnight");
+            }
+            else if (Hours == 12)
+            {
+                return ("Noon");
+            }
+            else if(Hours > 12)
+            {
+                return (Hours - 12 + " pm");
+            }
+            else
+            {
+                return (Hours + " am");
+            } 
+        }
 
     }
 }

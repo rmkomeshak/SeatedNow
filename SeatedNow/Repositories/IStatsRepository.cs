@@ -12,6 +12,7 @@ namespace SeatedNow.Repositories
         RestaurantStats GetStatsByRestaurantId(int id);
         List<string> GetTagsByRestaurantID(int id);
         RestaurantHours GetHoursByRestaurantId(int Id);
+        bool SetHoursByRestaurantId(int Id, RestaurantHours Hours);
         List<RestaurantRatings> GetRatingsByRestaurantId(int Id);
         List<string> GetTagsByRestaurantName(string Name);
     }

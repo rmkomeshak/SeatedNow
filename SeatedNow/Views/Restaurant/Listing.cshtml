@@ -47,13 +47,55 @@
                         <p><i class="fas fa-credit-card"></i><span id="restaurant-prices">$30 and under per person</span></p>
                         <p>
                             <i class="fas fa-clock"></i><span id="restaurant-hours">
-                                <b>Sunday:</b> 10am - 9pm <br />
-                                <b>Monday:</b> 9am - 9pm <br />
-                                <b>Tuesday:</b> 9am - 9pm <br />
-                                <b>Wednesday:</b> 9am - 9pm <br />
-                                <b>Thursday:</b> 9am - 9pm <br />
-                                <b>Friday:</b> 9am - 10pm <br />
-                                <b>Saturday:</b> 9am - 10pm <br />
+                                @if (Model.Hours.MondayOpen >= 0)
+                                {
+                                    <b>Monday:</b> @Model.Hours.ToAMPM(Model.Hours.MondayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.MondayClose) <br />
+                                } else
+                                {
+                                    <b>Monday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.TuesdayOpen >= 0)
+                                {
+                                    <b>Tuesday:</b> @Model.Hours.ToAMPM(Model.Hours.TuesdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.TuesdayClose) <br />
+                                } else
+                                {
+                                    <b>Tuesday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.WednsedayOpen >= 0)
+                                {
+                                    <b>Wednseday:</b> @Model.Hours.ToAMPM(Model.Hours.WednsedayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.WednsedayClose) <br />
+                                } else
+                                {
+                                    <b>Wednseday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.ThursdayOpen >= 0)
+                                {
+                                    <b>Thursday:</b> @Model.Hours.ToAMPM(Model.Hours.ThursdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.ThursdayClose) <br />
+                                } else
+                                {
+                                    <b>Thursday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.FridayOpen >= 0)
+                                {
+                                    <b>Friday:</b> @Model.Hours.ToAMPM(Model.Hours.FridayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.FridayClose) <br />
+                                } else
+                                {
+                                    <b>Friday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.SaturdayOpen >= 0)
+                                {
+                                    <b>Saturday:</b> @Model.Hours.ToAMPM(Model.Hours.SaturdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SaturdayClose) <br />
+                                } else
+                                {
+                                    <b>Saturday:</b> <span>TBA</span> <br />
+                                }
+                                @if (Model.Hours.SundayOpen >= 0)
+                                {
+                                    <b>Sunday:</b> @Model.Hours.ToAMPM(Model.Hours.SundayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SundayClose) <br />
+                                } else
+                                {
+                                    <b>Sunday:</b> <span>TBA</span> <br />
+                                }
                             </span>
                         </p>
                     </div>
@@ -145,31 +187,31 @@ else
                                 <label for="reservePartySize"><b>Give a Rating</b></label>
                                 <div class="form-group" style="font-size: 14px;">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="star1" value="1">
+                                        <input class="form-check-input" type="radio" name="rating" id="star1" value="1">
                                         <label class="form-check-label" for="star1">
                                             <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="star2" value="2">
+                                        <input class="form-check-input" type="radio" name="rating" id="star2" value="2">
                                         <label class="form-check-label" for="star2">
                                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="star3" value="3">
+                                        <input class="form-check-input" type="radio" name="rating" id="star3" value="3">
                                         <label class="form-check-label" for="star3">
                                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="star4" value="4">
+                                        <input class="form-check-input" type="radio" name="rating" id="star4" value="4">
                                         <label class="form-check-label" for="star4">
                                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="star1" value="5">
+                                        <input class="form-check-input" type="radio" name="rating" id="star1" value="5">
                                         <label class="form-check-label" for="star5">
                                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                         </label>
