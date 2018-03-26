@@ -33,6 +33,9 @@ namespace SeatedNow.Controllers
 
         public IActionResult Register()
         {
+            if (_userSessionManager == null || _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
+
             return View();
         }
 
