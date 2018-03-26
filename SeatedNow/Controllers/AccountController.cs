@@ -23,6 +23,10 @@ namespace SeatedNow.Controllers
 
         public IActionResult Login()
         {
+            if (_userSessionManager == null || _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
+
+
             ViewBag.Register = TempData["Register"];
             return View();
         }
