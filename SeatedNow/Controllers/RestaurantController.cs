@@ -124,6 +124,7 @@ namespace SeatedNow.Controllers
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
             restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
             return View(restaurant);
+
         }
 
         public IActionResult ReserveAction(int guests, string section, int restaurant_id)
