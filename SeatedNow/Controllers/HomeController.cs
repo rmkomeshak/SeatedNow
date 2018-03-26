@@ -5,13 +5,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Models;
+using SeatedNow.Managers;
 
 namespace SeatedNow.Controllers
 {
     public class HomeController : Controller
     {
+        UserSession _userSessionManager = new UserSession();
         public IActionResult Index()
         {
+            if (_userSessionManager == null || _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
+
             return View();
         }
 

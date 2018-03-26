@@ -17,6 +17,9 @@ namespace SeatedNow.Controllers
 
         public IActionResult Index()
         {
+            if (_userSessionManager == null || _userSessionManager.IsValid())
+                return Redirect("~/Restaurant/List");
+
             if (_userSessionManager.GetRole() != "Admin")
             {
                 return Redirect("~/");
