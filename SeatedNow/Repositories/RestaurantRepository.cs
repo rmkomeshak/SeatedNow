@@ -91,9 +91,12 @@ namespace SeatedNow.Repositories
                 {
                     command.ExecuteNonQuery();
                     connection.Close();
+                    UpdateTags(restaurant);
                     return true;
                 }
             }
+
+            
         }
 
         public bool UpdateTags(Restaurant restaurant)
@@ -122,7 +125,7 @@ namespace SeatedNow.Repositories
             {
                 connection.Open();
                 string sendquery = "UPDATE [dbo].[Restaurant_Keywords] SET keyword1 = '" + keyword1
-                    + "', keyword2 = '" + keyword2 + "', keyword3 = '" + keyword3 + "' WHERE id = " + restaurant.Id;
+                    + "', keyword2 = '" + keyword2 + "', keyword3 = '" + keyword3 + "' WHERE restaurant_id = " + restaurant.Id;
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {

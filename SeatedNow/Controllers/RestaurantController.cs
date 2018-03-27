@@ -217,7 +217,6 @@ namespace SeatedNow.Controllers
             Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3);
 
             _restaurantRepository.UpdateRestaurant(r);
-            _restaurantRepository.UpdateTags(r);
             return Redirect("~/Restaurant/Dashboard");
         }
 
