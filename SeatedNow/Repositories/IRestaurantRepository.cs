@@ -27,6 +27,6 @@ namespace SeatedNow.Repositories
         bool UpdateRestaurant(Restaurant restaurant);
         Boolean IsRestaurantRegistered(string email);
         Boolean InputRating(int restaurant_id, float rating, string review, DateTime time, int userId);
-        bool UpdateTags(List<string> tags, int id);
+        bool UpdateTags(Restaurant restaurant);
     }
 }

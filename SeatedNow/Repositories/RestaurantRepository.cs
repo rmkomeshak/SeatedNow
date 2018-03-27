@@ -96,26 +96,33 @@ namespace SeatedNow.Repositories
             }
         }
 
-        public bool UpdateTags(List<string> tags, int id)
+        public bool UpdateTags(Restaurant restaurant)
         {
             string keyword1 = "", keyword2 = "", keyword3 = "";
-            int i = 1;
+            string[] tags = restaurant.Tags.ToArray();
 
-            foreach (var tag in tags)
+            if (!string.IsNullOrEmpty(tags[0]))
             {
-                if(i == 1)
-                    keyword1 = tag;
-                if (i == 2)
-                    keyword2 = tag;
-                if (i == 3)
-                    keyword3 = tag;
-                i++;
+                keyword1 = tags[0];
             }
+
+            if (!string.IsNullOrEmpty(tags[1]))
+            {
+                keyword2 = tags[1];
+            }
+
+            if (!string.IsNullOrEmpty(tags[2]))
+            {
+                keyword3 = tags[2];
+            }
+
+
+
             using (connection)
             {
                 connection.Open();
                 string sendquery = "UPDATE [dbo].[Restaurant_Keywords] SET keyword1 = '" + keyword1
-                    + "', keyword2 = '" + keyword2 + "', keyword3 = '" + keyword3 + "' WHERE id = " + id;
+                    + "', keyword2 = '" + keyword2 + "', keyword3 = '" + keyword3 + "' WHERE id = " + restaurant.Id;
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {
