@@ -211,10 +211,15 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified)
+        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string keyword1, string keyword2, string keyword3)
         {
+            List<string> tags = new List<string>();
+            tags.Add(keyword1);
+            tags.Add(keyword2);
+            tags.Add(keyword3);
 
             _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color));
+            _restaurantRepository.UpdateTags(tags, Id);
             return Redirect("~/Restaurant/Dashboard");
         }
 

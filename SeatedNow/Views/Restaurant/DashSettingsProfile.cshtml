@@ -101,7 +101,7 @@
                 </div>
                 <div class="form-group col-12">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" style="min-height: 200px;" value="@Model.Description" class="form-control white-bg"></textarea>
+                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group col-12">
@@ -109,21 +109,13 @@
                     <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="@Model.Color" class="form-control white-bg" />
                     <span class="text-danger"></span>
                 </div>
-                <div class="form-group col-4">
-                    <label class="control-label">Keyword 1</label>
-                    <input class="form-control white-bg" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-4">
-                    <label class="control-label">Keyword 2</label>
-                    <input class="form-control white-bg" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-4">
-                    <label class="control-label">Keyword 3</label>
-                    <input class="form-control white-bg" />
-                    <span class="text-danger"></span>
-                </div>
+
+                <div class="form-group col-4">                     <label asp-for="keyword1" class="control-label">Keyword 1</label>                     <input asp-for="keyword1" class="form-control" autocomplete="off" />                     <span asp-validation-for="keyword1" class="text-danger"></span>                 </div>
+
+                <div class="form-group col-4">                     <label asp-for="keyword2" class="control-label">Keyword 2</label>                     <input asp-for="keyword2" class="form-control" autocomplete="off" />                     <span asp-validation-for="keyword2" class="text-danger"></span>                 </div>
+
+                <div class="form-group col-4">                     <label asp-for="keyword3" class="control-label">Keyword 3</label>                     <input asp-for="keyword3" class="form-control" autocomplete="off" />                     <span asp-validation-for="keyword3" class="text-danger"></span>                 </div>
+
                 <div class="form-group col-12">
                     <label class="control-label">Price Per Person</label>
                     <select class="form-control white-bg">
