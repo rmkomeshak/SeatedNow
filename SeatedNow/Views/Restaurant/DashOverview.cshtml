@@ -25,10 +25,10 @@
                 <hr style="border-color: #333; margin-left: -20px; margin-right: -20px;" />
                 <div class="restaurant-section">
                     <h5 style="font-weight: 700;">Table</h5>
-                    <button type="button" class="btn btn-success">Table 1</button>
-                    <button type="button" class="btn btn-success">Table 2</button>
-                    <button type="button" class="btn btn-success">Table 3</button>
-                    <button type="button" class="btn btn-success">Table 4</button>
+                    @foreach(var table in restaurant.Tables)
+                    {
+                        <button type="button" class="btn btn-success" style="margin-top:5px;">@table.TableName</button>
+                    }
                 </div>
                 <div class="restaurant-section">
                     <h5 style="font-weight: 700;">Booth</h5>
