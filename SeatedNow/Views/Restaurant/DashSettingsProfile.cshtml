@@ -101,7 +101,7 @@
                 </div>
                 <div class="form-group col-12">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
+                    <textarea asp-for="Description" style="min-height: 200px;" value="@Model.Description" class="form-control white-bg"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group col-12">
