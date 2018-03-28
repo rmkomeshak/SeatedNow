@@ -61,252 +61,254 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 multi-form">
+        <form asp-action="UpdateSections" style="width:800px;">
+            <div class="col-6 multi-form">
 
-            <!-- SECTION 1 -->
+                <!-- SECTION 1 -->
 
-            <div class="col-12">
-                <label class="control-label">Section 1</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section1Enabled">
+                <div class="col-12">
+                    <label class="control-label">Section 1</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section1Enabled">
+                            </div>
                         </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section1Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section1Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 2 -->
-
-            <div class="col-12">
-                <label class="control-label">Section 2</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section2Enabled">
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section2Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section2Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
+                        <input type="text" class="form-control" name="Section1Name" placeholder="Section Name" id="Section1Name" value="" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section1Seats" id="Section1Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- SECTION 3 -->
+                <!-- SECTION 2 -->
 
-            <div class="col-12">
-                <label class="control-label">Section 3</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section3Enabled">
+                <div class="col-12">
+                    <label class="control-label">Section 2</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section2Enabled">
+                            </div>
                         </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section3Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section3Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 4 -->
-
-            <div class="col-12">
-                <label class="control-label">Section 4</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section4Enabled">
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section4Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section4Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
+                        <input type="text" class="form-control" placeholder="Section Name" name="Section2Name" id="Section2Name" value="" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section2Seats" id="Section2Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- SECTION 5 -->
+                <!-- SECTION 3 -->
 
-            <div class="col-12">
-                <label class="control-label">Section 5</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section5Enabled">
+                <div class="col-12">
+                    <label class="control-label">Section 3</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section3Enabled">
+                            </div>
                         </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section5Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section5Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 6 -->
-
-            <div class="col-12">
-                <label class="control-label">Section 6</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="Section6Enabled">
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Section Name" id="Section6Name" disabled>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <select class="form-control embedded-input" id="Section6Number" disabled>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
+                        <input type="text" class="form-control" placeholder="Section Name" name="Section3Name" id="Section3Name" value="" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section3Seats" id="Section3Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group col-12" style="margin-top: 30px;">
-                <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+                <!-- SECTION 4 -->
+
+                <div class="col-12">
+                    <label class="control-label">Section 4</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section4Enabled">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Section Name" name="Section4Name" id="Section4Name" value="" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section4Seats" id="Section4Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5 -->
+
+                <div class="col-12">
+                    <label class="control-label">Section 5</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section5Enabled">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Section Name" name="Section5Name" id="Section5Name" value="" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section5Seats" id="Section5Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 6 -->
+
+                <div class="col-12">
+                    <label class="control-label">Section 6</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" id="Section6Enabled">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Section Name" name="Section6Name" id="Section6Name" disabled>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <select class="form-control embedded-input" name="Section6Seats" id="Section6Number" disabled>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-12" style="margin-top: 30px;">
+                    <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <!--

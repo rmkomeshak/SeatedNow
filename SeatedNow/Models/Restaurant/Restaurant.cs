@@ -142,6 +142,8 @@ namespace SeatedNow.Models
         public RestaurantStats Stats { get; set; }
 
         public IEnumerable<RestaurantTableList> Tables { get; set; }
+
+        public List<RestaurantSection> Sections { get; set; }
          
         public List<string> Tags { get; set; }
 
