@@ -40,7 +40,7 @@
                                 <form asp-action="Occupy">
                                 @foreach(var table in restaurant.Tables)
                                 {
-                                    if((table.Section == s.Id) && !table.IsTaken)
+                                    if((table.Section == s.Id) && (!table.IsTaken))
                                     {
                                         <button type="submit" class="btn btn-success" style="margin-top:5px;" name="table_id" value="@table.TableId">@table.TableName</button>
                                     }
