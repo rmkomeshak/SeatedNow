@@ -260,11 +260,20 @@ else
                     <div class="form-group">
                         <label for="reserveSection">Preferred Seating Section</label>
                         <select id="section" name="section" class="form-control white-bg">
-                            <option value="table">Table</option>
-                            <option value="booth">Booth</option>
-                            <option value="bar">Bar</option>
-                            <option value="patio">Patio</option>
-                            <option value="second floor">Second Floor</option>
+                            @{ 
+                                if(Model.Sections.Count() < 1)
+                                {
+                                    <option value="Generic">Generic</option>
+                                }
+                                else
+                                {
+                                    @foreach(var s in Model.Sections)
+                                    {
+                                        <option value="@s.Name.ToLower()">@s.Name</option>
+                                    }   
+                                }
+                            }
+                                 
                         </select>
                     </div>
                     <div class="form-group" style="display:none;">

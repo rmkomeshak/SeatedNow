@@ -127,6 +127,7 @@ namespace SeatedNow.Controllers
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
             restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
             restaurant.Hours = _statsRepository.GetHoursByRestaurantId(Id);
+            restaurant.Sections = _restaurantRepository.GetSections(_restaurantRepository.GetRestaurantByID(Id).Id);
             return View(restaurant);
 
         }
