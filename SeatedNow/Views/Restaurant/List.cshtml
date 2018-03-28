@@ -28,17 +28,35 @@
                         <div class="col-lg-12">
                             
                             <h4 class="keyword-title">Today's Top Keywords</h4>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23italian'">italian</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23casual'">casual</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23burgers'">burgers</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23mexican'">mexican</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23salad'">salad</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23tacos'">tacos</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23formal'">formal</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23american'">american</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23outdoor'">outdoor</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23chinese'">chinese</button>
-                            <button type="button" class="btn btn-outline-light" onclick="window.location.href='http://localhost:53908/Restaurant/SearchRestaurants?searchquery=%23thai'">thai</button>
+
+
+                            //top keyword buttons
+                            <div class="button" role="group">
+                                
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#italian"><button class="btn btn-outline-light">italian</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#casual"><button class="btn btn-outline-light">casual</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#burgers"><button class="btn btn-outline-light">burgers</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#mexican"><button class="btn btn-outline-light">mexican</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#salad"><button class="btn btn-outline-light">salad</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#tacos"><button class="btn btn-outline-light">tacos</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#formal"><button class="btn btn-outline-light">formal</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#american"><button class="btn btn-outline-light">american</button></a>
+                               
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#outdoor"><button class="btn btn-outline-light">outdoor</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#chinese"><button class="btn btn-outline-light">chinese</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#thai"><button class="btn btn-outline-light">thai</button></a>
+
+
+                            </div>
                             
                         </div>
                     </div>
