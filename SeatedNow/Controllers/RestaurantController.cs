@@ -315,5 +315,11 @@ namespace SeatedNow.Controllers
             return Redirect("~/Restaurant/Dashboard");
         }
 
+        public IActionResult RefreshWaits()
+        {
+            _restaurantRepository.GetRestaurants();
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
     }
 }

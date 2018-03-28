@@ -396,5 +396,65 @@ namespace SeatedNow.Repositories
 
         }
 
+        public void RefreshWaitTime(int RestaurantId)
+        {
+
+            Console.WriteLine("----------------------------------Running REFRESH------------------------------------");
+            int openTables = 0;
+            string opentablesquery = "SELECT count(*) FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + RestaurantId + "' AND taken='false'";
+
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(opentablesquery, connection))
+            {
+                openTables = (int)command.ExecuteScalar();
+                connection.Close();
+            }
+
+            if (openTables > 0)
+            {
+                SetWaitTime(RestaurantId, 0);
+            } else
+            {
+                int estimatedWait = 0;
+                int numReservations = GetNumReservations(RestaurantId);
+
+
+                estimatedWait = (int) (7.2 * numReservations);
+
+                SetWaitTime(RestaurantId, estimatedWait);
+
+            }
+        }
+
+        public void SetWaitTime(int RestaurantId, int Minutes)
+        {
+            Console.WriteLine("----------------------------------Running SET------------------------------------");
+            string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET wait_time = '" + Minutes + "' WHERE restaurant_id = '" + RestaurantId + "'";
+
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sendquery, connection))
+            {
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public int GetNumReservations(int RestaurantId)
+        {
+            Console.WriteLine("----------------------------------Running GETNUM------------------------------------");
+
+            int numReservations = 0;
+            string getnumquery = "SELECT count(*) FROM [dbo].[Reservations] WHERE restaurant_id = '" + RestaurantId + "'";
+
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(getnumquery, connection))
+            {
+                numReservations = (int)command.ExecuteScalar();
+                connection.Close();
+            }
+
+            return numReservations;
+        }
+
     }
 }

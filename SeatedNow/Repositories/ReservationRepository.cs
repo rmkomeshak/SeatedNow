@@ -11,6 +11,7 @@ namespace SeatedNow.Repositories
     {
 
         SqlConnection connection;
+        IStatsRepository _statsRepository = new StatsRepository();
 
         public ReservationRepository()
         {
@@ -73,6 +74,10 @@ namespace SeatedNow.Repositories
                     connection.Close();
                 }
             }
+
+            Console.WriteLine("----------------------------------Running RUNNING FRESH------------------------------------");
+            _statsRepository.RefreshWaitTime(reservation.RestaurantID);
+            
         }
 
         public void DeleteReservation(int reservation_id)

@@ -181,6 +181,8 @@ namespace SeatedNow.Repositories
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
+
+                _statsRepository.RefreshWaitTime(dbid);
             }
 
             connection.Close();

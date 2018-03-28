@@ -15,5 +15,8 @@ namespace SeatedNow.Repositories
         bool SetHoursByRestaurantId(int Id, RestaurantHours Hours);
         List<RestaurantRatings> GetRatingsByRestaurantId(int Id);
         List<string> GetTagsByRestaurantName(string Name);
+        void RefreshWaitTime(int RestaurantId);
+        void SetWaitTime(int RestaurantId, int Minutes);
+        int GetNumReservations(int RestaurantId);
     }
 }

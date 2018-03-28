@@ -14,281 +14,293 @@
 </head>
 
 <body>
-<div class="container-fluid" style="background: @Model.Color; padding-top: 80px; padding-bottom: 70px;">
-    <div class="container text-center">
-        <h1 id="restaurant-title" style="font-size: 50px; color: #fff;">@Model.Name</h1>
-        <h4 id="restaurant-wait-time" style="color: #fff; font-size: 20px; margin-bottom: 30px;"><b>Wait time:</b> 20 minutes</h4>
-        @foreach (var tag in Model.Tags)
-        {
-            <button id="restauraunt-keyword-1" type="button" class="btn btn-outline-light" style="margin: 5px;">#@tag</button>
-        }
-        
+    <div class="container-fluid" style="background: @Model.Color; padding-top: 80px; padding-bottom: 70px;">
+        <div class="container text-center">
+            <h1 id="restaurant-title" style="font-size: 50px; color: #fff;">@Model.Name</h1>
+            <h4 id="restaurant-wait-time" style="color: #fff; font-size: 20px; margin-bottom: 30px;"><b>Wait time:</b> @Model.Stats.WaitTime minutes</h4>
+            @foreach (var tag in Model.Tags)
+            {
+                <button id="restauraunt-keyword-1" type="button" class="btn btn-outline-light" style="margin: 5px;">#@tag</button>
+            }
+
+        </div>
     </div>
-</div>
-<div class="container">
-    <div class="row justify-content-lg-center" style="padding-top: 50px; padding-bottom: 50px;">
-        <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-4">
-                    <img class="mx-auto d-block" id="restaurant-logo" src="~/images/restaurants/@Model.ImagePath" style="max-width: 100%; margin-bottom: 20px; max-height: 200px; padding-right: 30px;" />
-                    <p id="restaurant-description" style="border-bottom: 1px #eee solid; padding-bottom: 20px; margin-bottom: 30px; margin-left: 5px; margin-right: 30px;">@Model.Description</p>
-                    <div id="restaurant-info">
-                        <p>
-                            <i class="fas fa-utensils"></i><span id="restaurant-menu">
-                                <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a>
-                            </span>
-                        </p>
-                        <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 @Model.PhoneNumber</span></p>
-                        <p>
-                            <i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">
-                                <a href="https://www.google.com/" target="_blank">https://www.google.com/</a>
-                            </span>
-                        </p>
-                        <p><i class="fas fa-credit-card"></i><span id="restaurant-prices">$30 and under per person</span></p>
-                        <p>
-                            <i class="fas fa-clock"></i><span id="restaurant-hours">
-                                @if (Model.Hours.MondayOpen >= 0)
-                                {
-                                    <b>Monday:</b> @Model.Hours.ToAMPM(Model.Hours.MondayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.MondayClose) <br />
-                                } else
-                                {
-                                    <b>Monday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.TuesdayOpen >= 0)
-                                {
-                                    <b>Tuesday:</b> @Model.Hours.ToAMPM(Model.Hours.TuesdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.TuesdayClose) <br />
-                                } else
-                                {
-                                    <b>Tuesday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.WednsedayOpen >= 0)
-                                {
-                                    <b>Wednseday:</b> @Model.Hours.ToAMPM(Model.Hours.WednsedayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.WednsedayClose) <br />
-                                } else
-                                {
-                                    <b>Wednseday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.ThursdayOpen >= 0)
-                                {
-                                    <b>Thursday:</b> @Model.Hours.ToAMPM(Model.Hours.ThursdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.ThursdayClose) <br />
-                                } else
-                                {
-                                    <b>Thursday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.FridayOpen >= 0)
-                                {
-                                    <b>Friday:</b> @Model.Hours.ToAMPM(Model.Hours.FridayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.FridayClose) <br />
-                                } else
-                                {
-                                    <b>Friday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.SaturdayOpen >= 0)
-                                {
-                                    <b>Saturday:</b> @Model.Hours.ToAMPM(Model.Hours.SaturdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SaturdayClose) <br />
-                                } else
-                                {
-                                    <b>Saturday:</b> <span>TBA</span> <br />
-                                }
-                                @if (Model.Hours.SundayOpen >= 0)
-                                {
-                                    <b>Sunday:</b> @Model.Hours.ToAMPM(Model.Hours.SundayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SundayClose) <br />
-                                } else
-                                {
-                                    <b>Sunday:</b> <span>TBA</span> <br />
-                                }
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-8" id="restaurant-info">
-                    <div class="row" style="background: #dddddd; padding: 30px 20px; border-radius: 5px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); margin-left: 0px; margin-right: 0; margin-bottom: 50px;">
-                        <div class="col-lg-6 align-self-center text-left">
-                            <h4 class="display-4" style="margin: 0; font-size: 20px;">Ready to get started?</h4>
-                        </div>
-                        <div class="col-lg-6 align-self-center text-right">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reserveSeat">Reserve My Seat</button>
-                        </div>
-                    </div>
-                    <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode </span></p>
-                    <!--GOOGLE MAPS STUFF-->
-                    <div id="googlemap" align="center">
-                        <div id="floating-panel" style="display:none;">
-                            <input id="address" type="textbox" value="@Model.Address">
-                        </div>
-                        <div id="map"></div>
-                        <script>
-                            function initMap() {
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 8,
-                                    center: { lat: -34.397, lng: 150.644 }
-                                });
-                                var geocoder = new google.maps.Geocoder();
-                                geocodeAddress(geocoder, map);
-                            }
-
-                            function geocodeAddress(geocoder, resultsMap) {
-                                var address = document.getElementById('address').value;
-                                geocoder.geocode({ 'address': address }, function (results, status) {
-                                    if (status === 'OK') {
-                                        resultsMap.setCenter(results[0].geometry.location);
-                                        var marker = new google.maps.Marker({
-                                            map: resultsMap,
-                                            position: results[0].geometry.location
-                                        });
-                                    } else {
-                                        alert('Geocode was not successful for the following reason: ' + status);
+    <div class="container">
+        <div class="row justify-content-lg-center" style="padding-top: 50px; padding-bottom: 50px;">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img class="mx-auto d-block" id="restaurant-logo" src="~/images/restaurants/@Model.ImagePath" style="max-width: 100%; margin-bottom: 20px; max-height: 200px; padding-right: 30px;" />
+                        <p id="restaurant-description" style="border-bottom: 1px #eee solid; padding-bottom: 20px; margin-bottom: 30px; margin-left: 5px; margin-right: 30px;">@Model.Description</p>
+                        <div id="restaurant-info">
+                            <p>
+                                <i class="fas fa-utensils"></i><span id="restaurant-menu">
+                                    <a href="https://www.google.com/" target="_blank"><b>View Menu</b></a>
+                                </span>
+                            </p>
+                            <p><i class="fas fa-phone"></i><span id="restaurant-phone">+1 @Model.PhoneNumber</span></p>
+                            <p>
+                                <i class="fas fa-external-link-square-alt"></i><span id="restaurant-site">
+                                    <a href="https://www.google.com/" target="_blank">https://www.google.com/</a>
+                                </span>
+                            </p>
+                            <p><i class="fas fa-credit-card"></i><span id="restaurant-prices">$30 and under per person</span></p>
+                            <p>
+                                <i class="fas fa-clock"></i><span id="restaurant-hours">
+                                    @if (Model.Hours.MondayOpen >= 0)
+                                    {
+                                        <b>Monday:</b> @Model.Hours.ToAMPM(Model.Hours.MondayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.MondayClose) <br />
                                     }
-                                });
-                            }
-                        </script>
-                        <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfBylWQ5799KJI6ytzM3_uRYTqWVAphDo&callback=initMap">
-                        </script>
+                                    else
+                                    {
+                                        <b>Monday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.TuesdayOpen >= 0)
+                                    {
+                                        <b>Tuesday:</b> @Model.Hours.ToAMPM(Model.Hours.TuesdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.TuesdayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Tuesday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.WednsedayOpen >= 0)
+                                    {
+                                        <b>Wednseday:</b> @Model.Hours.ToAMPM(Model.Hours.WednsedayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.WednsedayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Wednseday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.ThursdayOpen >= 0)
+                                    {
+                                        <b>Thursday:</b> @Model.Hours.ToAMPM(Model.Hours.ThursdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.ThursdayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Thursday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.FridayOpen >= 0)
+                                    {
+                                        <b>Friday:</b> @Model.Hours.ToAMPM(Model.Hours.FridayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.FridayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Friday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.SaturdayOpen >= 0)
+                                    {
+                                        <b>Saturday:</b> @Model.Hours.ToAMPM(Model.Hours.SaturdayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SaturdayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Saturday:</b> <span>TBA</span> <br />
+                                    }
+                                    @if (Model.Hours.SundayOpen >= 0)
+                                    {
+                                        <b>Sunday:</b> @Model.Hours.ToAMPM(Model.Hours.SundayOpen) <span>-</span> @Model.Hours.ToAMPM(Model.Hours.SundayClose) <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Sunday:</b> <span>TBA</span> <br />
+                                    }
+                                </span>
+                            </p>
+                        </div>
                     </div>
-                    <!--END OF GOOGLE MAPS STUFF-->
-                    @if (Model.Stats.TotalRatings > 0)
-    {
-                <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Math.Round(Model.Stats.Rating, 1) stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
-}
-else
-{
-                <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
-}
-                    @foreach (var rating in Model.Ratings)
-    {
-                <div class="listing-review">
-                    <span class="listing-rating">
+                    <div class="col-lg-8" id="restaurant-info">
+                        <div class="row" style="background: #dddddd; padding: 30px 20px; border-radius: 5px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); margin-left: 0px; margin-right: 0; margin-bottom: 50px;">
+                            <div class="col-lg-6 align-self-center text-left">
+                                <h4 class="display-4" style="margin: 0; font-size: 20px;">Ready to get started?</h4>
+                            </div>
+                            <div class="col-lg-6 align-self-center text-right">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reserveSeat">Reserve My Seat</button>
+                            </div>
+                        </div>
+                        <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode </span></p>
+                        <!--GOOGLE MAPS STUFF-->
+                        <div id="googlemap" align="center">
+                            <div id="floating-panel" style="display:none;">
+                                <input id="address" type="textbox" value="@Model.Address">
+                            </div>
+                            <div id="map"></div>
+                            <script>
+                                function initMap() {
+                                    var map = new google.maps.Map(document.getElementById('map'), {
+                                        zoom: 8,
+                                        center: { lat: -34.397, lng: 150.644 }
+                                    });
+                                    var geocoder = new google.maps.Geocoder();
+                                    geocodeAddress(geocoder, map);
+                                }
+
+                                function geocodeAddress(geocoder, resultsMap) {
+                                    var address = document.getElementById('address').value;
+                                    geocoder.geocode({ 'address': address }, function (results, status) {
+                                        if (status === 'OK') {
+                                            resultsMap.setCenter(results[0].geometry.location);
+                                            var marker = new google.maps.Marker({
+                                                map: resultsMap,
+                                                position: results[0].geometry.location
+                                            });
+                                        } else {
+                                            alert('Geocode was not successful for the following reason: ' + status);
+                                        }
+                                    });
+                                }
+                            </script>
+                            <script async defer
+                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfBylWQ5799KJI6ytzM3_uRYTqWVAphDo&callback=initMap">
+                            </script>
+                        </div>
+                        <!--END OF GOOGLE MAPS STUFF-->
                         @if (Model.Stats.TotalRatings > 0)
-    {
-        for (int i = 0; i < (int)rating.Rating; i++)
-        {
-                    <i class="fas fa-star"></i>
-}
+                        {
+                            <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Math.Round(Model.Stats.Rating, 1) stars</b> based on @Model.Stats.TotalRatings reviews</span></p>
+                        }
+                        else
+                        {
+                            <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
+                        }
+                        @foreach (var rating in Model.Ratings)
+                        {
+                            <div class="listing-review">
+                                <span class="listing-rating">
+                                    @if (Model.Stats.TotalRatings > 0)
+                                    {
+                                        for (int i = 0; i < (int)rating.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
 
-for (int i = 5; i > (int)rating.Rating; i--)
-{
-                    <i class="far fa-star"></i>
-}
-}
-else
-{
-                    <p style="margin-top: 50px;"><a><b>No Reviews</b></a></p>
-}
-                    </span>
-                    <span class="listing-comment">
-                        @rating.Comment
-                    </span>
-                </div>
+                                        for (int i = 5; i > (int)rating.Rating; i--)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p style="margin-top: 50px;"><a><b>No Reviews</b></a></p>
+                                    }
+                                </span>
+                                <span class="listing-comment">
+                                    @rating.Comment
+                                </span>
+                            </div>
 
-}
-                    <div style="background: #eee; padding: 20px; border-radius: 5px; margin-top: 20px;">
-                        <form asp-action="SendRating" type="submit">
-                            <div class="form-group">
-                                <label for="reservePartySize"><b>Give a Rating</b></label>
-                                <div class="form-group" style="font-size: 14px;">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="rating" id="star1" value="1">
-                                        <label class="form-check-label" for="star1">
-                                            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="rating" id="star2" value="2">
-                                        <label class="form-check-label" for="star2">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="rating" id="star3" value="3">
-                                        <label class="form-check-label" for="star3">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="rating" id="star4" value="4">
-                                        <label class="form-check-label" for="star4">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="rating" id="star1" value="5">
-                                        <label class="form-check-label" for="star5">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                        </label>
+                        }
+                        <div style="background: #eee; padding: 20px; border-radius: 5px; margin-top: 20px;">
+                            <form asp-action="SendRating" type="submit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label for="reservePartySize"><b>Give a Rating</b></label>
+                                    <div class="form-group" style="font-size: 14px;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rating" id="star1" value="1">
+                                            <label class="form-check-label" for="star1">
+                                                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rating" id="star2" value="2">
+                                            <label class="form-check-label" for="star2">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rating" id="star3" value="3">
+                                            <label class="form-check-label" for="star3">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rating" id="star4" value="4">
+                                            <label class="form-check-label" for="star4">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rating" id="star1" value="5">
+                                            <label class="form-check-label" for="star5">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <input hidden name="restaurant_id" value="@Model.Id" />
-                            <a id="showCommentBox"><b>Leave a Comment (Optional)</b></a>
-                            <div class="form-group" style="margin-top: 10px;">
-                                <textarea maxlength="250" id="commentBox" name="comment" class="form-control white-bg"></textarea>
-                            </div>
-                            <button onclick="if (document.getElementById('star1' || 'star2' || 'star3' || 'star4' || 'star5' ).checked = false; ) {alert=('Please give rating'); }" type="submit" class="btn-success">Submit Review</button>
-                        </form>
+                                <input hidden name="restaurant_id" value="@Model.Id" />
+                                <a id="showCommentBox"><b>Leave a Comment (Optional)</b></a>
+                                <div class="form-group" style="margin-top: 10px;">
+                                    <textarea maxlength="250" id="commentBox" name="comment" class="form-control white-bg"></textarea>
+                                </div>
+                                <button type="submit" class="btn-success">Submit Review</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="reserveSeat" tabindex="-1" role="dialog" aria-labelledby="reserveSeat" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Reserve a seat at @Model.Name</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="ReserveAction" type="submit">
-                    <img style="max-width: 100%; margin: 0 auto 20px auto;" src="http://4.bp.blogspot.com/-3FSnC6TQ5iM/T9XAuQUhHOI/AAAAAAAABGA/doakEq5PsXM/s1600/restaurant+layout.jpg" />
-                    <div class="form-group">
-                        <label for="reservePartySize">Party Size</label>
-                        <select id="guests" name="guests" class="form-control white-bg">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="reserveSection">Preferred Seating Section</label>
-                        <select id="section" name="section" class="form-control white-bg">
-                            @{ 
-                                if(Model.Sections.Count() < 1)
-                                {
-                                    <option value="Generic">Generic</option>
-                                }
-                                else
-                                {
-                                    @foreach(var s in Model.Sections)
+    <div class="modal fade" id="reserveSeat" tabindex="-1" role="dialog" aria-labelledby="reserveSeat" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reserve a seat at @Model.Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="ReserveAction" type="submit">
+                        <img style="max-width: 100%; margin: 0 auto 20px auto;" src="http://4.bp.blogspot.com/-3FSnC6TQ5iM/T9XAuQUhHOI/AAAAAAAABGA/doakEq5PsXM/s1600/restaurant+layout.jpg" />
+                        <div class="form-group">
+                            <label for="reservePartySize">Party Size</label>
+                            <select id="guests" name="guests" class="form-control white-bg">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reserveSection">Preferred Seating Section</label>
+                            <select id="section" name="section" class="form-control white-bg">
+                                @{
+                                    if (Model.Sections.Count() < 1)
                                     {
-                                        <option value="@s.Name.ToLower()">@s.Name</option>
-                                    }   
+                                        <option value="Generic">Generic</option>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var s in Model.Sections)
+                                        {
+                                            <option value="@s.Name.ToLower()">@s.Name</option>
+                                        }
+                                    }
                                 }
-                            }
-                                 
-                        </select>
-                    </div>
-                    <div class="form-group" style="display:none;">
-                        <select id="restaurant_id" name="restaurant_id" class="form-control white-bg">
-                            <option value="@Model.Id"></option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Confirm reservation</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                
+
+                            </select>
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <select id="restaurant_id" name="restaurant_id" class="form-control white-bg">
+                                <option value="@Model.Id"></option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Confirm reservation</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
