@@ -91,6 +91,46 @@ namespace SeatedNow.Repositories
                 {
                     command.ExecuteNonQuery();
                     connection.Close();
+                    UpdateTags(restaurant);
+                    return true;
+                }
+            }
+
+            
+        }
+
+        public bool UpdateTags(Restaurant restaurant)
+        {
+            string keyword1 = "", keyword2 = "", keyword3 = "";
+            string[] tags = restaurant.Tags.ToArray();
+
+            if (!string.IsNullOrEmpty(tags[0]))
+            {
+                keyword1 = tags[0];
+            }
+
+            if (!string.IsNullOrEmpty(tags[1]))
+            {
+                keyword2 = tags[1];
+            }
+
+            if (!string.IsNullOrEmpty(tags[2]))
+            {
+                keyword3 = tags[2];
+            }
+
+
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Keywords] SET keyword1 = '" + keyword1
+                    + "', keyword2 = '" + keyword2 + "', keyword3 = '" + keyword3 + "' WHERE restaurant_id = " + restaurant.Id;
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
                     return true;
                 }
             }
@@ -141,10 +181,55 @@ namespace SeatedNow.Repositories
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
+
+                _statsRepository.RefreshWaitTime(dbid);
             }
 
             connection.Close();
             return restaurants;
+        }
+
+        public List<RestaurantSection> GetSections(int restaurant_id)
+        {
+            List<RestaurantSection> sections = new List<RestaurantSection>();
+            string section1 = "", section2 = "", section3 = "", section4 = "", section5 = "", section6 = "";
+            string sendquery = "SELECT section1, section2, section3, section4, section5, section6 FROM [dbo].[Restaurant_Sections] WHERE restaurant_id = " + restaurant_id + ";";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(sendquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                section1 = reader["section1"].ToString();
+                section2 = reader["section2"].ToString();
+                section3 = reader["section3"].ToString();
+                section4 = reader["section4"].ToString();
+                section5 = reader["section5"].ToString();
+                section6 = reader["section6"].ToString();
+            }
+            connection.Close();
+
+            if (!string.IsNullOrEmpty(section1))
+                sections.Add(new RestaurantSection(section1, 1));
+
+            if (!string.IsNullOrEmpty(section2))
+                sections.Add(new RestaurantSection(section2, 2));
+
+            if (!string.IsNullOrEmpty(section3))
+                sections.Add(new RestaurantSection(section3, 3));
+
+            if (!string.IsNullOrEmpty(section4))
+                sections.Add(new RestaurantSection(section4, 4));
+
+            if (!string.IsNullOrEmpty(section5))
+                sections.Add(new RestaurantSection(section5, 5));
+
+            if (!string.IsNullOrEmpty(section6))
+                sections.Add(new RestaurantSection(section6, 6));
+
+            return sections;
         }
 
         public List<RestaurantListViewModel> GetRestaurantsByName(string name)
@@ -459,11 +544,11 @@ namespace SeatedNow.Repositories
         public List<RestaurantTableList> GetTablesByRestaurantID(int id)
         {
             List<RestaurantTableList> tablelist = new List<RestaurantTableList>();
-            int dbrestaurantid = -1, dbreservationid = -1, dbtableid = -1;
+            int dbrestaurantid = -1, dbreservationid = -1, dbtableid = -1, dbsection = -1;
             string dbtablename = "";
-            bool dbtaken = false;
+            bool dbtaken = false, dbenabled = false;
 
-            string checkquery = "SELECT restaurant_id, table_name, taken, reservation_id, table_id FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + id + "'";
+            string checkquery = "SELECT restaurant_id, table_name, taken, reservation_id, table_id, section, isEnabled FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -477,12 +562,108 @@ namespace SeatedNow.Repositories
                 dbtaken = (bool)reader["taken"];
                 dbreservationid = (int)reader["reservation_id"];
                 dbtableid = (int)reader["table_id"];
-                tablelist.Add(new RestaurantTableList(dbrestaurantid, dbtablename, dbtaken, dbreservationid, dbtableid));
+                dbsection = (int)reader["section"];
+                dbenabled = (bool)reader["isEnabled"];
+                tablelist.Add(new RestaurantTableList(dbrestaurantid, dbtablename, dbtaken, dbreservationid, dbtableid, dbsection, dbenabled));
             }
 
             connection.Close();
 
             return tablelist;
+        }
+
+        public bool UpdateSections(int restaurant_id, string section1, string section2, string section3, string section4, string section5, string section6, List<RestaurantTableList> tables)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Sections] SET section1 = '" + section1
+                    + "', section2 = '" + section2 + "', section3 = '" + section3
+                    + "', section4 = '" + section4 + "', section5 = '" + section5
+                    + "', section6 = '" + section6 + "' WHERE restaurant_id = " + restaurant_id;
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    UpdateTables(restaurant_id, tables);
+                    return true;
+                }
+            }
+        }
+
+        public bool UpdateTables(int restaurant_id, List<RestaurantTableList> tables)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string deletequery = "DELETE FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = " + restaurant_id;
+
+                using (SqlCommand command = new SqlCommand(deletequery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    InsertTables(tables);
+                    return true;
+                }
+            }
+        }
+       
+        public bool InsertTables(List<RestaurantTableList> tables)
+        {
+            using (connection)
+            {
+                connection.Open();
+                foreach(var table in tables)
+                {
+                    string sendquery = "INSERT INTO [dbo].[Restaurant_Tables] VALUES (" + table.RestaurantId +
+                        ", '" + table.TableName + "', '" + table.IsTaken + "', " + table.ReservationId + ", " + 
+                        table.TableId + ", " + table.Section + ", '" + table.IsEnabled + "');";
+
+                    using (SqlCommand command = new SqlCommand(sendquery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
+        public bool OccupyTable(int restaurant_id, int table_id)
+        {
+            bool b = true;
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_id = " + table_id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+        }
+
+        public bool FreeTable(int restaurant_id, int table_id)
+        {
+            bool b = false;
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_id = " + table_id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
         }
 
         public RestaurantListViewModel GetRestaurantListViewModelByID(int id)

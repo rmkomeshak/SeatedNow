@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace SeatedNow.Models
 {
@@ -14,8 +12,10 @@ namespace SeatedNow.Models
             Comment = comment;
         }
 
+        [Range(1, 5, ErrorMessage = "Woops, please select your rating again!")]
         public double Rating { get; set; }
 
+        [Required(ErrorMessage = "Please enter a comment")]
         public string Comment { get; set; }
     }
 }

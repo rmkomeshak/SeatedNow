@@ -1,0 +1,207 @@
+﻿@model SeatedNow.Models.Restaurant
+
+<h2 class="display-4" style="font-size: 40px;">Profile Settings</h2>
+
+<form asp-action="UpdateAction" style="margin-top: 50px;">
+    <div class="row" style="max-width: 700px;">
+        <div class="col-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control white-bg" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control white-bg" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control white-bg" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control white-bg" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6" hidden>
+                    <label asp-for="ZipCode" class="control-label"></label>
+                    <input asp-for="ZipCode" class="form-control white-bg" />
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6" hidden>
+                    <label asp-for="State" class="control-label"></label>
+                    <select asp-for="State" class="form-control white-bg">
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AR">AR</option>
+                        <option value="AZ">AZ</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DC">DC</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="IA">IA</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="MA">MA</option>
+                        <option value="MD">MD</option>
+                        <option value="ME">ME</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MO">MO</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="NC">NC</option>
+                        <option value="NE">NE</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NV">NV</option>
+                        <option value="NY">NY</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WI">WI</option>
+                        <option value="WV">WV</option>
+                        <option value="WY">WY</option>
+                    </select>
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control white-bg" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label class="control-label">Website URL</label>
+                    <input class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" style="min-height: 200px;" class="form-control white-bg"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label>Featured Color</label>
+                    <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="@Model.Color" class="form-control white-bg" />
+                    <span class="text-danger"></span>
+                </div>
+                @{
+                    string keyword1 = "tag", keyword2 = "tag", keyword3 = "tag";
+                    string[] tags = Model.Tags.ToArray();
+
+                    if (!string.IsNullOrEmpty(tags[0]))
+                    {
+                        keyword1 = tags[0];
+                    }
+
+                    if (!string.IsNullOrEmpty(tags[1]))
+                    {
+                        keyword2 = tags[1];
+                    }
+
+                    if (!string.IsNullOrEmpty(tags[2]))
+                    {
+                        keyword3 = tags[2];
+                    }       
+                }
+
+                <div class="form-group col-4">
+                    <label asp-for="Keyword1" class="control-label">Keyword 1</label>
+                    <input asp-for="Keyword1" class="form-control" value="@keyword1" autocomplete="off" />
+                    <span asp-validation-for="Keyword1" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4">
+                    <label asp-for="Keyword2" class="control-label">Keyword 2</label>
+                    <input asp-for="Keyword2" class="form-control" value="@keyword2" autocomplete="off" />
+                    <span asp-validation-for="Keyword2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4">
+                    <label asp-for="Keyword3" class="control-label">Keyword 3</label>
+                    <input asp-for="Keyword3" class="form-control" value="@keyword3" autocomplete="off" />
+                    <span asp-validation-for="Keyword3" class="text-danger"></span>
+                </div>
+                
+
+                <div class="form-group col-12">
+                    <label class="control-label">Price Per Person</label>
+                    <select class="form-control white-bg">
+                        <option>Unspecified</option>
+                        <option>$10 and under</option>
+                        <option>$20 and under</option>
+                        <option>$30 and under</option>
+                        <option>$40 and under</option>
+                        <option>$50 and under</option>
+                        <option>$60 and under</option>
+                        <option>$70 and under</option>
+                        <option>$80 and under</option>
+                        <option>$90 and under</option>
+                        <option>$100 and under</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control white-bg" />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label class="control-label">Menu File</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                        </div>
+                    </div>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="OwnerId" class="control-label"></label>
+                    <input asp-for="OwnerId" class="form-control white-bg" />
+                    <span asp-validation-for="OwnerId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <label asp-for="EventKey" class="control-label"></label>
+                    <input asp-for="EventKey" class="form-control white-bg" />
+                    <span asp-validation-for="EventKey" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12" hidden>
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="IsVerified" /> @Html.DisplayNameFor(model => model.IsVerified)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-12" style="padding-left: 0; padding-right: 0; margin-top: 15px;">
+                <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</form>

@@ -26,18 +26,38 @@
                 <div class="sn-top-keywords">
                     <div class="row align-items-center">
                         <div class="col-lg-12">
+                            
                             <h4 class="keyword-title">Today's Top Keywords</h4>
-                            <button type="button" class="btn btn-outline-light">italian</button>
-                            <button type="button" class="btn btn-outline-light">casual</button>
-                            <button type="button" class="btn btn-outline-light">burgers</button>
-                            <button type="button" class="btn btn-outline-light">mexican</button>
-                            <button type="button" class="btn btn-outline-light">salad</button>
-                            <button type="button" class="btn btn-outline-light">tacos</button>
-                            <button type="button" class="btn btn-outline-light">formal</button>
-                            <button type="button" class="btn btn-outline-light">american</button>
-                            <button type="button" class="btn btn-outline-light">outdoor</button>
-                            <button type="button" class="btn btn-outline-light">chinese</button>
-                            <button type="button" class="btn btn-outline-light">thai</button>
+
+
+                            //top keyword buttons
+                            <div class="button" role="group">
+                                
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#italian"><button class="btn btn-outline-light">italian</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#casual"><button class="btn btn-outline-light">casual</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#burgers"><button class="btn btn-outline-light">burgers</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#mexican"><button class="btn btn-outline-light">mexican</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#salad"><button class="btn btn-outline-light">salad</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#tacos"><button class="btn btn-outline-light">tacos</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#formal"><button class="btn btn-outline-light">formal</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#american"><button class="btn btn-outline-light">american</button></a>
+                               
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#outdoor"><button class="btn btn-outline-light">outdoor</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#chinese"><button class="btn btn-outline-light">chinese</button></a>
+
+                                <a asp-action="SearchRestaurants" asp-route-searchquery="#thai"><button class="btn btn-outline-light">thai</button></a>
+
+
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -45,6 +65,7 @@
                 <div class="sn-list-filter row">
                     <div class="col-6">
                         <h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 700;">@ViewBag.SortBy</h2>
+                        <input type="button" value="RefreshWaits DEVELOPMENT" onclick="location.href='@Url.Action("RefreshWaits", "Restaurant")'" />
                     </div>
                     <div class="col-6">
                         <div class="btn-toolbar float-right" role="toolbar">

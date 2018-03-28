@@ -1,37 +1,47 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-<head>
-    <style>
-        #map {
-            height: 400px;
-            width: 50%;
-        }
-    </style>
-</head>
-<body>
-    <p>SeatedNow is a new and exciting startup that aims to propel small to mid-size restaurants or food establishments into the digital era. We provide a seating reservation service that purpose is to increase both customer traffic and reservation efficiency. With state of the art algorithmic mathematics we are able to estimate average wait times for a table at the establishment and project those to customers that are looking for a place to eat. SeatedNow is designed to decrease the number of calls, for wait times and reservations, a restaurant receives. This will in turn decrease the amount of time staff are occupied with calls and can focus on other customers.</p>
-    <div>
-        <address>
-            Seated Now Rd.<br />
-            Rochester, MI 48309<br />
-            <abbr title="Phone">P:</abbr>
-            248-555-5555
-        </address>
-        <p>Rochester, MI</p>
 
-        <address>
-            <strong>Support:</strong> <a href="mailto:Support@seatednow.com">Support@seatednow.com</a><br />
-            <strong>Marketing:</strong> <a href="mailto:Marketing@seatednow.com">Marketing@seatednow.com</a>
-        </address>
+<body>
+
+    <div class="container-fluid sn-green-pattern" style="color: #fff; padding: 100px 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <center><h1 class="title">Contact Us</h1></center>
+                </div>
+            </div>
+        </div>
     </div>
-    <h3>Seated Now Headquarters</h3>
+    <div class="container">
+        <div class="row" style="max-width: 900px; margin: 50px auto;">
+            <div class="col-lg-4">
+                <h4><b>Contact Info</b></h4>
+                <p>
+                    111 Seated Now Road<br />
+                    Rochester, MI 48309
+                </p>
+                <p>
+                    248-555-5555
+                </p>
+                <p>
+                    <strong>Support</strong><br /><a href="mailto:support@seatednow.com">support@seatednow.com</a>
+                </p>
+                <p>
+                    <strong>Marketing</strong><br /><a href="mailto:marketing@seatednow.com">marketing@seatednow.com</a>
+                </p>
+
+            </div>
+            <div class="col-lg-8">
+                <h4><b>About Us</b></h4>
+                <p>SeatedNow is a new and exciting startup that aims to propel small to mid-size restaurants or food establishments into the digital era. We provide a seating reservation service that purpose is to increase both customer traffic and reservation efficiency. With state of the art algorithmic mathematics we are able to estimate average wait times for a table at the establishment and project those to customers that are looking for a place to eat. SeatedNow is designed to decrease the number of calls, for wait times and reservations, a restaurant receives. This will in turn decrease the amount of time staff are occupied with calls and can focus on other customers.</p>
+            </div>
+        </div>
+    </div>
     <div id="floating-panel" style="display:none;">
         <input id="address" type="textbox" value="Rochester, MI">
     </div>
-    <div id="map"></div>
+    <div id="map" style="width: 100%; height: 400px;"></div>
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {

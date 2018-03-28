@@ -1,0 +1,528 @@
+﻿@model SeatedNow.Models.Restaurant
+
+<h2 class="display-4" style="font-size: 40px;">Restaurant Settings</h2>
+
+<form asp-action="UpdateHours" style="margin-top: 50px;">
+    <div class="row" style="max-width: 700px;">
+        <div class="col-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+      
+            <!-- BEGIN MONDAY -->
+
+            <div class="form-row">
+                <input hidden name="RestaurantId" value="@Model.Id" />
+
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Monday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.MondayOpen" name="MondayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.MondayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.MondayClose" name="MondayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.MondayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END MONDAY -->
+            <!-- BEGIN TUESDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Tuesday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.TuesdayOpen" name="TuesdayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.TuesdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.TuesdayClose" name="TuesdayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.TuesdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END TUESDAY -->
+            <!-- BEGIN WEDNESDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Wednesday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.WednsedayOpen" name="WednsedayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.WednsedayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.WednsedayClose" name="WednsedayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.WednsedayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END WEDNESDAY -->
+            <!-- BEGIN THURSDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Thursday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.ThursdayOpen" name="ThursdayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.ThursdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.ThursdayClose" name="ThursdayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.ThursdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END THURSDAY -->
+            <!-- BEGIN FRIDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Friday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.FridayOpen" name="FridayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.FridayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.FridayClose" name="FridayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.FridayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END FRIDAY -->
+            <!-- BEGIN SATURDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Saturday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.SaturdayOpen" name="SaturdayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.SaturdayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.SaturdayClose" name="SaturdayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.SaturdayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END SATURDAY -->
+            <!-- BEGIN SUNDAY -->
+
+            <div class="form-row">
+                <div class="form-group col-3 align-self-center">
+                    <label class="control-label" style="margin-bottom: 0; padding-top: 5px;"><b>Sunday</b></label>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Opens</label>
+                    <select asp-for="Hours.SundayOpen" name="SundayOpen" class="form-control white-bg">
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.SundayOpen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4 offset-1">
+                    <label class="control-label">Closes</label>
+                    <select asp-for="Hours.SundayClose" name="SundayClose" class="form-control white-bg">
+                        <option value="12">Noon</option>
+                        <option value="13">1:00 PM</option>
+                        <option value="14">2:00 PM</option>
+                        <option value="15">3:00 PM</option>
+                        <option value="16">4:00 PM</option>
+                        <option value="17">5:00 PM</option>
+                        <option value="18">6:00 PM</option>
+                        <option value="19">7:00 PM</option>
+                        <option value="20">8:00 PM</option>
+                        <option value="21">9:00 PM</option>
+                        <option value="22">10:00 PM</option>
+                        <option value="23">11:00 PM</option>
+                        <option value="0">Midnight</option>
+                        <option value="1">1:00 AM</option>
+                        <option value="2">2:00 AM</option>
+                        <option value="3">3:00 AM</option>
+                        <option value="4">4:00 AM</option>
+                        <option value="5">5:00 AM</option>
+                        <option value="6">6:00 AM</option>
+                        <option value="7">7:00 AM</option>
+                        <option value="8">8:00 AM</option>
+                        <option value="9">9:00 AM</option>
+                        <option value="10">10:00 AM</option>
+                        <option value="11">11:00 AM</option>
+                        <option value="25">Closed</option>
+                    </select>
+                    <span asp-validation-for="Hours.SundayClose" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- END SUNDAY -->
+            <div class="form-group col-12" style="padding-left: 0; padding-right: 0; margin-top: 15px;">
+                <input type="submit" style="width: 100%;" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</form>

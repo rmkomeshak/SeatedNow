@@ -63,6 +63,7 @@ namespace SeatedNow.Controllers
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tables = _restaurantRepository.GetTablesByRestaurantID(Id);
+            restaurant.Sections = _restaurantRepository.GetSections(Id);
 
             return PartialView(restaurant);
         }
@@ -85,7 +86,7 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashContactSettings(int Id)
+        public IActionResult DashSettingsContact(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
@@ -93,18 +94,20 @@ namespace SeatedNow.Controllers
             return PartialView(restaurant);
         }
 
-        public IActionResult DashProfileSettings(int Id)
+        public IActionResult DashSettingsProfile(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
 
             return PartialView(restaurant);
         }
 
-        public IActionResult DashHoursSettings(int Id)
+        public IActionResult DashSettingsHours(int Id)
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Hours = _statsRepository.GetHoursByRestaurantId(Id);
 
             return PartialView(restaurant);
         }
@@ -126,6 +129,8 @@ namespace SeatedNow.Controllers
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
             restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
             restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
+            restaurant.Hours = _statsRepository.GetHoursByRestaurantId(Id);
+            restaurant.Sections = _restaurantRepository.GetSections(_restaurantRepository.GetRestaurantByID(Id).Id);
             return View(restaurant);
 
         }
@@ -186,6 +191,13 @@ namespace SeatedNow.Controllers
 
         }
 
+        public IActionResult UpdateHours(int MondayOpen, int MondayClose, int TuesdayOpen, int TuesdayClose, int WednsedayOpen, int WednsedayClose, int ThursdayOpen, int ThursdayClose, int FridayOpen, int FridayClose, int SaturdayOpen, int SaturdayClose, int SundayOpen, int SundayClose, int RestaurantId)
+        {
+            RestaurantHours Hours = new RestaurantHours(MondayOpen, MondayClose, TuesdayOpen, TuesdayClose, WednsedayOpen, WednsedayClose, ThursdayOpen, ThursdayClose, FridayOpen, FridayClose, SaturdayOpen, SaturdayClose, SundayOpen, SundayClose);
+            _statsRepository.SetHoursByRestaurantId(RestaurantId, Hours);
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
         public IActionResult SearchRestaurants(string searchquery)
         {
             SearchContent content;
@@ -205,13 +217,112 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified)
+        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3)
         {
+            Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3);
 
-            _restaurantRepository.UpdateRestaurant(new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color));
+            _restaurantRepository.UpdateRestaurant(r);
             return Redirect("~/Restaurant/Dashboard");
         }
 
+        public IActionResult UpdateSections(string Section1Name = "", string Section2Name = "", string Section3Name = "", string Section4Name = "", string Section5Name = "", string Section6Name = "", int Section1Seats = -1, int Section2Seats = -1, int Section3Seats = -1, int Section4Seats = -1, int Section5Seats = -1, int Section6Seats = -1)
+        {
+            List<RestaurantTableList> tables = new List<RestaurantTableList>();
+            Restaurant r = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID());
+            int restaurant_id = r.Id;
+            string tablename = "";
+            int totalseats = 0;
+
+            if ((!string.IsNullOrEmpty(Section1Name)) && (Section1Seats > 0))
+            {
+                for (int i = 1; i <= Section1Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section1Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 1, true));
+                }  
+            }
+
+            if ((!string.IsNullOrEmpty(Section2Name)) && (Section2Seats > 0))
+            {
+                for (int i = 1; i <= Section2Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section2Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 2, true));
+                }
+            }
+
+            if ((!string.IsNullOrEmpty(Section3Name)) && (Section3Seats > 0))
+            {
+                for (int i = 1; i <= Section3Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section3Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 3, true));
+                }
+            }
+
+            if ((!string.IsNullOrEmpty(Section4Name)) && (Section4Seats > 0))
+            {
+                for (int i = 1; i <= Section4Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section4Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 4, true));
+                }
+            }
+
+            if ((!string.IsNullOrEmpty(Section5Name)) && (Section5Seats > 0))
+            {
+                for (int i = 1; i <= Section5Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section5Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 5, true));
+                }
+            }
+
+            if ((!string.IsNullOrEmpty(Section6Name)) && (Section6Seats > 0))
+            {
+                for (int i = 1; i <= Section6Seats; i++)
+                {
+                    tablename = "";
+                    tablename = Section6Name + " " + i;
+                    totalseats++;
+                    tables.Add(new RestaurantTableList(restaurant_id, tablename, false, -1, totalseats, 6, true));
+                }
+            }
+
+            _restaurantRepository.UpdateSections(restaurant_id, Section1Name, Section2Name, Section3Name, Section4Name, Section5Name, Section6Name, tables);
+
+            return Redirect("~/Restaurant/Dashboard");
+        }
+
+        public IActionResult Occupy(int table_id)
+        {
+            int restaurant_id = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id;
+            _restaurantRepository.OccupyTable(restaurant_id, table_id);
+            return Redirect("~/Restaurant/Dashboard");
+        }
+
+        public IActionResult Free(int table_id)
+        {
+            int restaurant_id = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id;
+            _restaurantRepository.FreeTable(restaurant_id, table_id);
+            return Redirect("~/Restaurant/Dashboard");
+        }
+
+        public IActionResult RefreshWaits()
+        {
+            _restaurantRepository.GetRestaurants();
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
 
     }
 }

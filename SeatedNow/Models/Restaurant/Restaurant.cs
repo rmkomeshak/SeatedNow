@@ -40,6 +40,31 @@ namespace SeatedNow.Models
             Color = color;
         }
 
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color, string keyword1, string keyword2, string keyword3)
+        {
+            Id = id;
+            Name = name;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipcode;
+            PhoneNumber = phoneNumber;
+            ImagePath = imagePath;
+            IsVerified = isVerified;
+            OwnerId = ownerId;
+            EventKey = eventKey;
+            Description = description;
+            Color = color;
+            Keyword1 = keyword1;
+            Keyword2 = keyword2;
+            Keyword3 = keyword3;
+
+            Tags = new List<string>();
+            Tags.Add(Keyword1);
+            Tags.Add(Keyword2);
+            Tags.Add(Keyword3);
+        }
+
         public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
         {
             Name = name;
@@ -88,22 +113,6 @@ namespace SeatedNow.Models
             Tags = tags;
         }
 
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string color, string keyword1, string keyword2, string keyword3)
-        {
-            Id = id;
-            Name = name;
-            Address = address;
-            City = city;
-            State = state;
-            ZipCode = zipcode;
-            PhoneNumber = phoneNumber;
-            Color = color;
-            Keyword1 = keyword1;
-            Keyword2 = keyword2;
-            Keyword3 = keyword3;
-
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -133,6 +142,8 @@ namespace SeatedNow.Models
         public RestaurantStats Stats { get; set; }
 
         public IEnumerable<RestaurantTableList> Tables { get; set; }
+
+        public List<RestaurantSection> Sections { get; set; }
          
         public List<string> Tags { get; set; }
 

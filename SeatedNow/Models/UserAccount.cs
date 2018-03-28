@@ -27,15 +27,15 @@ namespace SeatedNow.Models
         [Key]
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "This field is erquired")]
+        [Required(ErrorMessage = "This field is required")]
         public string Name { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "This field is erquired")]
+        [Required(ErrorMessage = "This field is required")]
         public string Email { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "This field is erquired")]
+        [Required(ErrorMessage = "This field is required")]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.Password)]
