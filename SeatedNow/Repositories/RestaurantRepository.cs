@@ -271,7 +271,7 @@ namespace SeatedNow.Repositories
 
             string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
             int dbid = -1;
-            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE name = '" + name + "'";
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] WHERE name LIKE '%" + name + "%'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
