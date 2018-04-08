@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Managers;
 using SeatedNow.Models;
@@ -12,6 +13,7 @@ namespace SeatedNow.Controllers
     {
         IUserRepository _userRepository = new UserRepository();
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
+        IStatsRepository _statsRepository = new StatsRepository();
         UserSession _userSessionManager = new UserSession();
 
 
@@ -60,7 +62,11 @@ namespace SeatedNow.Controllers
             {
                 return Redirect("~/");
             }
-            return PartialView(_restaurantRepository.GetRestaurantByID(Id));
+
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
+
+            return PartialView(restaurant);
         }
 
         public IActionResult CreateAccount(int Id)
@@ -90,13 +96,16 @@ namespace SeatedNow.Controllers
             return PartialView(_userRepository.GetUserByID(id));
         }
 
-        public IActionResult DetailsRestaurant(int id)
+        public IActionResult DetailsRestaurant(int Id)
         {
             if (_userSessionManager.GetRole() != "Admin")
             {
                 return Redirect("~/");
             }
-            return PartialView(_restaurantRepository.GetRestaurantByID(id));
+            Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
+            restaurant.Tags = _statsRepository.GetTagsByRestaurantID(Id);
+
+            return PartialView(restaurant);
         }
 
         public IActionResult SendCreateAccount(string Name, string Email, string PhoneNumber, string Password, string Role)
@@ -167,8 +176,8 @@ namespace SeatedNow.Controllers
             return Redirect("~/Admin/Accounts");
         }
 
-
-        public IActionResult SendCreateRestaurant(string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId, string Description)
+       
+        public IActionResult SendCreateRestaurant(string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
         {
 
             if (_userSessionManager.GetRole() != "Admin")
@@ -176,8 +185,8 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
-            Restaurant restaurant = new Restaurant(Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId, Description);
-            _restaurantRepository.RegisterNewRestaurant(restaurant);
+            Restaurant r = new Restaurant(Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);
+            _restaurantRepository.RegisterNewRestaurant(r);
 
             if (_userSessionManager.GetRole() == "Admin")
             {
@@ -193,7 +202,7 @@ namespace SeatedNow.Controllers
             }
         }
 
-        public IActionResult SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, bool IsVerified, int OwnerId, string Description)
+        public IActionResult SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
         {
 
             if (_userSessionManager.GetRole() != "Admin")
@@ -201,8 +210,8 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
-            Restaurant restaurant = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, IsVerified, OwnerId, Description);
-            _restaurantRepository.UpdateRestaurant(restaurant);
+            Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);
+            _restaurantRepository.UpdateRestaurant(r);
             return Redirect("Restaurants");
         }
 

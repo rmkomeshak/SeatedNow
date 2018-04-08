@@ -399,7 +399,6 @@ namespace SeatedNow.Repositories
         public void RefreshWaitTime(int RestaurantId)
         {
 
-            Console.WriteLine("----------------------------------Running REFRESH------------------------------------");
             int openTables = 0;
             string opentablesquery = "SELECT count(*) FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + RestaurantId + "' AND taken='false'";
 
@@ -428,7 +427,6 @@ namespace SeatedNow.Repositories
 
         public void SetWaitTime(int RestaurantId, int Minutes)
         {
-            Console.WriteLine("----------------------------------Running SET------------------------------------");
             string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET wait_time = '" + Minutes + "' WHERE restaurant_id = '" + RestaurantId + "'";
 
             connection.Open();
@@ -441,7 +439,6 @@ namespace SeatedNow.Repositories
 
         public int GetNumReservations(int RestaurantId)
         {
-            Console.WriteLine("----------------------------------Running GETNUM------------------------------------");
 
             int numReservations = 0;
             string getnumquery = "SELECT count(*) FROM [dbo].[Reservations] WHERE restaurant_id = '" + RestaurantId + "'";

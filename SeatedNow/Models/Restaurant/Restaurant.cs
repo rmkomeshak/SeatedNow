@@ -7,23 +7,8 @@ namespace SeatedNow.Models
 {
     public class Restaurant
     {
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description)
-        {
-            Id = id;
-            Name = name;
-            Address = address;
-            City = city;
-            State = state;
-            ZipCode = zipcode;
-            PhoneNumber = phoneNumber;
-            ImagePath = imagePath;
-            IsVerified = isVerified;
-            OwnerId = ownerId;
-            EventKey = eventKey;
-            Description = description;
-        }
 
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color)
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color, string website, int price)
         {
             Id = id;
             Name = name;
@@ -38,9 +23,11 @@ namespace SeatedNow.Models
             EventKey = eventKey;
             Description = description;
             Color = color;
+            Website = website;
+            Price = price;
         }
 
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color, string keyword1, string keyword2, string keyword3)
+        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color, string keyword1, string keyword2, string keyword3, string website, int price)
         {
             Id = id;
             Name = name;
@@ -58,6 +45,8 @@ namespace SeatedNow.Models
             Keyword1 = keyword1;
             Keyword2 = keyword2;
             Keyword3 = keyword3;
+            Price = price;
+            Website = website;
 
             Tags = new List<string>();
             Tags.Add(Keyword1);
@@ -65,7 +54,7 @@ namespace SeatedNow.Models
             Tags.Add(Keyword3);
         }
 
-        public Restaurant(string name, string address, string city, string zipcode, string state, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
+        public Restaurant(string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string eventKey, string description, string color, string keyword1, string keyword2, string keyword3, string website, int price)
         {
             Name = name;
             Address = address;
@@ -76,42 +65,21 @@ namespace SeatedNow.Models
             ImagePath = imagePath;
             IsVerified = isVerified;
             OwnerId = ownerId;
-            EventKey = "";
+            EventKey = eventKey;
             Description = description;
+            Color = color;
+            Keyword1 = keyword1;
+            Keyword2 = keyword2;
+            Keyword3 = keyword3;
+            Price = price;
+            Website = website;
+
+            Tags = new List<string>();
+            Tags.Add(Keyword1);
+            Tags.Add(Keyword2);
+            Tags.Add(Keyword3);
         }
 
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description)
-        {
-            Id = id;
-            Name = name;
-            Address = address;
-            City = city;
-            State = state;
-            ZipCode = zipcode;
-            PhoneNumber = phoneNumber;
-            ImagePath = imagePath;
-            IsVerified = isVerified;
-            OwnerId = ownerId;
-            EventKey = "";
-            Description = description;
-        }
-
-        public Restaurant(int id, string name, string address, string city, string state, string zipcode, string phoneNumber, string imagePath, bool isVerified, int ownerId, string description, List<string> tags)
-        {
-            Id = id;
-            Name = name;
-            Address = address;
-            City = city;
-            State = state;
-            ZipCode = zipcode;
-            PhoneNumber = phoneNumber;
-            ImagePath = imagePath;
-            IsVerified = isVerified;
-            OwnerId = ownerId;
-            EventKey = "";
-            Description = description;
-            Tags = tags;
-        }
 
         public int Id { get; set; }
 
@@ -138,6 +106,10 @@ namespace SeatedNow.Models
         public string Description { get; set; }
         
         public string Color { get; set; }
+
+        public string Website { get; set; }
+
+        public int Price { get; set; }
 
         public RestaurantStats Stats { get; set; }
 

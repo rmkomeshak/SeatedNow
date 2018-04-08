@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Managers;
 using SeatedNow.Models;
@@ -14,6 +15,7 @@ namespace SeatedNow.Controllers
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
         IStatsRepository _statsRepository = new StatsRepository();
         IReservationRepository _reservationRepository = new ReservationRepository();
+        BlobsRepository _blobsRepository = new BlobsRepository();
         UserSession _userSessionManager = new UserSession();
 
         public IActionResult Login()
@@ -217,9 +219,26 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3)
+        public IActionResult UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
         {
-            Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3);
+
+            if (UploadedLogo != null)
+            {
+                var fileExtensionLogo = "." + UploadedLogo.ContentType.Substring(UploadedLogo.ContentType.LastIndexOf("/") + 1);
+                string fileNameLogo = Id + Name + "Logo" + fileExtensionLogo;
+
+                _blobsRepository.UploadBlobAsync(UploadedMenu, fileNameLogo);
+            }
+
+            if (UploadedMenu != null)
+            {
+                var fileExtensionMenu = "." + UploadedMenu.ContentType.Substring(UploadedMenu.ContentType.LastIndexOf("/") + 1);
+                string fileNameMenu = Id + Name + "Menu" + fileExtensionMenu;
+
+                _blobsRepository.UploadBlobAsync(UploadedLogo, fileNameMenu);
+            }
+
+            Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);
 
             _restaurantRepository.UpdateRestaurant(r);
             return Redirect("~/Restaurant/Dashboard");

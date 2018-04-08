@@ -166,16 +166,18 @@
                     <span class="text-danger"></span>
                 </div>
                 <div class="form-group col-12">
-                    <label asp-for="ImagePath" class="control-label"></label>
-                    <input asp-for="ImagePath" class="form-control white-bg" />
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
-                </div>
-                <div class="form-group col-12">
-                    <label class="control-label">Menu File</label>
+                    <label class="control-label">Logo</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile02">
-                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                            <input type="file" name="LogoUploaded" class="form-control" accept=".jpg,.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label class="control-label">Menu</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="MenuUploaded" class="form-control" accept=".pdf" />
                         </div>
                     </div>
                     <span class="text-danger"></span>
