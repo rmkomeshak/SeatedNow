@@ -61,6 +61,8 @@ namespace SeatedNow.Repositories
                 return false;
             }
 
+            Console.WriteLine("-------------------------------------------" + File.FileName);
+
             CloudBlobContainer container = GetCloudBlobContainer();
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(Name);
             blockBlob.Properties.ContentType = File.ContentType;
