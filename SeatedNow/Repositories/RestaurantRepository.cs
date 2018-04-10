@@ -618,6 +618,26 @@ namespace SeatedNow.Repositories
                 }
             }
         }
+
+        public bool CreateMetricsTable(string name)
+        {
+
+            string table_name = name.Replace(" ", "_") + "_Metrics";
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "CREATE TABLE " + table_name + " ( restaurant_id int, searches int,  time DATETIME() );";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+
+        }
        
         public bool InsertTables(List<RestaurantTableList> tables)
         {

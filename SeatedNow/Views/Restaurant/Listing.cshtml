@@ -103,8 +103,92 @@
                                     {
                                         <b>Sunday:</b> <span>TBA</span> <br />
                                     }
+                                
                                 </span>
                             </p>
+                            @{ 
+                                DateTime time = DateTime.Now;
+                                DayOfWeek day = time.DayOfWeek;
+                                string t = DateTime.Now.ToString("HH");
+                                int ti = Int32.Parse(t);
+                                bool IsOpen = false;
+
+                                if (day == DayOfWeek.Monday)
+                                {
+                                    if((ti < Model.Hours.MondayClose) && (ti >= Model.Hours.MondayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Tuesday)
+                                {
+                                    if ((ti < Model.Hours.TuesdayClose) && (ti >= Model.Hours.TuesdayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Wednesday)
+                                {
+                                    if ((ti < Model.Hours.WednsedayClose) && (ti >= Model.Hours.WednsedayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Thursday)
+                                {
+                                    if ((ti < Model.Hours.ThursdayClose) && (ti >= Model.Hours.ThursdayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Friday)
+                                {
+                                    if ((ti < Model.Hours.FridayClose) && (ti >= Model.Hours.FridayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Saturday)
+                                {
+                                    if ((ti < Model.Hours.SaturdayClose) && (ti >= Model.Hours.SaturdayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                                if (day == DayOfWeek.Sunday)
+                                {
+                                    if ((ti < Model.Hours.SundayClose) && (ti >= Model.Hours.SundayOpen))
+                                    {
+                                        IsOpen = true;
+                                    }
+
+                                }
+
+                            }
+
+                            @if (IsOpen)
+                            {
+                                <p style="color:green;"><b>OPEN</b></p>
+
+                            }
+                            else
+                            {
+                                <p style="color:red;"><b>CLOSED</b></p>
+
+                            }
+
                         </div>
                     </div>
                     <div class="col-lg-8" id="restaurant-info">

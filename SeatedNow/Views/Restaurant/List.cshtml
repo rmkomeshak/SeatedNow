@@ -82,7 +82,7 @@
                 </div>
             
 
-                @foreach(var restaurant in contents.RestaurantList) {
+                @foreach(var restaurant in contents.RestaurantList.Take(5)) {
                 <!-- RESTAURANT LISTING -->
                 <div class="sn-listing">
                     <div class="row align-items-center">

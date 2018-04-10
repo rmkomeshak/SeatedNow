@@ -119,6 +119,7 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Sections = _restaurantRepository.GetSections(Id);
 
             return PartialView(restaurant);
         }

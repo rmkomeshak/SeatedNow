@@ -32,5 +32,6 @@ namespace SeatedNow.Repositories
         List<RestaurantSection> GetSections(int restaurant_id);
         bool OccupyTable(int restaurant_id, int table_id);
         bool FreeTable(int restaurant_id, int table_id);
+        bool CreateMetricsTable(string name);
     }
 }
