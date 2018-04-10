@@ -200,7 +200,13 @@
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reserveSeat">Reserve My Seat</button>
                             </div>
                         </div>
-                        <p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode </span></p>
+                        @{ 
+                            string b = "https://www.google.com/maps/dir/Current+Location/";
+
+                            string gstring = Model.Address.Replace(" ", "+");
+                            gstring += "+" + Model.City + "+" + Model.State + "+" + Model.ZipCode;
+                        }
+                        <a href="@(b + gstring)" target="_blank"><p><i class="fas fa-map-marker-alt"></i><span id="restaurant-location">@Model.Address, @Model.City, @Model.State @Model.ZipCode</span></p></a>
                         <!--GOOGLE MAPS STUFF-->
                         <div id="googlemap" align="center">
                             <div id="floating-panel" style="display:none;">
