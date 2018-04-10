@@ -20,7 +20,7 @@
             <h4 id="restaurant-wait-time" style="color: #fff; font-size: 20px; margin-bottom: 30px;"><b>Wait time:</b> @Model.Stats.WaitTime minutes</h4>
             @foreach (var tag in Model.Tags)
             {
-                <button id="restauraunt-keyword-1" type="button" class="btn btn-outline-light" style="margin: 5px;">#@tag</button>
+                <a asp-action="SearchRestaurants" asp-route-searchquery="#@tag" id="restauraunt-keyword-1"  class="btn btn-outline-light" style="margin: 5px;">#@tag</a>
             }
 
         </div>
