@@ -31,25 +31,57 @@ namespace SeatedNow.Repositories
                                     + restaurant.PhoneNumber + "', '" + restaurant.ImagePath + "', '"
                                     + restaurant.IsVerified + "', '" + restaurant.OwnerId + "' ,'"
                                     + restaurant.EventKey + "', '" + restaurant.Description + "', '"
-                                    + restaurant.Color + "', '" + restaurant.Website + "', '"
-                                    + restaurant.Price +  "')";
-           
+                                    + restaurant.Color + "', '" + restaurant.Price + "', '"
+                                    + restaurant.Website + "')";
+
                 using (SqlCommand command = new SqlCommand(sendqueryRestaurant, connection))
                 {
                     command.ExecuteNonQuery();
                 }
+                connection.Close();
 
-                /*
-                string sendqueryRestaurants_Stats = "INSERT INTO [dbo].[Restaurant_Stats] VALUES ('" + restaurant.Id + "', '0', '0', '0', '0')";
+                int recentID = GetRecentRestaurantID();
+
+                connection.Open();
+                string sendqueryRestaurantTags = "INSERT INTO [dbo].[Restaurant_Keywords] VALUES ('" + recentID + "','" + restaurant.Keyword1 + "', '" + restaurant.Keyword2 + "', '" + restaurant.Keyword3 +"', '0')";
+
+                using (SqlCommand command = new SqlCommand(sendqueryRestaurantTags, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+
+                string sendqueryRestaurants_Stats = "INSERT INTO [dbo].[Restaurant_Stats] VALUES ('" + recentID + "', '0', '0', '0', '0', '0')";
 
                 using (SqlCommand command = new SqlCommand(sendqueryRestaurants_Stats, connection))
                 {
                     command.ExecuteNonQuery();
                 }
-                */
+                
 
                 connection.Close();
             }
+        }
+
+        public int GetRecentRestaurantID()
+        {
+            int recentID = -1;
+
+            connection.Open();
+            string sendquery = "SELECT TOP 1 id FROM [dbo].[Restaurants] ORDER BY id DESC";
+            using (SqlCommand getidcommand = new SqlCommand(sendquery, connection))
+            {
+
+                SqlDataReader reader = getidcommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    recentID = (int)reader["id"];
+                }
+            }
+
+            connection.Close();
+            return recentID;
         }
 
         public void getRestaurantTags()
@@ -186,7 +218,7 @@ namespace SeatedNow.Repositories
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
 
-                _statsRepository.RefreshWaitTime(dbid);
+                //_statsRepository.RefreshWaitTime(dbid);
             }
 
             connection.Close();
@@ -302,39 +334,6 @@ namespace SeatedNow.Repositories
             return restaurants;
         }
 
-        public List<RestaurantListViewModel> GetRestaurantsByReservations()
-        {
-            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
-
-            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
-            int dbid = -1;
-            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] AS m JOIN [dbo].[Restaurant_Stats] AS p on p.restaurant_id = m.id WHERE m.verified = 'true' ORDER BY p.reservations DESC";
-
-            connection.Open();
-            SqlCommand command = new SqlCommand(checkquery, connection);
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                dbid = (int)reader["id"];
-                dbname = reader["name"].ToString();
-                dbaddress = reader["address"].ToString();
-                dbcity = reader["city"].ToString();
-                dbstate = reader["state"].ToString();
-                dbzipcode = reader["zipcode"].ToString();
-                dbimage = reader["image"].ToString();
-
-                RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
-                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
-
-                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
-            }
-
-            connection.Close();
-            return restaurants;
-        }
-
         public List<RestaurantListViewModel> GetRestaurantsByTags(List<string> tags)
         {
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
@@ -380,6 +379,43 @@ namespace SeatedNow.Repositories
 
         }
 
+        public List<RestaurantListViewModel> GetRestaurantsByReservations()
+        {
+            List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
+
+            string dbname = "", dbaddress = "", dbcity = "", dbstate = "", dbzipcode = "", dbimage = "";
+            int dbid = -1;
+            string checkquery = "SELECT id, name, address, city, state, zipcode, image FROM [dbo].[Restaurants] AS m JOIN [dbo].[Restaurant_Stats] AS p on p.restaurant_id = m.id WHERE m.verified = 'true' ORDER BY p.reservations DESC";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(checkquery, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                dbid = (int)reader["id"];
+                dbname = reader["name"].ToString();
+                dbaddress = reader["address"].ToString();
+                dbcity = reader["city"].ToString();
+                dbstate = reader["state"].ToString();
+                dbzipcode = reader["zipcode"].ToString();
+                dbimage = reader["image"].ToString();
+
+                RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
+                List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
+
+                Console.WriteLine("----------------------------------------------------" + dbid + "-" + dbname);
+                Console.WriteLine("----------------------------------------------------" + restaurantStats.TotalRatings);
+                Console.WriteLine("----------------------------------------------------" + tags[0] + tags[1] + tags[2]);
+
+                restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
+            }
+
+            connection.Close();
+            return restaurants;
+        }
+
         public List<RestaurantListViewModel> GetRestaurantsByRatings()
         {
             List<RestaurantListViewModel> restaurants = new List<RestaurantListViewModel>();
@@ -405,6 +441,10 @@ namespace SeatedNow.Repositories
 
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
                 List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
+
+                Console.WriteLine("----------------------------------------------------" + dbid);
+                Console.WriteLine("----------------------------------------------------" + restaurantStats.TotalRatings);
+                Console.WriteLine("----------------------------------------------------" + tags[0] + tags[1] + tags[2]);
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
             }
@@ -438,6 +478,11 @@ namespace SeatedNow.Repositories
 
                 RestaurantStats restaurantStats = _statsRepository.GetStatsByRestaurantId(dbid);
                 List<string> tags = _statsRepository.GetTagsByRestaurantID(dbid);
+
+                Console.WriteLine("----------------------------------------------------" + dbid);
+                Console.WriteLine("----------------------------------------------------" + restaurantStats.TotalRatings);
+                Console.WriteLine("----------------------------------------------------" + tags[0] + tags[1] + tags[2]);
+
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats, tags));
             }
@@ -790,6 +835,5 @@ namespace SeatedNow.Repositories
 
             return true;
         }
-
     }
 }

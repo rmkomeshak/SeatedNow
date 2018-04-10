@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group col-12" hidden>
                             <label class="control-label">Website URL</label>
-                            <input class="form-control white-bg" />
+                            <input asp-for="Website" class="form-control white-bg" />
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
@@ -110,23 +110,23 @@
                             <span class="text-danger"></span>
                         </div>
                         @{
-                    string keyword1 = "tag", keyword2 = "tag", keyword3 = "tag";
-                    string[] tags = Model.Tags.ToArray();
+        string keyword1 = "tag", keyword2 = "tag", keyword3 = "tag";
+        string[] tags = Model.Tags.ToArray();
 
-                    if (!string.IsNullOrEmpty(tags[0]))
-                    {
-                        keyword1 = tags[0];
-                    }
+        if (!string.IsNullOrEmpty(tags[0]))
+        {
+            keyword1 = tags[0];
+        }
 
-                    if (!string.IsNullOrEmpty(tags[1]))
-                    {
-                        keyword2 = tags[1];
-                    }
+        if (!string.IsNullOrEmpty(tags[1]))
+        {
+            keyword2 = tags[1];
+        }
 
-                    if (!string.IsNullOrEmpty(tags[2]))
-                    {
-                        keyword3 = tags[2];
-                    }
+        if (!string.IsNullOrEmpty(tags[2]))
+        {
+            keyword3 = tags[2];
+        }
                         }
 
                         <div class="form-group col-4">
@@ -150,18 +150,18 @@
 
                         <div class="form-group col-12">
                             <label class="control-label">Price Per Person</label>
-                            <select class="form-control white-bg">
-                                <option>Unspecified</option>
-                                <option>$10 and under</option>
-                                <option>$20 and under</option>
-                                <option>$30 and under</option>
-                                <option>$40 and under</option>
-                                <option>$50 and under</option>
-                                <option>$60 and under</option>
-                                <option>$70 and under</option>
-                                <option>$80 and under</option>
-                                <option>$90 and under</option>
-                                <option>$100 and under</option>
+                            <select asp-for="Price" class="form-control white-bg">
+                                <option value="0">Unspecified</option>
+                                <option value="1">$10 and under</option>
+                                <option value="2">$20 and under</option>
+                                <option value="3">$30 and under</option>
+                                <option value="4">$40 and under</option>
+                                <option value="5">$50 and under</option>
+                                <option value="6">$60 and under</option>
+                                <option value="7">$70 and under</option>
+                                <option value="8">$80 and under</option>
+                                <option value="9">$90 and under</option>
+                                <option value="10">$100 and under</option>
                             </select>
                             <span class="text-danger"></span>
                         </div>

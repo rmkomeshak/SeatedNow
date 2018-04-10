@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-group col-12">
                             <label class="control-label">Website URL</label>
-                            <input class="form-control white-bg" />
+                            <input asp-for="Website" class="form-control white-bg" />
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group col-12">
@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group col-12">
                             <label>Featured Color</label>
-                            <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" class="form-control white-bg" />
+                            <input asp-for="Color" style="padding: 3px 5px; height: 40px;" type="color" name="Color" value="" class="form-control white-bg" />
                             <span class="text-danger"></span>
                         </div>
 
@@ -126,18 +126,18 @@
 
                         <div class="form-group col-12">
                             <label class="control-label">Price Per Person</label>
-                            <select class="form-control white-bg">
-                                <option>Unspecified</option>
-                                <option>$10 and under</option>
-                                <option>$20 and under</option>
-                                <option>$30 and under</option>
-                                <option>$40 and under</option>
-                                <option>$50 and under</option>
-                                <option>$60 and under</option>
-                                <option>$70 and under</option>
-                                <option>$80 and under</option>
-                                <option>$90 and under</option>
-                                <option>$100 and under</option>
+                            <select asp-for="Price" class="form-control white-bg">
+                                <option value="0">Unspecified</option>
+                                <option value="1">$10 and under</option>
+                                <option value="2">$20 and under</option>
+                                <option value="3">$30 and under</option>
+                                <option value="4">$40 and under</option>
+                                <option value="5">$50 and under</option>
+                                <option value="6">$60 and under</option>
+                                <option value="7">$70 and under</option>
+                                <option value="8">$80 and under</option>
+                                <option value="9">$90 and under</option>
+                                <option value="10">$100 and under</option>
                             </select>
                             <span class="text-danger"></span>
                         </div>
@@ -145,7 +145,7 @@
                             <label class="control-label">Logo</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="LogoUploaded" class="form-control white-bg" accept=".jpg,.png" />
+                                    <input type="file" name="UploadedLogo" class="form-control white-bg" accept=".jpg,.png" />
                                 </div>
                             </div>
                         </div>
@@ -153,17 +153,17 @@
                             <label class="control-label">Menu</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="MenuUploaded" class="form-control white-bg" accept=".pdf" />
+                                    <input type="file" name="UploadedMenu" class="form-control white-bg" accept=".pdf" />
                                 </div>
                             </div>
                             <span class="text-danger"></span>
                         </div>
-                        <div class="form-group col-12" >
+                        <div class="form-group col-12">
                             <label asp-for="OwnerId" class="control-label"></label>
                             <input asp-for="OwnerId" class="form-control white-bg" />
                             <span asp-validation-for="OwnerId" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-12" >
+                        <div class="form-group col-12">
                             <label asp-for="EventKey" class="control-label"></label>
                             <input asp-for="EventKey" class="form-control white-bg" />
                             <span asp-validation-for="EventKey" class="text-danger"></span>

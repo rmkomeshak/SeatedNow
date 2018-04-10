@@ -188,6 +188,7 @@ namespace SeatedNow.Controllers
             Restaurant r = new Restaurant(Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);
             _restaurantRepository.RegisterNewRestaurant(r);
 
+
             if (_userSessionManager.GetRole() == "Admin")
             {
                 return Redirect("Restaurants");

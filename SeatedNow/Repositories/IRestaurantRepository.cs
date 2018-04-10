@@ -10,6 +10,7 @@ namespace SeatedNow.Repositories
     {
         void RegisterNewRestaurant(Restaurant restaurant);
         void DeleteRestaurant(int id);
+        int GetRecentRestaurantID();
         List<RestaurantListViewModel> GetRestaurants();
         List<RestaurantListViewModel> GetRestaurantsByName(string name);
         List<RestaurantListViewModel> GetRestaurantsByReservations();
