@@ -200,7 +200,7 @@
                                                 <h5>@name</h5>
                                                 <p>Reserved for @recent[i].Time.ToString().Substring(0, 9)</p>
                                                 <p class="small-info">For @recent[i].Guests people in the @recent[i].Section section</p>
-                                                <button type="button" class="btn btn-dark btn-sm">Reserve Again</button>
+                                                <a href="~/Restaurant/Listing/@recent[i].RestaurantID" class="btn btn-dark btn-sm">Reserve Again</a>
                                                 <div class="btn-group mr-2" role="group">
                                                     <a asp-action="List" asp-route-resid="@recent[i].ReservationID" style="color:red; margin-left:5px;"><b>X</b></a>
                                                 </div>

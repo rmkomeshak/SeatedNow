@@ -245,7 +245,14 @@
                         {
                             <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
                         }
-                        @foreach (var rating in Model.Ratings)
+
+                        @{
+                            Predicate<RestaurantRatings> isInvalid = delegate (RestaurantRatings rating) { return (rating.Comment.Equals("") || (rating.Comment == null) || rating.Rating <= 0); };
+                            Model.Ratings.RemoveAll(isInvalid);
+                            Model.Ratings.Reverse();
+                        }
+
+                        @foreach (var rating in Model.Ratings.Take(5))
                         {
                             <div class="listing-review">
                                 <span class="listing-rating">
