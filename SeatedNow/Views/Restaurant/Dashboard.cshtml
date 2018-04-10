@@ -5,6 +5,10 @@
 
 @{
     ViewData["Title"] = "Dashboard";
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
+    string urlRestaurantLogo = Model.Id + Model.Name + "Logo.png";
+    string urlFullLogo = urlBase + urlRestaurantLogo;
 }
 
 <!--Sidebar-->
@@ -15,7 +19,7 @@
             <div class="sidebar">
                 <a href="/restaurant/listing/@restaurant.Id" target="_blank" style="color: #fff;">
                     <div class="sidebar-title">
-                        <img src="~/images/restaurants/@restaurant.ImagePath" /> @restaurant.Name
+                        <img src="@urlFullLogo" /> @restaurant.Name
                     </div>
                 </a>
                 <div class="sidebar-links">

@@ -163,19 +163,19 @@ namespace SeatedNow.Controllers
             switch (SortBy)
             {
                 case "reservations":
-                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations());
                     ViewBag.SortBy = "Most Reserved Restaurants";
                     break;
                 case "ratings":
-                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByRatings(), _restaurantRepository.GetRestaurantsByRatings());
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByRatings());
                     ViewBag.SortBy = "Highest Rated Restaurants";
                     break;
                 case "waittime":
-                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByWaitTime(), _restaurantRepository.GetRestaurantsByWaitTime());
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByWaitTime());
                     ViewBag.SortBy = "Shortest Wait Time";
                     break;
                 default:
-                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations(), _restaurantRepository.GetRestaurantsByReservations());
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations());
                     ViewBag.SortBy = "Most Reserved Restaurants";
                     break;
             }

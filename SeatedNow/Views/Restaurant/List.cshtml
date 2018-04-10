@@ -4,6 +4,8 @@
 @{
     var contents = Model;
     ViewData["Title"] = "Reservations made simple";
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
 }
 
 <div class="container-fluid body-content sn-image sn8 fade70" style="color: #fff; padding: 100px 0;">
@@ -83,13 +85,16 @@
             
 
                 @foreach(var restaurant in contents.RestaurantList) {
+
+                    string urlRestaurantLogo = restaurant.ID + restaurant.Name + "Logo.png";
+                    string urlFullLogo = urlBase + urlRestaurantLogo;
                 <!-- RESTAURANT LISTING -->
                 <div class="sn-listing">
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="logo">
                                 <a href="~/Restaurant/Listing/@restaurant.ID">
-                                    <img src="~/images/restaurants/@restaurant.ImagePath"  alt="@restaurant.Name" onerror="this.style.display='none'" />
+                                    <img src="@urlFullLogo"  alt="@restaurant.Name" onerror="this.style.display='none'" />
                                 </a>
                             </div>
                         </div>
@@ -183,12 +188,15 @@
                                             <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                                 <div class="logo">
                                                     <a href="Listing/@recent[i].RestaurantID">
-                                                        @foreach (var restaurant in contents.Restaurants)
+                                                        @foreach (var restaurant in contents.RestaurantList)
                                                         {
+                                                            string urlRestaurantLogo = restaurant.ID + restaurant.Name + "Logo.png";
+                                                            string urlFullLogo = urlBase + urlRestaurantLogo;
+
                                                             if (restaurant.ID == recent[i].RestaurantID)
                                                             {
-                                    
-                                                                <img src="~/images/restaurants/@restaurant.ImagePath" style="max-height:100px; max-width: 75px; margin-left: 5px;" alt="@restaurant.Name" onerror="this.style.display='none'" />
+
+                                                                <img src="@urlFullLogo" style="max-height:100px; max-width: 75px; margin-left: 5px;" alt="@restaurant.Name" onerror="this.style.display='none'" />
                                                                 name = restaurant.Name;
                                                                 break;
                                                             }

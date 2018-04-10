@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="SendUpdateRestaurant" id="updateRestaurantForm">
+        <form asp-action="SendUpdateRestaurant" id="updateRestaurantForm" enctype="multipart/form-data">
             <div class="row" style="max-width: 700px;">
                 <div class="col-12">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -169,7 +169,7 @@
                             <label class="control-label">Logo</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="LogoUploaded" class="form-control white-bg" accept=".jpg,.png" />
+                                    <input type="file" name="UploadedLogo" class="form-control white-bg" accept=".jpg,.png" />
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                             <label class="control-label">Menu</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="MenuUploaded" class="form-control white-bg" accept=".pdf" />
+                                    <input type="file" name="UploadedMenu" class="form-control white-bg" accept=".pdf" />
                                 </div>
                             </div>
                             <span class="text-danger"></span>

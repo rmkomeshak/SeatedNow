@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeatedNow.Managers;
@@ -15,6 +16,7 @@ namespace SeatedNow.Controllers
         IRestaurantRepository _restaurantRepository = new RestaurantRepository();
         IStatsRepository _statsRepository = new StatsRepository();
         UserSession _userSessionManager = new UserSession();
+        BlobsRepository _blobsRepository = new BlobsRepository();
 
 
         public IActionResult Index()
@@ -203,12 +205,44 @@ namespace SeatedNow.Controllers
             }
         }
 
-        public IActionResult SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
+        public async Task<IActionResult> SendUpdateRestaurant(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
         {
 
             if (_userSessionManager.GetRole() != "Admin")
             {
                 return Redirect("~/");
+            }
+
+            if (UploadedLogo != null)
+            {
+                var fileExtensionLogo = "." + UploadedLogo.ContentType.Substring(UploadedLogo.ContentType.LastIndexOf("/") + 1);
+                string fileNameLogo = Id + Name + "Logo" + ".png";
+
+                if (await _blobsRepository.DoesBlobExistAsync(fileNameLogo))
+                {
+                    await _blobsRepository.DeleteBlobAsync(fileNameLogo);
+                    await _blobsRepository.UploadBlobAsync(UploadedLogo, fileNameLogo);
+                }
+                else
+                {
+                    await _blobsRepository.UploadBlobAsync(UploadedLogo, fileNameLogo);
+                }
+            }
+
+            if (UploadedMenu != null)
+            {
+                var fileExtensionMenu = "." + UploadedMenu.ContentType.Substring(UploadedMenu.ContentType.LastIndexOf("/") + 1);
+                string fileNameMenu = Id + Name + "Menu" + fileExtensionMenu;
+
+                if (await _blobsRepository.DoesBlobExistAsync(fileNameMenu))
+                {
+                    await _blobsRepository.DeleteBlobAsync(fileNameMenu);
+                    await _blobsRepository.UploadBlobAsync(UploadedMenu, fileNameMenu);
+                }
+                else
+                {
+                    await _blobsRepository.UploadBlobAsync(UploadedMenu, fileNameMenu);
+                }
             }
 
             Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);

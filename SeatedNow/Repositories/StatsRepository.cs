@@ -65,7 +65,7 @@ namespace SeatedNow.Repositories
         public List<string> GetTagsByRestaurantName(string name)
         {
             int dbrestaurantid = -1;
-            string checkquery = "SELECT id FROM [dbo].[Restaurants] WHERE name = '" + name + "'";
+            string checkquery = "SELECT id FROM [dbo].[Restaurants] WHERE name LIKE '%" + name + "%'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
