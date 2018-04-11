@@ -24,7 +24,7 @@
                 </a>
                 <div class="sidebar-links">
                     <a class="active-link" onclick="loadPage(@restaurant.Id, 'DashOverview');"><i class="fas fa-list-alt"></i> Manage Seats</a>
-                    <a class="" onclick="loadPage(@restaurant.Id, 'DashStatistics');"><i class="fas fa-chart-bar"></i> Information</a>
+                    <a class="" onclick="loadPage(@restaurant.Id, 'DashStatistics'); loadPage(@restaurant.Id, 'DashStatistics');"><i class="fas fa-chart-bar"></i> Information</a>
                     <a class="" onclick="loadPage(@restaurant.Id, 'DashFloorplan');"><i class="fas fa-desktop"></i> Floor Plan</a>
 
                     <a data-toggle="collapse" href="#settings-collapse"><i class="fas fa-cog"></i> Settings</a>
@@ -38,7 +38,9 @@
                 </div>
             </div>
             <div id="dashboardView" class="main-content">
-                @Html.Partial("~/Views/Restaurant/DashOverview.cshtml")
+                <script>
+                    loadPage(@restaurant.Id, 'DashOverview');
+                </script>
             </div>
         </div>
     </div>
