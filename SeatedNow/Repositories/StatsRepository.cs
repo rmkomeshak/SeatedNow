@@ -410,7 +410,11 @@ namespace SeatedNow.Repositories
                 connection.Close();
             }
 
-            if (openTables <= 2 && openTables > 0)
+            if (openTables >= 3)
+            {
+                SetWaitTime(RestaurantId, 0);
+
+            } else if (openTables <= 2 && openTables > 0)
             {
                 SetWaitTime(RestaurantId, 5);
             } else
