@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -271,7 +272,15 @@ namespace SeatedNow.Controllers
                 }
             }
 
-            Restaurant r = new Restaurant(Id, Name, Address, City, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, Description, Color, Keyword1, Keyword2, Keyword3, Website, Price);
+            string regName = Regex.Replace(Name, "'", "''");
+            string regAddress = Regex.Replace(Address, "'", "''");
+            string regCity = Regex.Replace(City, "'", "''");
+            string regDescription = Regex.Replace(Description, "'", "''");
+            string regKeyword1 = Regex.Replace(Keyword1, "'", "''");
+            string regKeyword2 = Regex.Replace(Keyword2, "'", "''");
+            string regKeyword3 = Regex.Replace(Keyword3, "'", "''");
+
+            Restaurant r = new Restaurant(Id, regName, regAddress, regCity, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, regDescription, Color, regKeyword1, regKeyword2, regKeyword3, Website, Price);
 
             _restaurantRepository.UpdateRestaurant(r);
             return Redirect("~/Restaurant/Dashboard");
