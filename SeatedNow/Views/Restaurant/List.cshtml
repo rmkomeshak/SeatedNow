@@ -79,6 +79,9 @@
                             <div class="btn-group" role="group">
                                 <a class="btn btn-danger" asp-action="List" asp-route-SortBy="waittime">Wait Time</a>
                             </div>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-danger" style="color:white;" onclick="location.href='@Url.Action("RefreshWaits", "Restaurant")'"><i class="fas fa-sync-alt"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
