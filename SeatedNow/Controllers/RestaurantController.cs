@@ -182,6 +182,42 @@ namespace SeatedNow.Controllers
 
             return View(contents);
         }
+        
+        public IActionResult ListAll(string SortBy = "", int resid = 0)
+        {
+            if (_userSessionManager == null || !_userSessionManager.IsValid())
+                return Redirect("~/");
+
+            int userId = _userSessionManager.getID();
+            ListPage contents;
+
+            if (resid > 0)
+            {
+                _reservationRepository.DeleteReservation(resid);
+            }
+
+            switch (SortBy)
+            {
+                case "reservations":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations());
+                    ViewBag.SortBy = "Sorted by Most Reserved";
+                    break;
+                case "ratings":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByRatings());
+                    ViewBag.SortBy = "Sorted by Highest Ratings";
+                    break;
+                case "waittime":
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByWaitTime());
+                    ViewBag.SortBy = "Sorted by Wait Time";
+                    break;
+                default:
+                    contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByReservations());
+                    ViewBag.SortBy = "Sorted by Most Reserved";
+                    break;
+            }
+
+            return View(contents);
+        }
 
         public IActionResult SendRating(float rating, string comment, int restaurant_id)
         {
