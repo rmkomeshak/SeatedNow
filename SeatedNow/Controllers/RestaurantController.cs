@@ -369,6 +369,7 @@ namespace SeatedNow.Controllers
         {
             int restaurant_id = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id;
             _restaurantRepository.OccupyTable(restaurant_id, table_id);
+            _statsRepository.RefreshWaitTime(restaurant_id);
             return Redirect("~/Restaurant/Dashboard");
         }
 
@@ -376,6 +377,7 @@ namespace SeatedNow.Controllers
         {
             int restaurant_id = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id;
             _restaurantRepository.FreeTable(restaurant_id, table_id);
+            _statsRepository.RefreshWaitTime(restaurant_id);
             return Redirect("~/Restaurant/Dashboard");
         }
 

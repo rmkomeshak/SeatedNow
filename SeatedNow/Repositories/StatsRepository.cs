@@ -398,6 +398,7 @@ namespace SeatedNow.Repositories
 
         public void RefreshWaitTime(int RestaurantId)
         {
+            Random random = new Random();
 
             int openTables = 0;
             string opentablesquery = "SELECT count(*) FROM [dbo].[Restaurant_Tables] WHERE restaurant_id = '" + RestaurantId + "' AND taken='false'";
@@ -409,16 +410,25 @@ namespace SeatedNow.Repositories
                 connection.Close();
             }
 
-            if (openTables > 0)
+            if (openTables <= 2 && openTables > 0)
             {
-                SetWaitTime(RestaurantId, 0);
+                SetWaitTime(RestaurantId, 5);
             } else
             {
                 int estimatedWait = 0;
                 int numReservations = GetNumReservations(RestaurantId);
 
+                RestaurantStats stats = GetStatsByRestaurantId(RestaurantId);
 
-                estimatedWait = (int) (7.2 * numReservations);
+                double randomValue = random.NextDouble() * (4 - 2) + 2;
+
+                if (stats.Rating >= 4 || stats.Rating <= 1.5)
+                {
+                    estimatedWait = (int)(randomValue * numReservations * 1.25);
+                } else
+                {
+                    estimatedWait = (int)(randomValue * numReservations * (5 - stats.Rating));
+                }
 
                 SetWaitTime(RestaurantId, estimatedWait);
 

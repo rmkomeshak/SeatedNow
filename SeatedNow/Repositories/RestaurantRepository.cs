@@ -218,7 +218,7 @@ namespace SeatedNow.Repositories
 
                 restaurants.Add(new RestaurantListViewModel(dbid, dbname, dbaddress, dbcity, dbstate, dbzipcode, dbimage, restaurantStats));
 
-                //_statsRepository.RefreshWaitTime(dbid);
+                _statsRepository.RefreshWaitTime(dbid);
             }
 
             connection.Close();
