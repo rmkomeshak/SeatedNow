@@ -84,7 +84,7 @@
                 </div>
             
 
-                @foreach(var restaurant in contents.RestaurantList) {
+                @foreach(var restaurant in contents.RestaurantList.Take(5)) {
 
                     string urlRestaurantLogo = restaurant.ID + restaurant.Name + "Logo.png";
                     string urlFullLogo = urlBase + urlRestaurantLogo;

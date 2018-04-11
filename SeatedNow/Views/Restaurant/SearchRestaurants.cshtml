@@ -1,6 +1,6 @@
 ﻿@model SearchContent
 
-@{ 
+@{
     var results = Model.Results;
     var query = Model.Query;
 
@@ -8,6 +8,8 @@
     {
         query = query.Substring(1);
     }
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
 }
 
 @{
@@ -31,7 +33,7 @@
     <div class="row" style="padding-top: 50px; padding-bottom: 20px;">
         <div class="col-lg-8 offset-2">
 
-            @if(results != null)
+            @if (results != null)
             {
                 <h3 class="display-4" style="font-size: 40px; text-align: center; margin-bottom: 50px; color: #5d7337">@results.Count Result(s) related to "@query"</h3>
             }
@@ -45,51 +47,53 @@
             {
                 if (result.Name.ToLower().Equals(query.ToLower()))
                 {
+                    string urlRestaurantLogo = result.ID + result.Name + "Logo.png";
+                    string urlFullLogo = urlBase + urlRestaurantLogo;
                     <div class="sn-listing">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3">
-                            <div class="logo">
-                                <a href="~/Restaurant/Listing/@result.ID">
-                                    <img src="~/images/restaurants/@result.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'"/>
-                                </a>
+                        <div class="row align-items-center">
+                            <div class="col-lg-3">
+                                <div class="logo">
+                                    <a href="~/Restaurant/Listing/@result.ID">
+                                        <img src="@urlFullLogo" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
-                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
-                            <div class="keywords">
-                                @foreach (var tag in result.Tags)
-                                {
-                                    <div class="btn-group mr-2" role="group">
-                                        <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-3 text-center">
-                            <div class="ratings">
-                                @if (result.Stats.TotalRatings > 0)
-                                {
-                                    for (int i = 0; i < (int)result.Stats.Rating; i++)
+                            <div class="col-lg-6 text-center text-sm-left">
+                                <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
+                                <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
+                                <div class="keywords">
+                                    @foreach (var tag in result.Tags)
                                     {
-                                        <i class="fas fa-star"></i>
+                                        <div class="btn-group mr-2" role="group">
+                                            <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                        </div>
                                     }
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-center">
+                                <div class="ratings">
+                                    @if (result.Stats.TotalRatings > 0)
+                                    {
+                                        for (int i = 0; i < (int)result.Stats.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
 
-                                    for (int i = 5; i > (int)result.Stats.Rating; i--)
-                                    {
-                                        <i class="far fa-star"></i>
+                                        for (int i = 5; i > (int)result.Stats.Rating; i--)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                        <a class="ratings-link" href="~/Restaurant/Listing/@result.ID">Based on @result.Stats.TotalRatings reviews</a>
                                     }
-                                    <a class="ratings-link" href="~/Restaurant/Listing/@result.ID">Based on @result.Stats.TotalRatings reviews</a>
-                                }
-                                else
-                                {
-                                    <a><b>No Reviews</b></a>
-                                }
+                                    else
+                                    {
+                                        <a><b>No Reviews</b></a>
+                                    }
+                                </div>
+                                <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                             </div>
-                            <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                         </div>
                     </div>
-                </div>
 
                 }
 
@@ -100,51 +104,53 @@
             {
                 if (!result.Name.ToLower().Equals(query.ToLower()))
                 {
-                <div class="sn-listing">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3">
-                            <div class="logo">
-                                <a href="/">
-                                    <img src="~/images/restaurants/@result.ImagePath" alt="Restaurant Title" onerror="this.style.display='none'" />
-                                </a>
+                    string urlRestaurantLogo = result.ID + result.Name + "Logo.png";
+                    string urlFullLogo = urlBase + urlRestaurantLogo;
+                    <div class="sn-listing">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3">
+                                <div class="logo">
+                                    <a href="/">
+                                        <img src="@urlFullLogo" alt="Restaurant Title" onerror="this.style.display='none'" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
-                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
-                            <div class="keywords">
-                                @foreach (var tag in result.Tags)
-                                {
-                                    <div class="btn-group mr-2" role="group">
-                                        <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-3 text-center">
-                            <div class="ratings">
-                                @if (result.Stats.TotalRatings > 0)
-                                {
-                                    for (int i = 0; i < (int)result.Stats.Rating; i++)
+                            <div class="col-lg-6 text-center text-sm-left">
+                                <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@result.ID">@result.Name</a></h3>
+                                <span class="restaurant-location"><a href="~/Restaurant/Listing/@result.ID">@result.Address, @result.City, @result.ZipCode  @result.State</a></span>
+                                <div class="keywords">
+                                    @foreach (var tag in result.Tags)
                                     {
-                                        <i class="fas fa-star"></i>
+                                        <div class="btn-group mr-2" role="group">
+                                            <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                        </div>
                                     }
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-center">
+                                <div class="ratings">
+                                    @if (result.Stats.TotalRatings > 0)
+                                    {
+                                        for (int i = 0; i < (int)result.Stats.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
 
-                                    for (int i = 5; i > (int)result.Stats.Rating; i--)
-                                    {
-                                        <i class="far fa-star"></i>
+                                        for (int i = 5; i > (int)result.Stats.Rating; i--)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                        <a class="ratings-link" href="~/Restaurant/Listing/@result.ID">Based on @result.Stats.TotalRatings reviews</a>
                                     }
-                                    <a class="ratings-link" href="~/Restaurant/Listing/@result.ID">Based on @result.Stats.TotalRatings reviews</a>
-                                }
-                                else
-                                {
-                                    <a><b>No Reviews</b></a>
-                                }
+                                    else
+                                    {
+                                        <a><b>No Reviews</b></a>
+                                    }
+                                </div>
+                                <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                             </div>
-                            <a href="~/Restaurant/Listing/@result.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
                         </div>
                     </div>
-                </div>
                 }
             }
 

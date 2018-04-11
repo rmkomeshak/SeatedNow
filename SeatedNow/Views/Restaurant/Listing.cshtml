@@ -146,7 +146,7 @@
 
                                 if (day == DayOfWeek.Thursday)
                                 {
-                                    if ((ti < Model.Hours.ThursdayClose) && (ti >= Model.Hours.ThursdayOpen))
+                                    if ((ti <= Model.Hours.ThursdayClose) && (ti >= Model.Hours.ThursdayOpen))
                                     {
                                         IsOpen = true;
                                     }
