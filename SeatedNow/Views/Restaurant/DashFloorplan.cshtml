@@ -3,6 +3,10 @@
 @{
     var restaurant = Model;
     ViewData["Title"] = "FloorPlan";
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
+    string urlRestaurantFloorplan = Model.Id + Model.Name + "Floorplan.png";
+    string urlFullFloorplan = urlBase + urlRestaurantFloorplan;
 }
 
 <script type="text/javascript">
@@ -43,20 +47,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="floor-plan-image" style="background: #fff; padding: 5px; border-radius: 5px;  margin-bottom: 30px;">
-                        <img src="http://4.bp.blogspot.com/-3FSnC6TQ5iM/T9XAuQUhHOI/AAAAAAAABGA/doakEq5PsXM/s1600/restaurant+layout.jpg" style="max-width: 100%;" />
-                    </div>
-                    <div class="form-group mb-5">
-                        <label class="control-label">Floor Plan Image</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="restaurantFloorPlan">
-                                <label class="custom-file-label" for="restaurantFloorPlan">Choose file</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="">Upload</span>
-                            </div>
-                        </div>
-                        <span class="text-danger"></span>
+                        <img src="@urlFullFloorplan" style="max-width: 100%;" />
                     </div>
                 </div>
             </div>

@@ -221,7 +221,7 @@ namespace SeatedNow.Controllers
             return View(content);
         }
 
-        public async Task<IActionResult> UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo)
+        public async Task<IActionResult> UpdateAction(int Id, string Name, string Address, string City, string ZipCode, string State, string PhoneNumber, string ImagePath, string Description, string Color, int OwnerId, string EventKey, bool isVerified, string Keyword1, string Keyword2, string Keyword3, string Website, int Price, IFormFile UploadedMenu, IFormFile UploadedLogo, IFormFile UploadedFloorplan)
         {
 
             if (UploadedLogo != null)
@@ -252,6 +252,22 @@ namespace SeatedNow.Controllers
                 else
                 {
                     await _blobsRepository.UploadBlobAsync(UploadedMenu, fileNameMenu);
+                }
+            }
+
+            if (UploadedFloorplan != null)
+            {
+                var fileExtensionFloorplan = "." + UploadedFloorplan.ContentType.Substring(UploadedFloorplan.ContentType.LastIndexOf("/") + 1);
+                string fileNameFloorplan = Id + Name + "Floorplan" + ".png";
+
+                if (await _blobsRepository.DoesBlobExistAsync(fileNameFloorplan))
+                {
+                    await _blobsRepository.DeleteBlobAsync(fileNameFloorplan);
+                    await _blobsRepository.UploadBlobAsync(UploadedFloorplan, fileNameFloorplan);
+                }
+                else
+                {
+                    await _blobsRepository.UploadBlobAsync(UploadedFloorplan, fileNameFloorplan);
                 }
             }
 
