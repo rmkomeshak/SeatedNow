@@ -1,4 +1,9 @@
-﻿@model ListPage
+﻿
+@{
+    ViewData["Title"] = "Full Listing";
+}
+
+@model ListPage
 
 
 @{
@@ -25,59 +30,23 @@
     <div class="container" style="padding-top: 30px;">
         <div class="row">
             <div class="col-lg-8 text-center text-sm-left">
-                <div class="sn-top-keywords">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12">
-                            
-                            <h4 class="keyword-title">Today's Top Keywords</h4>
-
-                            <div class="button" role="group">
-
-                                
-                                
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#italian"><button class="btn btn-outline-light">italian</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#casual"><button class="btn btn-outline-light">casual</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#burgers"><button class="btn btn-outline-light">burgers</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#mexican"><button class="btn btn-outline-light">mexican</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#salad"><button class="btn btn-outline-light">salad</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#tacos"><button class="btn btn-outline-light">tacos</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#formal"><button class="btn btn-outline-light">formal</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#american"><button class="btn btn-outline-light">american</button></a>
-                               
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#outdoor"><button class="btn btn-outline-light">outdoor</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#chinese"><button class="btn btn-outline-light">chinese</button></a>
-
-                                <a asp-action="SearchRestaurants" asp-route-searchquery="#thai"><button class="btn btn-outline-light">thai</button></a>
-
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
 
                 <div class="sn-list-filter row">
                     <div class="col-5">
-                        <h2 style="margin-bottom: 20px; font-size: 22px; font-weight: 700;">@ViewBag.SortBy</h2>
-                        
+                        <h2 style="font-size: 26px; font-weight: 700;">All Restaurants</h2>
+                        <h6 style="margin-top: -10px;">@ViewBag.SortBy</h6>
+
                     </div>
                     <div class="col-7">
                         <div class="btn-toolbar float-right" role="toolbar">
                             <div class="btn-group mr-2" role="group">
-                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="reservations">Reservations</a>
+                                <a class="btn btn-danger" asp-action="ListAll" asp-route-SortBy="reservations">Reservations</a>
                             </div>
                             <div class="btn-group mr-2" role="group">
-                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="ratings">Ratings</a>
+                                <a class="btn btn-danger" asp-action="ListAll" asp-route-SortBy="ratings">Ratings</a>
                             </div>
                             <div class="btn-group mr-2" role="group">
-                                <a class="btn btn-danger" asp-action="List" asp-route-SortBy="waittime">Wait Time</a>
+                                <a class="btn btn-danger" asp-action="ListAll" asp-route-SortBy="waittime">Wait Time</a>
                             </div>
                             <div class="btn-group mr-2" role="group">
                                 <a class="btn btn-danger" style="color:white;" onclick="location.href='@Url.Action("RefreshWaits", "Restaurant")'"><i class="fas fa-sync-alt"></i></a>
@@ -85,68 +54,67 @@
                         </div>
                     </div>
                 </div>
-            
 
-                @foreach(var restaurant in contents.RestaurantList.Take(5)) {
+                @foreach (var restaurant in contents.RestaurantList)
+                {
 
                     string urlRestaurantLogo = restaurant.ID + restaurant.Name + "Logo.png";
                     string urlFullLogo = urlBase + urlRestaurantLogo;
-                <!-- RESTAURANT LISTING -->
-                <div class="sn-listing">
-                    <div class="row align-items-center">
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <a href="~/Restaurant/Listing/@restaurant.ID">
-                                    <img src="@urlFullLogo"  alt="@restaurant.Name" onerror="this.style.display='none'" />
-                                </a>
+                    <!-- RESTAURANT LISTING -->
+                    <div class="sn-listing">
+                        <div class="row align-items-center">
+                            <div class="col-lg-2">
+                                <div class="logo">
+                                    <a href="~/Restaurant/Listing/@restaurant.ID">
+                                        <img src="@urlFullLogo" alt="@restaurant.Name" onerror="this.style.display='none'" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 text-center text-sm-left">
-                            <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Name</a></h3>
-                            <span class="restaurant-location"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Address, @restaurant.City, @restaurant.ZipCode @restaurant.State</a></span>
-                            <div class="keywords">
-                                @if (restaurant.Tags != null)
-                                {
-                                    foreach (var tag in restaurant.Tags)
+                            <div class="col-lg-6 text-center text-sm-left">
+                                <h3 class="restaurant-title"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Name</a></h3>
+                                <span class="restaurant-location"><a href="~/Restaurant/Listing/@restaurant.ID">@restaurant.Address, @restaurant.City, @restaurant.ZipCode @restaurant.State</a></span>
+                                <div class="keywords">
+                                    @if (restaurant.Tags != null)
                                     {
-                                        <div class="btn-group mr-2" role="group">
-                                            <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
-                                        </div>
-                                        
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-4 text-center">
-                            <div class="ratings">
-                                @if (restaurant.Stats.TotalRatings > 0)
-                                {
-                                    for (int i = 0; i < (int)restaurant.Stats.Rating; i++)
-                                    {
-                                        <i class="fas fa-star"></i>
-                                    }
+                                        foreach (var tag in restaurant.Tags)
+                                        {
+                                            <div class="btn-group mr-2" role="group">
+                                                <a class="btn btn-light" asp-action="SearchRestaurants" asp-route-searchquery="#@tag">#@tag</a>
+                                            </div>
 
-                                    for (int i = 5; i > (int)restaurant.Stats.Rating; i--)
-                                    {
-                                        <i class="far fa-star"></i>
+                                        }
                                     }
-                                    <a class="ratings-link" href="~/Restaurant/Listing/@restaurant.ID">Based on @restaurant.Stats.TotalRatings reviews</a>
-                                    }
-                                 else
-                                 {
-                                    <a><b>No Reviews</b></a>
-                                 }
+                                </div>
                             </div>
-                            <a href="~/Restaurant/Listing/@restaurant.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
-                            <a href="~/Restaurant/Listing/@restaurant.ID" role="button" class="btn btn-secondary btn-reserve">Info</a>
-                            <div class="wait-time">
-                                <b>Estimated Wait:</b> @restaurant.Stats.WaitTime min
+                            <div class="col-lg-4 text-center">
+                                <div class="ratings">
+                                    @if (restaurant.Stats.TotalRatings > 0)
+                                    {
+                                        for (int i = 0; i < (int)restaurant.Stats.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+
+                                        for (int i = 5; i > (int)restaurant.Stats.Rating; i--)
+                                        {
+                                            <i class="far fa-star"></i>
+                                        }
+                                        <a class="ratings-link" href="~/Restaurant/Listing/@restaurant.ID">Based on @restaurant.Stats.TotalRatings reviews</a>
+                                    }
+                                    else
+                                    {
+                                        <a><b>No Reviews</b></a>
+                                    }
+                                </div>
+                                <a href="~/Restaurant/Listing/@restaurant.ID#reserveSeat" role="button" class="btn btn-sn btn-reserve">Reserve</a>
+                                <a href="~/Restaurant/Listing/@restaurant.ID" role="button" class="btn btn-secondary btn-reserve">Info</a>
+                                <div class="wait-time">
+                                    <b>Estimated Wait:</b> @restaurant.Stats.WaitTime min
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 }
-                <a class="btn btn-dark btn-sm" style="color:white; margin-bottom:40px;" align=center href="~/Restaurant/ListAll">View All Restaurants</a>
 
 
             </div>
@@ -157,14 +125,15 @@
                             <h5 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Your Recent Reservations</h5>
                             <div class="recent-reservations">
                                 <!-- RECENT RESTAURANT LISTING -->
-                                @{ 
+                                @{
                                     var name = "";
                                 }
-                                
-                                @if (contents.UserReservations.Count > 0) {
+
+                                @if (contents.UserReservations.Count > 0)
+                                {
                                     var array_length = 5;
 
-                                    if(contents.UserReservations.Count <= 5)
+                                    if (contents.UserReservations.Count <= 5)
                                     {
                                         array_length = contents.UserReservations.Count;
                                     }
@@ -172,22 +141,23 @@
                                     DiningReservation[] recent = contents.UserReservations.ToArray();
                                     DiningReservation swap;
 
-                                    for(int i = 0; i < contents.UserReservations.Count; i++)
+                                    for (int i = 0; i < contents.UserReservations.Count; i++)
                                     {
-                                        for(int k = 0; k < contents.UserReservations.Count-1; k++)
+                                        for (int k = 0; k < contents.UserReservations.Count - 1; k++)
                                         {
-                                            if(recent[k].Time.CompareTo(recent[k+1].Time) < 0)
+                                            if (recent[k].Time.CompareTo(recent[k + 1].Time) < 0)
                                             {
                                                 swap = recent[k];
-                                                recent[k] = recent[k+1];
-                                                recent[k+1] = swap;
+                                                recent[k] = recent[k + 1];
+                                                recent[k + 1] = swap;
                                             }
 
                                         }
 
                                     }
 
-                                    for (int i = 0; i < array_length; i++) {
+                                    for (int i = 0; i < array_length; i++)
+                                    {
                                         <div class="row recent-restaurant align-items-start">
                                             <div class="col-lg-3" style="padding: 0; margin-top: 5px;">
                                                 <div class="logo">
@@ -223,8 +193,8 @@
                                 else
                                 {
                                     <div class="row recent-restaurant align-items-start">
-                                            <h5>No recent reservations.</h5>
-                                     </div>
+                                        <h5>No recent reservations.</h5>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -234,3 +204,5 @@
         </div>
     </div>
 </div>
+
+
