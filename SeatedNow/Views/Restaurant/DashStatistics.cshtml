@@ -2,12 +2,16 @@
 @{
     var restaurant = Model.Restaurant;
     var other = Model.OtherRestaurants;
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
+    string urlRestaurantLogo = Model.Restaurant.Id + Model.Restaurant.Name + "Logo.png";
+    string urlFullLogo = urlBase + urlRestaurantLogo;
 }
 
     <h2 class="display-4" style="font-size: 40px;">@restaurant.Name Information</h2>
         <div class="row" style="margin-top: 50px; max-width: 1000px;">
             <div class="col-lg-6">
-                <img src="~/images/restaurants/@restaurant.ImagePath" style="max-width: 300px; max-height: 300px; margin-bottom: 30px;" />
+                <img src="@urlFullLogo" style="max-width: 300px; max-height: 300px; margin-bottom: 30px;" />
                 <p>Name: @restaurant.Name</p>
                 <p>Address: @restaurant.Address</p>
                 <p>Zip Code: @restaurant.ZipCode</p>
