@@ -116,6 +116,7 @@
                                 string t = DateTime.Now.ToString("HH");
                                 int ti = Int32.Parse(t);
                                 bool IsOpen = false;
+                                int close = 0;
 
                                 if (day == DayOfWeek.Monday)
                                 {
@@ -184,12 +185,12 @@
 
                             @if (IsOpen)
                             {
-                                <p style="color:green;"><b>OPEN</b></p>
+                                <p style="color:green;"><b>OPEN NOW</b></p>
 
                             }
                             else
                             {
-                                <p style="color:red;"><b>CLOSED</b></p>
+                                <p style="color:red;"><b>CLOSED NOW</b></p>
 
                             }
 
