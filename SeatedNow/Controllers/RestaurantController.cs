@@ -205,7 +205,7 @@ namespace SeatedNow.Controllers
                     break;
                 case "ratings":
                     contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByRatings());
-                    ViewBag.SortBy = "Sorted by Highest Ratings";
+                    ViewBag.SortBy = "Sorted by Highest Rated";
                     break;
                 case "waittime":
                     contents = new ListPage(_reservationRepository.GetReservationsByCustomerID(userId, 5), _restaurantRepository.GetRestaurantsByWaitTime());
