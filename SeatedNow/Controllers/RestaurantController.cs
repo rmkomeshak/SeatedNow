@@ -236,7 +236,8 @@ namespace SeatedNow.Controllers
         {
             RestaurantHours Hours = new RestaurantHours(MondayOpen, MondayClose, TuesdayOpen, TuesdayClose, WednsedayOpen, WednsedayClose, ThursdayOpen, ThursdayClose, FridayOpen, FridayClose, SaturdayOpen, SaturdayClose, SundayOpen, SundayClose);
             _statsRepository.SetHoursByRestaurantId(RestaurantId, Hours);
-            return Redirect(Request.Headers["Referer"].ToString());
+            TempData["successMessage"] = "Success";
+            return Redirect("~/Restaurant/Dashboard");
         }
 
         public IActionResult SearchRestaurants(string searchquery)
@@ -308,15 +309,28 @@ namespace SeatedNow.Controllers
                 }
             }
 
+            if (String.IsNullOrEmpty(Description))
+            {
+                Description = "";
+            }
+
             string regName = Regex.Replace(Name, "'", "''");
+            Console.WriteLine("--------------------------------------" + regName);
             string regAddress = Regex.Replace(Address, "'", "''");
+            Console.WriteLine("--------------------------------------" + regAddress);
             string regCity = Regex.Replace(City, "'", "''");
+            Console.WriteLine("--------------------------------------" + regCity);
             string regDescription = Regex.Replace(Description, "'", "''");
+            Console.WriteLine("--------------------------------------" + regDescription);
             string regKeyword1 = Regex.Replace(Keyword1, "'", "''");
+            Console.WriteLine("--------------------------------------" + regKeyword1);
             string regKeyword2 = Regex.Replace(Keyword2, "'", "''");
+            Console.WriteLine("--------------------------------------" + regKeyword2);
             string regKeyword3 = Regex.Replace(Keyword3, "'", "''");
+            Console.WriteLine("--------------------------------------" + regKeyword3);
 
             Restaurant r = new Restaurant(Id, regName, regAddress, regCity, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, regDescription, Color, regKeyword1, regKeyword2, regKeyword3, Website, Price);
+            TempData["successMessage"] = "Success";
 
             _restaurantRepository.UpdateRestaurant(r);
             return Redirect("~/Restaurant/Dashboard");
@@ -398,6 +412,7 @@ namespace SeatedNow.Controllers
 
             _restaurantRepository.UpdateSections(restaurant_id, Section1Name, Section2Name, Section3Name, Section4Name, Section5Name, Section6Name, tables);
 
+            TempData["successMessage"] = "Success";
             return Redirect("~/Restaurant/Dashboard");
         }
 

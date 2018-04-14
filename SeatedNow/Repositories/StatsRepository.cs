@@ -414,7 +414,7 @@ namespace SeatedNow.Repositories
             {
                 SetWaitTime(RestaurantId, 0);
 
-            } else if (openTables <= 2 && openTables > 0)
+            } else if (openTables > 0)
             {
                 SetWaitTime(RestaurantId, 5);
             } else
