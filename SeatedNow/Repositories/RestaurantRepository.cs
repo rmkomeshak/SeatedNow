@@ -57,7 +57,14 @@ namespace SeatedNow.Repositories
                 {
                     command.ExecuteNonQuery();
                 }
-                
+
+                string sendqueryRestaurants_Sections = "INSERT INTO [dbo].[Restaurant_Sections] VALUES (" + recentID + ", '', '', '', '', '', '')";
+
+                using (SqlCommand command = new SqlCommand(sendqueryRestaurants_Sections, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
 
                 connection.Close();
             }
