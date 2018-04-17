@@ -17,7 +17,7 @@
 <h2 class="display-4" style="font-size: 40px;">@restaurant.Name Information</h2>
 <div class="container">
     <div class="row" style="margin-top:5%;">
-        <div class="col-6">
+        <div class="col-6" style="margin-left:-5%;">
             <h3 style="margin-bottom:5%;">Basic Statistics</h3>
             <div style="clear:both;">
                 <h5 style="float:left;"><i class="fas fa-male"></i> &nbsp;&nbsp; Current Customers:</h5>
@@ -62,7 +62,7 @@
         avg = avg / other.Count;
     }
     <div class="col-6">
-    <h3>Recent Reviews</h3>
+    <h3 style="margin-bottom:5%;">Recent Reviews</h3>
     @if (Model.Restaurant.Stats.TotalRatings > 0)
     {
         <p><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Math.Round(Model.Restaurant.Stats.Rating, 1) stars</b> based on @Model.Restaurant.Stats.TotalRatings reviews</span></p>
