@@ -19,5 +19,6 @@ namespace SeatedNow.Repositories
         void SetWaitTime(int RestaurantId, int Minutes);
         int GetNumReservations(int RestaurantId);
         bool UpdateReservations();
+        bool UpdatePageviews(int id);
     }
 }

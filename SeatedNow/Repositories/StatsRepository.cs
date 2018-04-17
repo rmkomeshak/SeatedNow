@@ -52,11 +52,27 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public bool UpdatePageviews(int id)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET pageviews = pageviews + 1 WHERE restaurant_id = " + id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+        }
+
         public RestaurantStats GetStatsByRestaurantId(int id)
         {
-            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbtotalratings = -1;
+            int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbtotalratings = -1, dbpageviews = -1;
             double dbrating = 0.0;
-            string checkquery = "SELECT restaurant_id, reservations, cur_customers, wait_time, rating, total_ratings FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
+            string checkquery = "SELECT restaurant_id, reservations, cur_customers, wait_time, rating, total_ratings, pageviews FROM [dbo].[Restaurant_Stats] WHERE restaurant_id = '" + id + "'";
 
             connection.Open();
             SqlCommand command = new SqlCommand(checkquery, connection);
@@ -71,11 +87,12 @@ namespace SeatedNow.Repositories
                 dbwaittime = (int)reader["wait_time"];
                 dbrating = (double)reader["rating"];
                 dbtotalratings = (int)reader["total_ratings"];
+                dbpageviews = (int)reader["pageviews"];
             }
 
             connection.Close();
 
-            return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating, dbtotalratings);
+            return new RestaurantStats(dbrestaurantid, dbreservations, dbcustomers, dbwaittime, dbrating, dbtotalratings, dbpageviews);
         }
 
         public List<string> GetTagsByRestaurantName(string name)

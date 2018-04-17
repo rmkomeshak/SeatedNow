@@ -151,6 +151,13 @@ namespace SeatedNow.Controllers
             return Redirect("~/Restaurant/List");
         }
 
+        public IActionResult UpdatePageviews(int rId)
+        {
+            _statsRepository.UpdatePageviews(rId);
+            string listing_page = "~/Restaurant/Listing/" + rId;
+            return Redirect(listing_page);
+        }
+
         public IActionResult List(string SortBy="", int resid=0)
         {
             if (_userSessionManager == null || !_userSessionManager.IsValid())
