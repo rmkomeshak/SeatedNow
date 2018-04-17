@@ -2,39 +2,109 @@
 @{
     var restaurant = Model.Restaurant;
     var other = Model.OtherRestaurants;
+    List<RestaurantRatings> ratings = Model.Restaurant.Ratings;
+    List<RestaurantTableList> tables = Model.Restaurant.Tables.ToList();
+
+    Predicate<RestaurantTableList> taken = delegate (RestaurantTableList table) { return table.IsTaken; };
+    tables.RemoveAll(taken);
+    var free = tables.Count();
+    var inUse = Model.Restaurant.Tables.Count() - free;
 
     string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
     string urlRestaurantLogo = Model.Restaurant.Id + Model.Restaurant.Name + "Logo.png";
     string urlFullLogo = urlBase + urlRestaurantLogo;
 }
-
-    <h2 class="display-4" style="font-size: 40px;">@restaurant.Name Information</h2>
-        <div class="row" style="margin-top: 50px; max-width: 1000px;">
-            <div class="col-lg-6">
-                <img src="@urlFullLogo" style="max-width: 300px; max-height: 300px; margin-bottom: 30px;" />
-                <p>Name: @restaurant.Name</p>
-                <p>Address: @restaurant.Address</p>
-                <p>Zip Code: @restaurant.ZipCode</p>
-                <p>Reservations: @restaurant.Stats.Reservations</p>
-                <p>Current Customers: @restaurant.Stats.Customers</p>
+<h2 class="display-4" style="font-size: 40px;">@restaurant.Name Information</h2>
+<div class="container">
+    <div class="row" style="margin-top:5%;">
+        <div class="col-6">
+            <h3 style="margin-bottom:5%;">Basic Statistics</h3>
+            <div style="clear:both;">
+                <h5 style="float:left;"><i class="fas fa-male"></i> &nbsp;&nbsp; Current Customers:</h5>
+                <h5 style="float:right; margin-right:35%;">@Model.Restaurant.Stats.Customers</h5>
             </div>
-            <div class="col-lg-6">
-                <div id="chart_div"></div>
+            <div style="clear:both;">
+                <h5 style="float:left;"><i class="fas fa-check"></i> &nbsp;&nbsp; Free Tables:</h5>
+                <h5 style="float:right; margin-right:35%;">@free</h5>
             </div>
-    </div>
+            <div style="clear:both;">
+                <h5 style="float:left;"><i class="fas fa-times"></i> &nbsp;&nbsp; Taken Tables:</h5>
+                <h5 style="float:right; margin-right:35%;">@inUse</h5>
+            </div>
+            <div style="clear:both;">
+                <h5 style="float:left;"><i class="far fa-clock"></i> &nbsp;&nbsp; Wait Time:</h5>
+                <h5 style="float:right; margin-right:35%;">@Model.Restaurant.Stats.WaitTime min</h5>
+            </div>
+            <div style="clear:both;">
+                <h5 style="float:left;"><i class="far fa-address-book"></i> &nbsp;&nbsp; Reservations:</h5>
+                <h5 style="float:right; margin-right:35%;">@Model.Restaurant.Stats.Reservations</h5>
+            </div>
 
-@{ 
-    var avg = 0;
-    foreach(var r in other)
-    {
-        if (r.ID != restaurant.Id)
+
+
+
+        </div>
+
+    @{
+        var avg = 0;
+        foreach (var r in other)
         {
-            avg += r.Stats.WaitTime;
+            if (r.ID != restaurant.Id)
+            {
+                avg += r.Stats.WaitTime;
+            }
         }
+
+        avg = avg / other.Count;
+    }
+    <div class="col-6">
+    <h3>Recent Reviews</h3>
+    @if (Model.Restaurant.Stats.TotalRatings > 0)
+    {
+        <p><i class="fas fa-star"></i><span id="restaurant-rating"><b>@Math.Round(Model.Restaurant.Stats.Rating, 1) stars</b> based on @Model.Restaurant.Stats.TotalRatings reviews</span></p>
+    }
+    else
+    {
+        <p style="margin-top: 50px;"><i class="fas fa-star"></i><span id="restaurant-rating"><b>No Reviews</b></span></p>
     }
 
-    avg = avg / other.Count;
-}
+    
+        @{
+            Predicate<RestaurantRatings> isInvalid = delegate (RestaurantRatings rating) { return (rating.Comment.Equals("") || (rating.Comment == null) || rating.Rating <= 0); };
+            ratings.RemoveAll(isInvalid);
+            ratings.Reverse();
+        }
+
+        @foreach (var rating in ratings.Take(5))
+        {
+            <div class="listing-review">
+                <span class="listing-rating">
+                    @if (Model.Restaurant.Stats.TotalRatings > 0)
+                    {
+                        for (int i = 0; i < (int)rating.Rating; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+
+                        for (int i = 5; i > (int)rating.Rating; i--)
+                        {
+                            <i class="far fa-star"></i>
+                        }
+                    }
+                    else
+                    {
+                        <p style="margin-top: 50px;"><a><b>No Reviews</b></a></p>
+                    }
+                </span>
+                <span class="listing-comment">
+                    @rating.Comment
+                </span>
+            </div>
+
+        }
+    </div>
+    </div>
+</div>
 
 <head>
     <!--Load the AJAX API-->

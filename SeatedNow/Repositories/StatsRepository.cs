@@ -36,6 +36,22 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public bool UpdateReservations()
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET reservations = reservations + 1;";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+        }
+
         public RestaurantStats GetStatsByRestaurantId(int id)
         {
             int dbrestaurantid = -1, dbreservations = -1, dbcustomers = -1, dbwaittime = -1, dbtotalratings = -1;

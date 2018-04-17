@@ -75,6 +75,8 @@ namespace SeatedNow.Controllers
         {
             Restaurant restaurant = _restaurantRepository.GetRestaurantByID(Id);
             restaurant.Stats = _statsRepository.GetStatsByRestaurantId(Id);
+            restaurant.Tables = _restaurantRepository.GetTablesByRestaurantID(Id);
+            restaurant.Ratings = _statsRepository.GetRatingsByRestaurantId(Id);
             List<RestaurantListViewModel> other = _restaurantRepository.GetRestaurants();
             DashStats content = new DashStats(restaurant, other);
 
@@ -145,6 +147,7 @@ namespace SeatedNow.Controllers
             DateTime dt = DateTime.Today;
             DiningReservation r = new DiningReservation(restaurant_id, _userSessionManager.getID(), guests, dt, 10, section);
             _reservationRepository.CreateReservation(r);
+            _statsRepository.UpdateReservations();
             return Redirect("~/Restaurant/List");
         }
 
