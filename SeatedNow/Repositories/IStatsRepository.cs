@@ -18,7 +18,10 @@ namespace SeatedNow.Repositories
         void RefreshWaitTime(int RestaurantId);
         void SetWaitTime(int RestaurantId, int Minutes);
         int GetNumReservations(int RestaurantId);
-        bool UpdateReservations();
+        bool UpdateReservations(int restaurant_id);
         bool UpdatePageviews(int id);
+        bool UpdateCustomers(int guests, int restaurant_id);
+        bool ReduceCustomers(int guests, int restaurant_id);
+        bool ReduceReservations(int restaurant_id);
     }
 }

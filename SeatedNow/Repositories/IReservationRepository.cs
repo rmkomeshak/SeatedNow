@@ -11,6 +11,7 @@ namespace SeatedNow.Repositories
         List<DiningReservation> GetReservationsByCustomerID(int CustomerId, int results);
         void CreateReservation(DiningReservation reservation);
         void DeleteReservation(int reservation_id);
+        void DeleteReservation(int restaurant_id, int table_id, string section_name);
 
     }
 }

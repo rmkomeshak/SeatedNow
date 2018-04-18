@@ -145,9 +145,31 @@ namespace SeatedNow.Controllers
         public IActionResult ReserveAction(int guests, string section, int restaurant_id)
         {
             DateTime dt = DateTime.Today;
-            DiningReservation r = new DiningReservation(restaurant_id, _userSessionManager.getID(), guests, dt, 10, section);
-            _reservationRepository.CreateReservation(r);
-            _statsRepository.UpdateReservations();
+            List<RestaurantTableList> tables = _restaurantRepository.GetTablesByRestaurantID(restaurant_id);
+            List<RestaurantSection> sections = _restaurantRepository.GetSections(restaurant_id);
+
+            int sec = -1;
+
+            foreach(var s in sections)
+            {
+                if(s.Name.ToLower().Equals(section.ToLower()))
+                {
+                    sec = s.Id;
+                    break;
+                }
+            }
+
+            foreach(var table in tables)
+            {
+                if ((!table.IsTaken) && (table.Section == sec))
+                {
+                    _restaurantRepository.OccupyTable(restaurant_id, table.TableName);
+                    DiningReservation r = new DiningReservation(restaurant_id, _userSessionManager.getID(), guests, DateTime.Now, table.TableId, section);
+                    _reservationRepository.CreateReservation(r);
+                    _statsRepository.UpdateCustomers(guests, restaurant_id);
+                    break;
+                }
+            }
             return Redirect("~/Restaurant/List");
         }
 
@@ -434,11 +456,26 @@ namespace SeatedNow.Controllers
             return Redirect("~/Restaurant/Dashboard");
         }
 
-        public IActionResult Free(int table_id)
+        public IActionResult Free(string table_name)
         {
+            int i = table_name.LastIndexOf(" ");
+            string section_name = "Test";
+            int table_id = 1;
+
+            if (i != -1)
+            {
+                section_name = table_name.Substring(0, i).ToLower();
+                table_id = Int32.Parse(table_name.Substring(i + 1));
+            }
+
             int restaurant_id = _restaurantRepository.GetRestaurantByOwnerID(_userSessionManager.getID()).Id;
-            _restaurantRepository.FreeTable(restaurant_id, table_id);
-            _statsRepository.RefreshWaitTime(restaurant_id);
+            int guests = _restaurantRepository.GetGuests(restaurant_id, table_id, section_name);
+
+            _restaurantRepository.FreeTable(restaurant_id, table_name);
+            _statsRepository.ReduceCustomers(guests, restaurant_id);
+            //_statsRepository.RefreshWaitTime(restaurant_id);
+            _reservationRepository.DeleteReservation(restaurant_id, table_id, section_name);
+            
             return Redirect("~/Restaurant/Dashboard");
         }
 
@@ -448,5 +485,25 @@ namespace SeatedNow.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+        public IActionResult RestaurantReserve(string tableId, int guests, int restaurantId)
+        {
+            int i = tableId.LastIndexOf(" ");
+            string sectionName = "Test";
+            int table_id = 1;
+
+            if(i != -1)
+            {
+                sectionName = tableId.Substring(0, i).ToLower();
+                table_id = Int32.Parse(tableId.Substring(i + 1));
+            }
+
+            DiningReservation dr = new DiningReservation(restaurantId, _userSessionManager.getID(), guests, DateTime.Now, table_id, sectionName);
+            _reservationRepository.CreateReservation(dr);
+            _restaurantRepository.OccupyTable(restaurantId, tableId.ToLower());
+            _statsRepository.UpdateCustomers(guests, restaurantId);
+            //_statsRepository.RefreshWaitTime(restaurantId);
+         
+            return Redirect("~/Restaurant/Dashboard");
+        }
     }
 }

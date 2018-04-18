@@ -1,6 +1,26 @@
 ﻿@model Restaurant
 @{
     var restaurant = Model;
+
+    string urlBase = "https://seatednow.blob.core.windows.net/seatednow/";
+    string urlRestaurantFloorplan = Model.Id + Model.Name + "Floorplan.png";
+    string urlFullFloorplan = urlBase + urlRestaurantFloorplan;
+}
+
+@{ 
+    string ToSectionName(int i)
+    {
+        foreach(var section in restaurant.Sections)
+        {
+            if(section.Id == i)
+            {
+                return section.Name;
+            }
+
+        }
+
+        return ("Generic");
+    }
 }
 
 
@@ -11,7 +31,7 @@
 
 <body>
     <h2 class="display-4" style="font-size: 40px;">@restaurant.Name Seat Management</h2>
-    @if (TempData["successMessage"] != null) 
+    @if (TempData["successMessage"] != null)
     {
         <div class="text-success">Your settings have been saved successfully!</div>
     }
@@ -42,14 +62,15 @@
                             <div class="restaurant-section">
                                 <h5 style="font-weight: 700;">@s.Name</h5>
                                 <form asp-action="Occupy">
-                                    @foreach (var table in restaurant.Tables)
-                                    {
-                                        if ((table.Section == s.Id) && (!table.IsTaken))
-                                        {
-                                            <button type="submit" class="btn btn-success" style="margin-top:5px;" name="table_id" value="@table.TableId">@table.TableName</button>
-                                        }
+                        @foreach (var table in restaurant.Tables)
+                        {
+                            if ((table.Section == s.Id) && (!table.IsTaken))
+                            {
+                                 //<button type="submit" class="btn btn-success" style="margin-top:5px;" name="table_id" value="@table.TableId">@table.TableName</button>
+                                <button type="button" class="open-AddReservation btn btn-success" data-id="@table.TableName" style="margin-top:5px;" data-toggle="modal" data-target="#reserveSeat">@table.TableName</button>
+                            }
 
-                                    }
+                        }
                                 </form>
                             </div>
                         }
@@ -80,7 +101,7 @@
                                     {
                                         if ((table.Section == s.Id) && table.IsTaken)
                                         {
-                                            <button type="submit" class="btn btn-danger" style="margin-top:5px;" name="table_id" value="@table.TableId">@table.TableName</button>
+                                            <button type="submit" class="btn btn-danger" style="margin-top:5px;" name="table_name" id="table_name" value="@table.TableName">@table.TableName</button>
                                         }
 
                                     }
@@ -90,6 +111,51 @@
                     }
 
                 }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="reserveSeat" tabindex="-1" role="dialog" aria-labelledby="reserveSeat" aria-hidden="true" style="margin-top:10%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black;">Reserve a Seat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="RestaurantReserve" method="get">
+                        <div class="form-group">
+                            <label class="form-inline my-2 my-lg-0" style="color:black;">Table</label>
+                            <input type="text" class="form-control white-bg" id="tableId" name="tableId">
+                        </div>
+                        <label for="reservePartySize" style="color:black; margin-top:15px;">Party Size</label>
+                        <select id="guests" name="guests" class="form-control white-bg">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+
+                        <div class="form-group" style="display:none;">
+                            <select id="restaurantId" name="restaurantId" class="form-control white-bg">
+                                <option value="@Model.Id"></option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-top:30px;">Close</button>
+                        <button type="submit" class="btn btn-success" style="margin-top:30px;">Confirm reservation</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -126,4 +192,10 @@
         var content = container.innerHTML;
         container.innerHTML = content;
     }
+
+    $(document).on("click", ".open-AddReservation", function () {
+        var myReserveId = $(this).data('id');
+        $(".modal-body #tableId").val(myReserveId);
+        
+    });
 </script>

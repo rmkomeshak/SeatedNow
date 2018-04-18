@@ -634,6 +634,26 @@ namespace SeatedNow.Repositories
             return tablelist;
         }
 
+        public int GetGuests(int restaurant_id, int table_id, string section_name)
+        {
+            int guests = -1;
+            string query = "SELECT seats_reserved FROM [dbo].[Reservations] WHERE restaurant_id = " + restaurant_id + " AND table_id = " + table_id + " AND section = '" + section_name + "';";
+
+            connection.Open();
+            SqlCommand command = new SqlCommand(query, connection);
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                guests = (int)reader["seats_reserved"];
+            }
+
+            connection.Close();
+
+            return guests;
+        }
+
         public bool UpdateSections(int restaurant_id, string section1, string section2, string section3, string section4, string section5, string section6, List<RestaurantTableList> tables)
         {
             using (connection)
@@ -712,6 +732,24 @@ namespace SeatedNow.Repositories
             }
         }
 
+        public bool OccupyTable(int restaurant_id, string table_name)
+        {
+            bool b = true;
+
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+        }
+
         public bool OccupyTable(int restaurant_id, int table_id)
         {
             bool b = true;
@@ -730,14 +768,14 @@ namespace SeatedNow.Repositories
             }
         }
 
-        public bool FreeTable(int restaurant_id, int table_id)
+        public bool FreeTable(int restaurant_id, string table_name)
         {
             bool b = false;
 
             using (connection)
             {
                 connection.Open();
-                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_id = " + table_id + ";";
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {

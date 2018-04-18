@@ -36,17 +36,69 @@ namespace SeatedNow.Repositories
             }
         }
 
-        public bool UpdateReservations()
+        public bool UpdateReservations(int restaurant_id)
         {
             using (connection)
             {
                 connection.Open();
-                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET reservations = reservations + 1;";
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET reservations = reservations + 1 WHERE restaurant_id = " + restaurant_id + ";";
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {
                     command.ExecuteNonQuery();
                     connection.Close();
+                    RefreshWaitTime(restaurant_id);
+                    return true;
+                }
+            }
+        }
+
+        public bool ReduceReservations(int restaurant_id)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET reservations = reservations - 1 WHERE restaurant_id = " + restaurant_id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    RefreshWaitTime(restaurant_id);
+                    return true;
+                }
+            }
+        }
+
+        public bool UpdateCustomers(int guests, int restaurant_id)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET cur_customers = cur_customers + " + guests + " WHERE restaurant_id = " + restaurant_id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    UpdateReservations(restaurant_id);
+                    return true;
+                }
+            }
+        }
+
+        public bool ReduceCustomers(int guests, int restaurant_id)
+        {
+            using (connection)
+            {
+                connection.Open();
+                string sendquery = "UPDATE [dbo].[Restaurant_Stats] SET cur_customers = cur_customers - " + guests + " WHERE restaurant_id = " + restaurant_id + ";";
+
+                using (SqlCommand command = new SqlCommand(sendquery, connection))
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    ReduceReservations(restaurant_id);
                     return true;
                 }
             }

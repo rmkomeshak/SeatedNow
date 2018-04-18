@@ -93,6 +93,19 @@ namespace SeatedNow.Repositories
 
         }
 
+        public void DeleteReservation(int restaurant_id, int table_id, string section_name)
+        {
+            connection.Open();
+            string sendquery = "DELETE FROM [dbo].[Reservations] WHERE restaurant_id = " + restaurant_id + " AND table_id = " + table_id + " AND section = '" + section_name + "';";
+
+            using (SqlCommand command = new SqlCommand(sendquery, connection))
+            {
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
+
 
     }
 }
