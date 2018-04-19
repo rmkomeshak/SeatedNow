@@ -257,6 +257,7 @@ namespace SeatedNow.Controllers
 
             int userId = _userSessionManager.getID();
             DateTime time = DateTime.Now;
+            comment = Regex.Replace(comment, "'", "''");
 
             _restaurantRepository.InputRating(restaurant_id, rating, comment, time, userId);
 
@@ -275,18 +276,45 @@ namespace SeatedNow.Controllers
         public IActionResult SearchRestaurants(string searchquery)
         {
             SearchContent content;
+            var searchquery2 = "";
+            searchquery2 += searchquery;
+
+            if (searchquery.Contains("'"))
+            {
+                searchquery = Regex.Replace(searchquery, "'", "''");
+            }
+            if (searchquery.Contains("%"))
+            {
+                return Redirect("~/Restaurant/List");
+            }
+            if (searchquery.Contains(";"))
+            {
+                return Redirect("~/Restaurant/List");
+            }
+            if (searchquery.Contains("/"))
+            {
+                return Redirect("~/Restaurant/List");
+            }
+            if (searchquery.Contains("("))
+            {
+                return Redirect("~/Restaurant/List");
+            }
+            if (searchquery.Contains(")"))
+            {
+                return Redirect("~/Restaurant/List");
+            }
 
             if (searchquery[0].Equals('#'))
-            {
-                List<string> tags = new List<string>();
-                tags.Add(searchquery.Substring(1));
-                content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(tags));
+                {
+                    List<string> tags = new List<string>();
+                    tags.Add(searchquery.Substring(1));
+                    content = new SearchContent(searchquery2, _restaurantRepository.GetRestaurantsByTags(tags));
 
-            }
-            else
-            {
-                content = new SearchContent(searchquery, _restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(searchquery)));
-            }
+                }
+                else
+                {
+                    content = new SearchContent(searchquery2, _restaurantRepository.GetRestaurantsByTags(_statsRepository.GetTagsByRestaurantName(searchquery)));
+                }
 
             return View(content);
         }
