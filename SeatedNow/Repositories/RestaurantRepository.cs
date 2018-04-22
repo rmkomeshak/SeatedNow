@@ -12,11 +12,13 @@ namespace SeatedNow.Repositories
 
         SqlConnection connection;
         IStatsRepository _statsRepository = new StatsRepository();
+        IReservationRepository _reservationRepository = new ReservationRepository();
 
         public RestaurantRepository()
         {
             IDataRepository dataRepo = new DataRepository();
             IStatsRepository statsRepo = new StatsRepository();
+            IReservationRepository reservationRepo = new ReservationRepository();
             connection = dataRepo.GetDBConnection();
         }
 
@@ -732,14 +734,15 @@ namespace SeatedNow.Repositories
             }
         }
 
-        public bool OccupyTable(int restaurant_id, string table_name)
+        public bool OccupyTable(int restaurant_id, string table_name, DateTime time)
         {
             bool b = true;
+            int reservation_id = _reservationRepository.GetReservationID(time);
 
             using (connection)
             {
                 connection.Open();
-                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "', reservation_id = " + reservation_id + " WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {
@@ -775,7 +778,7 @@ namespace SeatedNow.Repositories
             using (connection)
             {
                 connection.Open();
-                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "' WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
+                string sendquery = "UPDATE [dbo].[Restaurant_Tables] SET taken = '" + b + "', reservation_id = -1 WHERE restaurant_id = " + restaurant_id + " AND table_name = '" + table_name + "';";
 
                 using (SqlCommand command = new SqlCommand(sendquery, connection))
                 {

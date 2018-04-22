@@ -31,7 +31,7 @@ namespace SeatedNow.Repositories
         bool UpdateTags(Restaurant restaurant);
         bool UpdateSections(int restaurant_id, string section1, string section2, string section3, string section4, string section5, string section6, List<RestaurantTableList> tables);
         List<RestaurantSection> GetSections(int restaurant_id);
-        bool OccupyTable(int restaurant_id, string table_name);
+        bool OccupyTable(int restaurant_id, string table_name, DateTime time);
         bool OccupyTable(int restaurant_id, int table_id);
         bool FreeTable(int restaurant_id, string table_name);
         bool CreateMetricsTable(string name);
