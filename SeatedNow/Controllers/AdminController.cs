@@ -188,6 +188,11 @@ namespace SeatedNow.Controllers
                 return Redirect("~/");
             }
 
+            if (String.IsNullOrEmpty(Description))
+            {
+                Description = "";
+            }
+
             string regName = Regex.Replace(Name, "'", "''");
             string regAddress = Regex.Replace(Address, "'", "''");
             string regCity = Regex.Replace(City, "'", "''");
@@ -268,6 +273,11 @@ namespace SeatedNow.Controllers
                 {
                     await _blobsRepository.UploadBlobAsync(UploadedFloorplan, fileNameFloorplan);
                 }
+            }
+
+            if (String.IsNullOrEmpty(Description))
+            {
+                Description = "";
             }
 
             string regName = Regex.Replace(Name, "'", "''");

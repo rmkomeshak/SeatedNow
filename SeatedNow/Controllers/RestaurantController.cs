@@ -406,19 +406,12 @@ namespace SeatedNow.Controllers
             }
 
             string regName = Regex.Replace(Name, "'", "''");
-            Console.WriteLine("--------------------------------------" + regName);
             string regAddress = Regex.Replace(Address, "'", "''");
-            Console.WriteLine("--------------------------------------" + regAddress);
             string regCity = Regex.Replace(City, "'", "''");
-            Console.WriteLine("--------------------------------------" + regCity);
             string regDescription = Regex.Replace(Description, "'", "''");
-            Console.WriteLine("--------------------------------------" + regDescription);
             string regKeyword1 = Regex.Replace(Keyword1, "'", "''");
-            Console.WriteLine("--------------------------------------" + regKeyword1);
             string regKeyword2 = Regex.Replace(Keyword2, "'", "''");
-            Console.WriteLine("--------------------------------------" + regKeyword2);
             string regKeyword3 = Regex.Replace(Keyword3, "'", "''");
-            Console.WriteLine("--------------------------------------" + regKeyword3);
 
             Restaurant r = new Restaurant(Id, regName, regAddress, regCity, ZipCode, State, PhoneNumber, ImagePath, isVerified, OwnerId, EventKey, regDescription, Color, regKeyword1, regKeyword2, regKeyword3, Website, Price);
             TempData["successMessage"] = "Success";

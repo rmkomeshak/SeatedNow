@@ -511,12 +511,17 @@ namespace SeatedNow.Repositories
 
                 double randomValue = random.NextDouble() * (4 - 2) + 2;
 
-                if (stats.Rating >= 4 || stats.Rating <= 1.5)
+                if (stats.Rating >= 4)
                 {
-                    estimatedWait = (int)(randomValue * numReservations * 1.25);
-                } else
+                    estimatedWait = (int)(randomValue * numReservations * 1.00);
+                }
+                else if (stats.Rating <= 1.5)
                 {
-                    estimatedWait = (int)(randomValue * numReservations * (5 - stats.Rating));
+                    estimatedWait = (int)(randomValue * numReservations * 1.20);
+                }
+                else 
+                {
+                    estimatedWait = (int)(randomValue * numReservations * 1.35);
                 }
 
                 SetWaitTime(RestaurantId, estimatedWait);
